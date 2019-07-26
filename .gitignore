@@ -1,0 +1,16 @@
+bvs/crawler_*
+
+bvs/tmp_url
+
+bvs/prueba.py
+
+.vscode
+
+bvs/__pycache__
+__pycache__
+
+prueba.py
+
+[^/]*.json
+
+*.csv
