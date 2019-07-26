@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from datetime import datetime
 import argparse
 import json
+import os
 
 
 
@@ -62,13 +63,12 @@ def main(year,output):
     outputFile.close()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog ='BvSalud.py')
-    parser.add_argument('-y','--year',metavar='year',required=True, type=int,help ='To define a year')
-    parser.add_argument('-o','--output',required=True, help ='To define the file to save data.')   
-    
+    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
+    parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
+    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
     args = parser.parse_args()
-
     year = args.year
     output = args.output
-    path = str(output)+".json"
+    current_dir = os.getcwd()
+    path = os.path.join(current_dir,output)
     main(year, path)

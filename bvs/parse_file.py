@@ -1,11 +1,12 @@
 from mongo import Mongo
 from crawler import Crawl
+from constant import *
+import os
 from bs4 import BeautifulSoup
 from datetime import datetime
 from urllib.request import urlopen, urlretrieve
 import re, time
 from io import open
-from constant import *
 import socket
 from socket import timeout
 socket.setdefaulttimeout(300)
@@ -124,9 +125,11 @@ difference_between_entry_update_date.
         return doc_id  
 
     def compare_t1_t2(crawl):
-        path_url_error = 'data/error_url' 
-        with open(path_url_error,'w') as file:
-            file.write("No documents in urls")         
+
+        path_url_error = os.path.join(BVSALUD_DOWNLOADS_PATH,"urlsError.txt")
+        file = open(path_url_error,'w')
+
+        file.write("No documents in urls")         
         list_ids_t1 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T1)
         list_ids_t2 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T2)
 
@@ -179,8 +182,7 @@ difference_between_entry_update_date.
                     Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
             else:
                 try:
-                    with open(path_url_error,'a') as file:
-                        file.write(url)
-                except:
-                    with open(path_url_error,'w') as file:
-                        file.write(url)               
+                    print("Error: << id >> {url}")
+                    file.write("\n"+url)
+                except: pass
+        file.close()              

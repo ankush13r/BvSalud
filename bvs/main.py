@@ -58,11 +58,10 @@ def main(mode ,path_sub_folder,restart):
     else:
         print("Wrong argument: ",mode)
         return False
-
     crawl = Crawl(mode,path_super_folder,path_sub_folder)
-    
     print(crawl)
     print()
+    
     last_stopped, case = find_last_stopped(PATH_TO_LAST_RECORD) 
     
     if restart:
