@@ -72,20 +72,19 @@ def loop_case_restart(crawl):
     if last_path == crawl.path_to_crawler and crawl.mode == last_mode:
         if last_case == CASE_DOWNLOAD:
             crawl.save_records(last_stopped) # Downloading records
-            last_saving_num = 0
-            return True
+            return 0
         elif last_case == CASE_SAVE:
             last_saving_num = last_stopped  
             return last_saving_num  
         else:
             print(">>>> Error:\tCase doesn't match to the last case was: ",last_case,"\nPlease check the file: {os.getcwd()}/{PATH_TO_LAST_RECORD}")
-            return False
+            return -1
     else:
         print(">>>> Error:\tThe last output folder or/and condition don't match.\n")
         print(f"\t\tLast output folder:\t{last_path},\tNew output folder: {crawl.path_to_crawler}")
         print(f"\t\tLast condition:\t\t{last_mode},\tNew condition: {crawl.mode}\n")
         print(f"You can check also:\t{os.getcwd()}/{PATH_TO_LAST_RECORD}\n")
-        return False
+        return -1
 
 
 def loop_case_all(crawl):
@@ -120,11 +119,11 @@ def main(mode ,path_sub_folder,restart):
     
     if restart:
       last_saving_num = loop_case_restart(crawl)
-      if not last_saving_num: 
+      if last_saving_num == -1: 
           return False
     else:
         last_saving_num = loop_case_all(crawl)
-        if not last_saving_num:
+        if last_saving_num == -1:
             return False   
 
     backup_collection(crawl.mode)
