@@ -138,10 +138,10 @@ difference_between_entry_update_date.
 
         print("\nNew records: ",len(list_new_ids),"\n")
 
-        for id in list_new_ids:
+        for i, id in enumerate(list_new_ids):
             document_t2 = Mongo.get_document(COLLECTIONS_NONE_INDEXED_T2,id)
             try:
-                print("New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
+                print(i+1, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
                 print()
                 Mongo.save_dict_to_mongo(document_t2,MODE_ALL)
                 Mongo.save_to_mongo_updated_info(id,'new',document_t2['db'])                                                        
@@ -149,10 +149,10 @@ difference_between_entry_update_date.
                 Mongo.save_exception_to_mongo(id,'Saveing new none indexed document into mongo',id, str(e))
 
         print("\nRecords to modify: ",len(list_modified_ids),"\n")
-        for id in list_modified_ids:
+        for i, id in enumerate(list_modified_ids):
             document_t1 = Mongo.get_document(COLLECTIONS_NONE_INDEXED_T1,id)
             
-            print("\nDocument to modify: ",document_t1['_id'])
+            print("\n",i+1,") Document to modify: ",document_t1['_id'])
             if document_t1['db'] == 'IBECS':
                 doc_id = Parse.find_id_by_alternate_id(id)                
             else:
