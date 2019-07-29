@@ -32,7 +32,7 @@ bash: $ cd BvSalud
 ```
 ### - First time:
 ```bash
-bash: $ python BvSalud -m/--mode 'all' -o/--output 'folder_name' 
+bash: $ python bvs -m/--mode 'all' -o/--output 'folder_name' 
 
 ```
 
@@ -48,7 +48,7 @@ For first time you have to run it with the argument **"all"**. It will download 
        ---------------------------------------------------- 
 ### All next time:
 ```bash
-bash: $ python BvSalud -m/--mode 'new' -o/--output folder_name 
+bash: $ python bvs -m/--mode 'new' -o/--output folder_name 
 
 ```
 The next rounds are just for new articles, not available in MongoDB. In these rounds program will compare all none indexed article if they have been indexed or there is any new article. 
