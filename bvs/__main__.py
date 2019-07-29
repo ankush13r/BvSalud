@@ -59,7 +59,7 @@ def find_last_stopped(path_to_find_last_stoped):
         return 0 ,None, None, None
 
 def backup_collection(mode):
-    if crawl.mode == MODE_ALL:
+    if mode == MODE_ALL:
         Mongo.change_collections_name(DATA_BASE,COLLECTION_ALL,COLLECTION_ALL+"_old")
         Mongo.change_collections_name(DATA_BASE,COLLECTIONS_NONE_INDEXED_T1,COLLECTIONS_NONE_INDEXED_T1+"_old")
         Mongo.change_collections_name(DATA_BASE,COLLECTIONS_NONE_INDEXED_T2,COLLECTIONS_NONE_INDEXED_T2+"_old")
@@ -76,7 +76,7 @@ def loop_case_restart(crawl):
             return True
         elif last_case == CASE_SAVE:
             last_saving_num = last_stopped  
-            return True  
+            return last_saving_num  
         else:
             print(">>>> Error:\tCase doesn't match to the last case was: ",last_case,"\nPlease check the file: {os.getcwd()}/{PATH_TO_LAST_RECORD}")
             return False
