@@ -86,7 +86,7 @@ The program is to make a json file for all **indexed articles** that have **{sel
 -o 'output_file_name.json': A file_name to create a json file with article selected.
 
 
-##PIPILINE
+## PIPILINE
 
 ![Pipeline](pics/pipeline.png)
 
