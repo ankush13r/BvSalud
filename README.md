@@ -55,7 +55,7 @@ After all it will save all new article directly and those that have been indexed
     - **Update_info** *(Collection)*: This collection saves information about none indexed articles, if those are new or just have been updated to indexed, and also save the date.
     - **errors_training** *(Collection)*: Save all errors occurred while saving. 
 
-![BvSalud](data/BvSalud.png)
+![Pipeline](pics/pipeline.png)
 
 
 
