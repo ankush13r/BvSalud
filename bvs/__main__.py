@@ -93,7 +93,7 @@ def loop_case_all(crawl):
         print(f"Last time it had been interrupted, while {last_case}ing records,\tpage number: {last_stopped},\tfolder: {last_path},\tIn condition: {last_mode}")
         input_str = str(input("Do you really want to continue?,yes/no[yes]: ") or "yes") 
         if input_str != 'yes':
-            return False
+            return -1
     crawl.save_records() # Downloading records.
     return 0
 
