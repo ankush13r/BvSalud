@@ -27,7 +27,7 @@ If the folder already exits, it will delete it and make a new.
 bash: $ git clone https://github.com/ankush13r/BvSalud.git
 ```
 
-### First time:
+### - First time:
 ```bash
 bash: $ python BvSalud -m/--mode 'all' -o/--output 'folder_name' 
 
@@ -41,8 +41,9 @@ For first time you have to run it with the argument **"all"**. It will download 
     - **all_articles** *(Collection)*:  This collection will contain all articles.
     - **none_indexed_t1** *(Collection)*:  This collection will just contain none indexed articles.
     - **errors_training** *(Collection)*: Save all errors occurred while saving.
----------------------------------------------------- 
-### All next time:
+
+       ---------------------------------------------------- 
+### - All next time:
 ```bash
 bash: $ python BvSalud -m/--mode 'new' -o/--output folder_name 
 
@@ -73,6 +74,7 @@ The program is to make a json file for all **none indexed articles**. Those arti
 -y 'yyyy': all articles will be greater o equal than year received by argument.
 -o 'output_file_name.json': A file_name to create a json file with article selected.
 
+-----------------------------------------------------------------------
 ## TUTORIAL goalSet:
 ```bash
 bash: $ python tesSet.py -y 'year' -o output_file_name.json
@@ -85,7 +87,8 @@ The program is to make a json file for all **indexed articles** that have **{sel
 
 
 ---------------------------------------------------------------------
-##PIPILINE
+
+##cdPIPILINE
 ![Pipeline](pics/pipeline.png)
 
  
