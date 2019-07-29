@@ -1,4 +1,4 @@
-from constant import  * 
+from bvs.constant import  * 
 import json, os,shutil
 import math,time
 from bs4 import BeautifulSoup
