@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from bvs/constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
+from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
 from pymongo import MongoClient
 from datetime import datetime
 import argparse
@@ -56,7 +56,7 @@ def main(year,output):
                 "pmid": dict_doc['_id'],
                 "Year":year,
                 "abstractText":dict_doc['ab_es']}
-        data_json = json.dumps(data_dict,indent=4) # ensure_ascii=False).encode('utf8')
+        data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
         outputFile.write(data_json)
         collection_all.update_one({'_id': dict_doc['_id']},
                                     {'$set':

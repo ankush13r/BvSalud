@@ -69,6 +69,10 @@ After all it will save all new article directly and those that have been indexed
 
 ## TUTORIAL testSet:
 ```bash
+bash: $ cd BvSalud
+```
+
+```bash
 bash: $ python tesSet.py -y 'year' -o output_file_name.json
 
 ```
@@ -81,6 +85,10 @@ The program is to make a json file for all **none indexed articles**. Those arti
 
 -----------------------------------------------------------------------
 ## TUTORIAL goalSet:
+```bash
+bash: $ cd BvSalud
+```
+
 ```bash
 bash: $ python goalSet.py -y 'year' -o output_file_name.json
 
