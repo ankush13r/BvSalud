@@ -162,7 +162,7 @@ difference_between_entry_update_date.
             while True:
                 try:
                     xml = urlopen(url)
-                    time.sleep(5)
+                    time.sleep(2)
                     break
                 except Exception as err:
                     print("Error: ",err)
@@ -185,4 +185,5 @@ difference_between_entry_update_date.
                     print("Error: << id >> {url}")
                     file.write("\n"+url)
                 except: pass
-        file.close()              
+        file.close()
+        return True              

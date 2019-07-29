@@ -6,12 +6,12 @@ BVSALUD_DOWNLOADS_PATH = os.path.join(path_home,"bvSalud_downloads")
 if not os.path.isdir(BVSALUD_DOWNLOADS_PATH):
     os.mkdir(BVSALUD_DOWNLOADS_PATH)
 
-PATH_TO_LAST_RECORD = "data/last_record"
+PATH_TO_LAST_RECORD = "data/last_record.txt"
 PATH_TO_SAVE_ALL = os.path.join(BVSALUD_DOWNLOADS_PATH,"crawlers_all/")
 PATH_TO_SAVE_NONE_INDEXED = os.path.join(BVSALUD_DOWNLOADS_PATH,"crawlers_none_indexed/")
 CASE_SAVE = "saving"
 CASE_DOWNLOAD = "download"
-MODE_COMPARE = "compare"
+MODE_COMPARE = "new"
 MODE_ALL = "all"
 MODE_NEW = "new"
 DATA_BASE = "BvSalud"

@@ -66,16 +66,16 @@ class Mongo:
         document =  db[collection].find_one({"_id":id})  
         return document
 
-    def save_dict_to_mongo(document_dict, mode=None):
+    def save_dict_to_mongo(document_dict, condition=None):
         entry_date = int((document_dict['entry_date']).strftime("%Y"))
         try:
-            if mode == MODE_COMPARE and  document_dict['mh'] is None:
+            if condition == MODE_COMPARE and  document_dict['mh'] is None:
                 collection_None_Indexed_t2.insert_one(document_dict)
-            elif mode == MODE_ALL:
+            elif condition == MODE_ALL:
                 collection_all.insert_one(document_dict)
                 if entry_date in YEARS and document_dict['mh'] is None:
                     collection_None_Indexed_t1.insert_one(document_dict)
-            elif mode == MODE_NEW:
+            elif condition == MODE_NEW:
                 collection_all.insert_one(document_dict)
 
         except Exception as e:

@@ -9,7 +9,7 @@
 
     "all": "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&sort=YEAR_DESC&format=abstract&filter[db][]=LILACS&filter[db][]=IBECS&q=&index=tw&",
     
-    "compare": "http://pesquisa.bvsalud.org/portal/?u_filter[]=fulltext&u_filter[]=collection&u_filter[]=db&u_filter[]=mj_cluster&u_filter[]=type_of_study&u_filter[]=clinical_aspect&u_filter[]=limit&u_filter[]=pais_assunto&u_filter[]=la&u_filter[]=year_cluster&u_filter[]=type&u_filter[]=ta_cluster&u_filter[]=jd&u_filter[]=pais_afiliacao&fb=&output=xml&lang=en&sort=&format=summary&q=no_indexing:1&index=tw&where=&filter[db][]=LILACS&filter[db][]=IBECS&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&",
+    "new": "http://pesquisa.bvsalud.org/portal/?u_filter[]=fulltext&u_filter[]=collection&u_filter[]=db&u_filter[]=mj_cluster&u_filter[]=type_of_study&u_filter[]=clinical_aspect&u_filter[]=limit&u_filter[]=pais_assunto&u_filter[]=la&u_filter[]=year_cluster&u_filter[]=type&u_filter[]=ta_cluster&u_filter[]=jd&u_filter[]=pais_afiliacao&fb=&output=xml&lang=en&sort=&format=summary&q=no_indexing:1&index=tw&where=&filter[db][]=LILACS&filter[db][]=IBECS&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&",
 
     "url_for_id": "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
 

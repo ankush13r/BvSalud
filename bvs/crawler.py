@@ -55,11 +55,11 @@ class Crawl:
 
     def save_all_urls_list(self):
         list_all_urls = [(self.make_url(((self.per_page*i)+1),(i)+1)) for i in range(self.num_pages)] 
-        print("Saving urls")
+        print("\nSaving urls")
         with open(self.path_to_url, 'w') as file:
             for url in list_all_urls:
                 file.write(url+'\n')
-        print("Saved all urls > ",self.path_to_url)
+        print("Saved all urls > ",os.getcwd(), self.path_to_url, "\n")
         return list_all_urls
     def __str__(self):
         return (f"Document type:\t\t{self.mode}\nTotal records:\t\t{self.total_record}\nPath to save xml:\t{self.path_to_crawler }\nPer page count:\t\t{self.per_page}\nTotal Pages:\t\t{self.num_pages}")
@@ -72,7 +72,7 @@ class Crawl:
             num_page = 0
             print("It will start by ", num_page)
 
-        print("----------Saving Records------------")
+        print("\n----------Saving Records------------\n")
         
         if starting_page == 0:
             list_urls= self.save_all_urls_list()
@@ -99,7 +99,7 @@ class Crawl:
         while num_page < self.num_pages:
             print(num_page ," >> Downloading")
             with open(PATH_TO_LAST_RECORD,"w") as file:
-                file.write(str(num_page) + " " + CASE_DOWNLOAD)
+                file.write(str(num_page) + " " + CASE_DOWNLOAD + " " + str(self.path_to_crawler) + " "+ str(self.mode))
             destine = os.path.join(self.path_to_crawler,str(num_page)+".xml")
             
             while True:
@@ -113,7 +113,7 @@ class Crawl:
             if num_page == (self.num_pages -1):  
                 print("Saved all records in ",self.path_to_crawler)
                 with open(PATH_TO_LAST_RECORD,"w") as file:
-                    file.write("0 saving")      
+                    file.write("0 saving "+ str(self.path_to_crawler)+" "+ str(self.mode))      
             num_page = num_page+1
             time.sleep(30)
 
