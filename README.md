@@ -15,7 +15,7 @@ Downloading all articles, always, is a waste of time, when we can just download 
 
     `pip: $ pip install pymongo`
 
-## TUTORIAL
+## TUTORIAL CRAWLER
 If you are going to excecute this program for the first time or you don't have any data in MongoDB than you must pass the condition (argument) -m/--mode \[all\] and also a argument for output folder -o/--output folder_name.
 Otherwise, you must pass the condition (argument) -m/--mode \[new\].
 
@@ -23,7 +23,7 @@ All data download will be saved in the directory /home/user_name/bvSalud_downloa
 If the folder already exits, it will delete it and make a new. 
 ### First time:
 ```bash
-bash: $ python bvs -m/--mode 'all' -o/--output 'folder_name' 
+bash: $ python BvSalud -m/--mode 'all' -o/--output 'folder_name' 
 
 ```
 
@@ -38,7 +38,7 @@ For first time you have to run it with the argument **"all"**. It will download 
 ---------------------------------------------------- 
 ### All next time:
 ```bash
-bash: $ python bvs -m/--mode 'new' -o/--output folder_name 
+bash: $ python BvSalud -m/--mode 'new' -o/--output folder_name 
 
 ```
 The next rounds are just for new articles, not available in MongoDB. In these rounds program will compare all none indexed article if they have been indexed or there is any new article. 
