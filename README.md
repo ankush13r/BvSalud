@@ -43,7 +43,7 @@ For first time you have to run it with the argument **"all"**. It will download 
     - **errors_training** *(Collection)*: Save all errors occurred while saving.
 
        ---------------------------------------------------- 
-### - All next time:
+### All next time:
 ```bash
 bash: $ python BvSalud -m/--mode 'new' -o/--output folder_name 
 
@@ -77,7 +77,7 @@ The program is to make a json file for all **none indexed articles**. Those arti
 -----------------------------------------------------------------------
 ## TUTORIAL goalSet:
 ```bash
-bash: $ python tesSet.py -y 'year' -o output_file_name.json
+bash: $ python goalSet.py -y 'year' -o output_file_name.json
 
 ```
 
@@ -86,9 +86,8 @@ The program is to make a json file for all **indexed articles** that have **{sel
 -o 'output_file_name.json': A file_name to create a json file with article selected.
 
 
----------------------------------------------------------------------
+##PIPILINE
 
-##cdPIPILINE
 ![Pipeline](pics/pipeline.png)
 
  
