@@ -1,0 +1,11 @@
+README.md
+setup.py
+BvSalud.egg-info/PKG-INFO
+BvSalud.egg-info/SOURCES.txt
+BvSalud.egg-info/dependency_links.txt
+BvSalud.egg-info/top_level.txt
+bvs/__init__.py
+bvs/constant.py
+bvs/crawler.py
+bvs/mongo.py
+bvs/parse_file.py

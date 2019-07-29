@@ -19,7 +19,7 @@ class Crawl:
         self.super_directory = super_directory
         self.path_to_crawler = os.path.join(self.super_directory,sub_directory)
         self.per_page = int(per_page)
-        self.path_to_url = "tmp_url.txt"
+        self.path_to_url = "BvSalud/data/tmp_url.txt"
         self.num_pages = int(math.ceil(self.total_record/self.per_page))
         if not os.path.isdir(super_directory):
             os.mkdir(super_directory)

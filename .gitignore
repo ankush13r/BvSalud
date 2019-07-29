@@ -1,3 +1,7 @@
+dist
+
+build
+
 bvs/crawler_*
 
 bvs/tmp_url
