@@ -22,3 +22,7 @@ COLLECTION_UPDATE_INFO = "Update_info"
 COLLECTION_ERRORS = "errors"
 YEARS = [2018,2019]
 PATH_URL_JSON = "bvs/data/baseUrl.json"
+SLEEP_TIME1 = 900 # In seconds
+SLEEP_TIME2 = 60 # In Seconds
+TIMEOUT_URL1 = 300
+TMP_URL_PATH = "bvs/data/tmp_url.txt"

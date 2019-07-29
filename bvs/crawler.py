@@ -9,7 +9,7 @@ import socket
 import urllib
 from socket import timeout
 
-socket.setdefaulttimeout(300)
+socket.setdefaulttimeout(TIMEOUT_URL1)
 
 class Crawl:
     def __init__(self,mode,super_directory,sub_directory,per_page=int(500)):
@@ -19,7 +19,7 @@ class Crawl:
         self.super_directory = super_directory
         self.path_to_crawler = os.path.join(self.super_directory,sub_directory)
         self.per_page = int(per_page)
-        self.path_to_url = "bvs/data/tmp_url.txt"
+        self.path_to_url = TMP_URL_PATH
         self.num_pages = int(math.ceil(self.total_record/self.per_page))
         if not os.path.isdir(super_directory):
             os.mkdir(super_directory)
@@ -108,7 +108,8 @@ class Crawl:
                     break
                 except Exception as err:
                     print("Error: ",err)
-                    time.sleep(900)
+                    print("Sleeping: ",SLEEP_TIME1,"seconds")
+                    time.sleep(SLEEP_TIME1)
             print("\tFinished downloading\n")          
             if num_page == (self.num_pages -1):  
                 print("Saved all records in ",self.path_to_crawler)

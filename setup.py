@@ -1,6 +1,5 @@
 import setuptools
 
-
 setuptools.setup(
     name="BvSalud",
     version="0.0.4",
@@ -10,7 +9,11 @@ setuptools.setup(
     long_description="",
     long_description_content_type="",
     url="https://github.com/ankush13r/BvSalud.git",
-    packages=setuptools.find_packages(),
+    packages=['bvs','data','bvs/data'],
+    package_data={
+        # If any package contains *.txt or *.rst files, include them:
+        '': ['*.txt', '*.md', '*.json','*.js'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

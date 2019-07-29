@@ -162,11 +162,12 @@ difference_between_entry_update_date.
             while True:
                 try:
                     xml = urlopen(url)
-                    time.sleep(2)
+                    time.sleep(3)
                     break
                 except Exception as err:
                     print("Error: ",err)
-                    time.sleep(90)    
+                    print("Sleeping: ",SLEEP_TIME2, "seconds")
+                    time.sleep(SLEEP_TIME2)    
             bsObj = BeautifulSoup(xml,features='lxml')
             document_xml = bsObj.find('doc')
             
