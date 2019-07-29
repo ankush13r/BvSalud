@@ -1,4 +1,5 @@
-from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
+#!/usr/bin/env python
+from bvs/constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
 from pymongo import MongoClient
 from datetime import datetime
 import argparse
@@ -11,7 +12,7 @@ client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
-collection_Update_info = db[COLLECTION_UPDATE_INFO]
+
 
 
 def main(year,output):

@@ -27,6 +27,9 @@ If the folder already exits, it will delete it and make a new.
 bash: $ git clone https://github.com/ankush13r/BvSalud.git
 ```
 
+```bash
+bash: $ cd BvSalud
+```
 ### - First time:
 ```bash
 bash: $ python BvSalud -m/--mode 'all' -o/--output 'folder_name' 
@@ -71,8 +74,10 @@ bash: $ python tesSet.py -y 'year' -o output_file_name.json
 ```
 
 The program is to make a json file for all **none indexed articles**. Those article that has been select, will be update by new row **{selected: true}**, in mongoDB, collection all_articles.
--y 'yyyy': all articles will be greater o equal than year received by argument.
--o 'output_file_name.json': A file_name to create a json file with article selected.
+
+*-y 'yyyy'*: all articles will be greater o equal than year received by argument.
+
+*-o 'output_file_name.json'*: A file_name to create a json file with article selected.
 
 -----------------------------------------------------------------------
 ## TUTORIAL goalSet:
@@ -82,7 +87,9 @@ bash: $ python goalSet.py -y 'year' -o output_file_name.json
 ```
 
 The program is to make a json file for all **indexed articles** that have **{selected: true}**.
+
 -y 'yyyy': all articles will be greater o equal than year received by argument.
+
 -o 'output_file_name.json': A file_name to create a json file with article selected.
 
 

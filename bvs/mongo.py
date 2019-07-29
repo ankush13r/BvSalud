@@ -1,5 +1,5 @@
 
-from bvs.constant import *
+from constant import *
 from datetime import datetime
 from pymongo import MongoClient
 

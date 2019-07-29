@@ -1,4 +1,5 @@
-from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
+#!/usr/bin/env python
+from bvs/constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
 from pymongo import MongoClient
 from datetime import datetime
 import argparse

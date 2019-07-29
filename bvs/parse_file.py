@@ -1,6 +1,6 @@
-from bvs.mongo import Mongo
-from bvs.crawler import Crawl
-from bvs.constant import *
+from mongo import Mongo
+from crawler import Crawl
+from constant import *
 import os
 from bs4 import BeautifulSoup
 from datetime import datetime

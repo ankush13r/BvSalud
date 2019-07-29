@@ -6,7 +6,7 @@ BVSALUD_DOWNLOADS_PATH = os.path.join(path_home,"bvSalud_downloads")
 if not os.path.isdir(BVSALUD_DOWNLOADS_PATH):
     os.mkdir(BVSALUD_DOWNLOADS_PATH)
 
-PATH_TO_LAST_RECORD = "BvSalud/data/last_record.txt"
+PATH_TO_LAST_RECORD = "bvs/data/last_record.txt"
 PATH_TO_SAVE_ALL = os.path.join(BVSALUD_DOWNLOADS_PATH,"crawlers_all/")
 PATH_TO_SAVE_NONE_INDEXED = os.path.join(BVSALUD_DOWNLOADS_PATH,"crawlers_none_indexed/")
 CASE_SAVE = "saving"
@@ -21,4 +21,4 @@ COLLECTIONS_NONE_INDEXED_T2 = "none_indexed_t2"
 COLLECTION_UPDATE_INFO = "Update_info"
 COLLECTION_ERRORS = "errors"
 YEARS = [2018,2019]
-PATH_URL_JSON = "BvSalud/data/baseUrl.json"
+PATH_URL_JSON = "bvs/data/baseUrl.json"

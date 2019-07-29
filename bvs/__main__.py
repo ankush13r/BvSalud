@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from bvs.crawler import Crawl
-from bvs.parse_file import Parse
-from bvs.mongo import Mongo
-from bvs.constant import *
+from crawler import Crawl
+from parse_file import Parse
+from mongo import Mongo
+from constant import *
 
 import glob
 import sys, os
