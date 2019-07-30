@@ -38,7 +38,7 @@ def find_last_stopped(path_to_find_last_stoped):
         with open(path_to_find_last_stoped,"r") as file:
             result = file.read()
         if str(result) == "0":
-            return 0 ,None
+            return 0 ,None, None, None
         else:
             result_splited = result.split()
             last_stopped = int(result_splited[0])

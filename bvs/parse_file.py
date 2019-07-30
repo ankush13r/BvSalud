@@ -186,14 +186,13 @@ difference_between_entry_update_date.
                     Mongo.replace_doc_to_mongo(document_dict,document_t1['_id'])
                     Mongo.save_to_mongo_updated_info(document_dict['_id'],'update',document_dict['db'])
                     print("->> Updated!\n")
-                    file.write(str("\n" + str(i)+ ". " + str(url)))
-                    
                 except Exception as e:
                     print("Error (while Mongo.replace_do_to_mongo(document_dict,document_t1['_id'])): ",e)
                     Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
 
             else:
                 file.write(str("\n" + str(i)+ ". " + str(url)))
+                Mongo.save_exception_to_mongo(doc_id,'Finding document by alternate id',url,"Document doesn't exist.")
                 print(f"Error: No Document Found :{url}")
         file.close()
         return True              
