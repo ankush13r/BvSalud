@@ -119,9 +119,6 @@ def main(mode ,path_sub_folder,restart):
     elif path_sub_folder == OUTPUT_ERROR:
         print("Error: You must define output folder.\n\t-o/--output folder_name")
         return False
-    else:
-        print("correct")
-        return 2 
 
     path_super_folder = create_super_folder_path(mode)
     if not path_super_folder:
