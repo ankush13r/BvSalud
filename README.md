@@ -65,6 +65,11 @@ After all it will save all new article directly and those that have been indexed
     - **Update_info** *(Collection)*: This collection saves information about none indexed articles, if those are new or just have been updated to indexed, and also save the date.
     - **errors_training** *(Collection)*: Save all errors occurred while saving. 
 
+### JUST COMPARE: If you already have *none_indexed_t1* *none_indexed_t2*, and just need to compare and update collection *all_articles*.
+```bash
+bash: $ python bvs -m/--mode 'new' -o/--output folder_name 
+
+```
 
 
 ## TUTORIAL testSet:

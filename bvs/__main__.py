@@ -100,14 +100,28 @@ def loop_case_all(crawl):
 def  create_super_folder_path(mode):
     if mode == MODE_ALL:
         path_super_folder = PATH_TO_SAVE_ALL
-    elif mode == MODE_COMPARE:
+    elif mode == MODE_NEW:
         path_super_folder = PATH_TO_SAVE_NONE_INDEXED
+    elif mode == MODE_COMPARE:
+        path_super_folder = PATH_TO_SAVE_ALL
     else:
         print("Wrong argument: ",mode)
         return False
     return path_super_folder
 
 def main(mode ,path_sub_folder,restart):
+
+    if mode == MODE_COMPARE:
+        print("Comparing documents in mongo")
+        Parse.compare_t1_t2()
+        print("Finished comparing")
+        return True
+    elif path_sub_folder == OUTPUT_ERROR:
+        print("Error: You must define output folder.\n\t-o/--output folder_name")
+        return False
+    else:
+        print("correct")
+        return 2 
 
     path_super_folder = create_super_folder_path(mode)
     if not path_super_folder:
@@ -116,7 +130,7 @@ def main(mode ,path_sub_folder,restart):
     crawl = Crawl(mode,path_super_folder,path_sub_folder)
     print(crawl)
     print()
-    
+   
     if restart:
       last_saving_num = loop_case_restart(crawl)
       if last_saving_num == -1: 
@@ -125,19 +139,20 @@ def main(mode ,path_sub_folder,restart):
         last_saving_num = loop_case_all(crawl)
         if last_saving_num == -1:
             return False   
-
     backup_collection(crawl.mode)
     save_to_mongo(crawl.path_to_crawler,crawl.mode,last_saving_num) #Saving records to MongoDB.
-    if crawl.mode == MODE_COMPARE:
+    if crawl.mode == MODE_NEW:
         print("Comparing documents in mongo")
-        Parse.compare_t1_t2(crawl)
+        Parse.compare_t1_t2()
+        print("Finished comparing")
+    return True
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(prog ='BvSalud.py')
     parser.add_argument('--restart',action='store_true',  help ='To restart the program from last interrupted')
-    parser.add_argument('-m','--mode',metavar=[MODE_ALL,MODE_COMPARE],required=True, help ='To define if the program is excecuting first time or downloading all article again.')
-    parser.add_argument('-o','--output',required=True, help ='To define the directory for downloads.')   
+    parser.add_argument('-m','--mode',metavar=[MODE_ALL,MODE_NEW,MODE_COMPARE],required=True, help ='To define if the program is excecuting first time or downloading all article again.')
+    parser.add_argument('-o','--output', default=OUTPUT_ERROR, help ='To define the directory for downloads.')   
     args = parser.parse_args()
 
     mode = args.mode

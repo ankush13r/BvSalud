@@ -101,13 +101,14 @@ class Crawl:
             with open(PATH_TO_LAST_RECORD,"w") as file:
                 file.write(str(num_page) + " " + CASE_DOWNLOAD + " " + str(self.path_to_crawler) + " "+ str(self.mode))
             destine = os.path.join(self.path_to_crawler,str(num_page)+".xml")
-            
-            while True:
+            count = 0
+            while True and count < 3:
                 try:
                     urlretrieve(list_urls[num_page],destine)
                     break
                 except Exception as err:
-                    print("Error: ",err)
+                    count = count+1
+                    print(count,") Error: ",err)
                     print("Sleeping: ",SLEEP_TIME1,"seconds")
                     time.sleep(SLEEP_TIME1)
             print("\tFinished downloading\n")          

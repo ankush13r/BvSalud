@@ -2,6 +2,7 @@ from mongo import Mongo
 from crawler import Crawl
 from constant import *
 import os
+import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 from urllib.request import urlopen, urlretrieve
@@ -124,10 +125,18 @@ difference_between_entry_update_date.
         time.sleep(5)
         return doc_id  
 
-    def compare_t1_t2(crawl):
+    def compare_t1_t2():
 
+        json_data = open(PATH_URL_JSON,"r")
+        base_dictionary = json.load(json_data)
+        try:
+            base_url =  base_dictionary["url_for_id"]
+        except:
+            base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
+                
         path_url_error = os.path.join(BVSALUD_DOWNLOADS_PATH,"urlsError.txt")
         file = open(path_url_error,'w')
+
 
         file.write("No documents in urls")         
         list_ids_t1 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T1)
@@ -141,7 +150,7 @@ difference_between_entry_update_date.
         for i, id in enumerate(list_new_ids):
             document_t2 = Mongo.get_document(COLLECTIONS_NONE_INDEXED_T2,id)
             try:
-                print(i+1, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
+                print("\n",i+1, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
                 print()
                 Mongo.save_dict_to_mongo(document_t2,MODE_ALL)
                 Mongo.save_to_mongo_updated_info(id,'new',document_t2['db'])                                                        
@@ -157,15 +166,15 @@ difference_between_entry_update_date.
                 doc_id = Parse.find_id_by_alternate_id(id)                
             else:
                 doc_id = id
-            base_url = crawl.get_base_url("url_for_id")
             url = base_url + doc_id
-            while True:
+            count = 0
+            while True and count < 2:
                 try:
                     xml = urlopen(url)
-                    time.sleep(3)
                     break
                 except Exception as err:
-                    print("Error: ",err)
+                    count = count + 1
+                    print(count,") Error: ",err)
                     print("Sleeping: ",SLEEP_TIME2, "seconds")
                     time.sleep(SLEEP_TIME2)    
             bsObj = BeautifulSoup(xml,features='lxml')
