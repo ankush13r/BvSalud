@@ -117,7 +117,7 @@ difference_between_entry_update_date.
         doc_id = found_object.group().strip()
         print("url:", url)
         print("new_id: ", doc_id)
-#        time.sleep(2)
+        time.sleep(2)
         return doc_id 
 
     def compare_t1_t2():
@@ -166,6 +166,7 @@ difference_between_entry_update_date.
             while True and count < 2:
                 try:
                     xml = urlopen(url)
+                    time.sleep(2)
                     break
                 except Exception as err:
                     count = count + 1
@@ -219,6 +220,7 @@ difference_between_entry_update_date.
             while True and count < 2:
                 try:
                     xml = urlopen(url)
+                    time.sleep(2)
                     break
                 except Exception as err:
                     count = count + 1
