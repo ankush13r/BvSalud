@@ -6,6 +6,12 @@ Downloading all articles, always, is a waste of time, when we can just download 
 
 ### REQUERIMENT
 
+    `$ cd BvSalud`
+    
+    `$ pip install -r requirements.txt`
+
+**If you are getting problem with any library while installing requirements, so you can install id individually**
+
 - **BeautifulSoup:**
 
     `pip: $ pip install beautifulSoup`
@@ -24,11 +30,11 @@ If the folder already exits, it will delete it and make a new.
 
 ### How to download:
 ```bash
-bash: $ git clone https://github.com/ankush13r/BvSalud.git
+shel: $ git clone https://github.com/ankush13r/BvSalud.git
 ```
 
 ```bash
-bash: $ cd BvSalud
+shel: $ cd BvSalud
 ```
 ### - First time:
 ```bash
@@ -72,7 +78,7 @@ bash: $ python bvs -m/--mode 'compare'
 ```
 With mode "compare" you are just comparing time1 and time2 none indexed collection. And updating all articles collection depending on if there are any new article or modified.
 
-### FIX ERROR: If program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.
+### RESTART from the last failed to finish it: If the program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.
 ```bash
 bash: $ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
 
@@ -119,6 +125,7 @@ The program is to make a json file for all **indexed articles** that have **{sel
 ![Pipeline](pics/pipeline.png)
 
  
+For more information contact:* *ankush.ran13@gmail.com*
 
 
 
