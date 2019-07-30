@@ -31,6 +31,7 @@ collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 collection_None_Indexed_t2 =db[COLLECTIONS_NONE_INDEXED_T2]
 collection_Update_info = db[COLLECTION_UPDATE_INFO]
+collection_panding_docs = db[COLLECTION_PANDING]
 errors = db[COLLECTION_ERRORS]
 
 class Mongo:
@@ -43,7 +44,10 @@ class Mongo:
             ids_list.append(item['_id'])
 
         return ids_list
-    
+    def delete_document_in_panding_coll(old_id):
+        collection_panding_docs.delete_one({'_id':old_id})
+        return True
+
     def replace_doc_to_mongo(new_document_dict,old_id):
         print(f"Replacing Document:{new_document_dict['_id']} <> {old_id}")
         old_document =  collection_all.find_one({"_id":old_id}) 
@@ -55,7 +59,6 @@ class Mongo:
             print("Error: None Type Document: while replacing, id: ",old_id)
         collection_all.delete_one({'_id':old_id})
         collection_all.insert_one(new_document_dict)
-
 
     def save_exception_to_mongo(id,type_error,detail_error,exception):  
         errors.insert_one(dict(date_time=datetime.utcnow(),
@@ -69,7 +72,8 @@ class Mongo:
         return document
 
     def save_dict_to_mongo(document_dict, condition=None):
-        entry_date = int((document_dict['entry_date']).strftime("%Y"))
+        if condition != MODE_PANDING:
+            entry_date = int((document_dict['entry_date']).strftime("%Y"))
         try:
             if condition == MODE_NEW and  document_dict['mh'] is None:
                 collection_None_Indexed_t2.insert_one(document_dict)
@@ -79,7 +83,8 @@ class Mongo:
                     collection_None_Indexed_t1.insert_one(document_dict)
             elif condition == MODE_INDEXED:
                 collection_all.insert_one(document_dict)
-
+            elif condition == MODE_PANDING:
+                collection_panding_docs.insert_one(document_dict)
         except Exception as e:
             Mongo.save_exception_to_mongo(document_dict['_id'],'Saving one <doc> from single XML file',document_dict['_id'],str(e))                         
 
