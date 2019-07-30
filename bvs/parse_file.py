@@ -133,7 +133,7 @@ difference_between_entry_update_date.
         file = open(path_url_error,'w')
 
 
-        file.write("No documents in urls")         
+        file.write("No documents in urls:\n")         
         list_ids_t1 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T1)
         list_ids_t2 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T2)
 
@@ -190,8 +190,8 @@ difference_between_entry_update_date.
                     Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
             else:
                 try:
-                    print("Error: {url}")
-                    file.write("\n"+url)
+                    print(f"Error: No Document Found :{url}")
+                    file.write(f"\n{i}. {url}")
                 except: pass
         file.close()
         return True              
