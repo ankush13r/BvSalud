@@ -45,12 +45,14 @@ class Mongo:
         return ids_list
     
     def replace_doc_to_mongo(new_document_dict,old_id):
-        old_document =  collection_all.find_one({"_id":old_id})  
+        print("Replacing Document:")
+        old_document =  collection_all.find_one({"_id":old_id}) 
         new_document_dict['parsing_update_date'] = datetime.utcnow()
-        new_document_dict['entry_date'] = old_document['entry_date']
-        new_document_dict['parsing_entry_date'] = old_document['parsing_entry_date']
-
-
+        if old_document is not None:
+            new_document_dict['entry_date'] = old_document['entry_date']
+            new_document_dict['parsing_entry_date'] = old_document['parsing_entry_date']
+        else:
+            print("Error: None Type Document: while replacing, id: ",old_id)
         collection_all.delete_one({'_id':old_id})
         collection_all.insert_one(new_document_dict)
 

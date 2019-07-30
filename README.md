@@ -67,9 +67,17 @@ After all it will save all new article directly and those that have been indexed
 
 ### JUST COMPARE: If you already have *none_indexed_t1* *none_indexed_t2*, and just need to compare and update collection *all_articles*.
 ```bash
-bash: $ python bvs -m/--mode 'new' -o/--output folder_name 
+bash: $ python bvs -m/--mode 'compare'
 
 ```
+With mode "compare" you are just comparing time1 and time2 none indexed collection. And updating all articles collection depending on if there are any new article or modified.
+
+### FIX ERROR: If program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.
+```bash
+bash: $ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
+
+```
+With argument --restart the program will find last stop and start from that point. **Warning:** **-m/--mode** and **-o/--output** must be 
 
 
 ## TUTORIAL testSet:
