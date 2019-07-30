@@ -229,7 +229,6 @@ difference_between_entry_update_date.
                     time.sleep(SLEEP_TIME2)    
             bsObj = BeautifulSoup(xml,features='lxml')
             document_xml = bsObj.find('doc')
-            
             if document_xml is not None:
                 try:
                     document_dict = Parse.xml_to_dictionary(document_xml)

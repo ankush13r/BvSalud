@@ -40,7 +40,8 @@ def main(year,output):
     list_json_doc = []
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-
+    
+ 
     for i, dict_doc in enumerate(cursor_mongo):
         print(i)
         if i > 0:
@@ -64,6 +65,7 @@ def main(year,output):
                                     }) 
     outputFile.write(']}')
     outputFile.close()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='tesSet.py',usage='%(prog)s [-y ####] [-o file.json]')

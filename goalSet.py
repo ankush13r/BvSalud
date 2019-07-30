@@ -5,6 +5,9 @@ from datetime import datetime
 import argparse
 import json
 import os
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS,  ImageColorGenerator
+
 
 
 
@@ -13,7 +16,14 @@ db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
-
+def make_word_cloud(text):
+    try:
+        word_cloud = WordCloud(width = 1920, height = 1080, background_color='black').generate(text)
+        plt.figure(figsize=(10,8),facecolor = 'white', edgecolor='blue')
+        plt.imshow(word_cloud, interpolation='spline16')
+        plt.axis("off")
+        plt.show()
+    except: pass
 
 def main(year,output):
 
@@ -27,9 +37,7 @@ def main(year,output):
 
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-    for i, document_dict in enumerate(cursor_mongo):
-        print(i)
-    return 1
+    heading_text = ""
     for i, document_dict in enumerate(cursor_mongo):
         print(i)
         if i > 0:
@@ -46,11 +54,14 @@ def main(year,output):
         try:
             mesh_major = list(set(document_dict['mh']+document_dict['sh']))
         except Exception as err:
-            print("Error: ", err)
             if document_dict['mh'] is not None and document_dict['sh'] is None:
+                print("\t->> sh:  NULL")
                 mesh_major = document_dict['mh']
+        try: 
+            year = int((document_dict['da']).strftime("%Y"))
+        except Exception as err: 
+            print("Error: ",err, "<< da is None >>")
 
-        year = int((document_dict['da']).strftime("%Y"))
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
                 "db":document_dict['db'],
@@ -59,9 +70,13 @@ def main(year,output):
                 "Year": year,
                 "abstractText":document_dict['ab_es']}
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
-        outputFile.write(data_json) 
+        outputFile.write(data_json)
+        heading_text = heading_text + " " + str(' '.join(mesh_major))
+
     outputFile.write(']}')
     outputFile.close()
+    make_word_cloud(heading_text)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
