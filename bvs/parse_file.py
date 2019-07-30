@@ -116,7 +116,8 @@ difference_between_entry_update_date.
         found_object = re.search(r"(?<=ID:).*",data_string) # Regex For get id from the string
         doc_id = found_object.group().strip()
         print("url:", url)
-        time.sleep(2)
+        print("new_id: ", doc_id)
+#        time.sleep(2)
         return doc_id 
 
     def compare_t1_t2():
