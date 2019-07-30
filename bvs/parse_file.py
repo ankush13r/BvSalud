@@ -140,24 +140,25 @@ difference_between_entry_update_date.
 
         list_new_ids  = list(set(list_ids_t2) - set(list_ids_t1))
         list_modified_ids  = list(set(list_ids_t1) - set(list_ids_t2))
-
-        print("\nNew records: ",len(list_new_ids),"\n")
+        new_records_len = len(list_new_ids)
+        print("\nNew records: ",new_records_len,"\n")
 
         for i, id in enumerate(list_new_ids):
             document_t2 = Mongo.get_document(COLLECTIONS_NONE_INDEXED_T2,id)
             try:
-                print("\n",i+1, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
+                print("\n",new_records_len-i, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
                 print()
                 Mongo.save_dict_to_mongo(document_t2,MODE_INDEXED)
                 Mongo.save_to_mongo_updated_info(id,'new',document_t2['db'])                                                        
             except (TypeError, AttributeError) as e:
                 Mongo.save_exception_to_mongo(id,'Saveing new none indexed document into mongo',id, str(e))
 
-        print("\nRecords to modify: ",len(list_modified_ids),"\n")
+        modify_records_len = len(list_modified_ids)
+        print("\nRecords to modify: ",modify_records_len,"\n")
         for i, id in enumerate(list_modified_ids):
             document_t1 = Mongo.get_document(COLLECTIONS_NONE_INDEXED_T1,id)
             
-            print("\n",i+1,") Document to modify: ",document_t1['_id'])
+            print("\n",modify_records_len-i,"-> Document to modify: ",document_t1['_id'])
             if document_t1['db'] == 'IBECS':
                 try:
                     doc_id = Parse.find_id_by_alternate_id(document_t1['_id'])                
