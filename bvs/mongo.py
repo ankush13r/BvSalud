@@ -44,18 +44,18 @@ class Mongo:
 
         return ids_list
     
-    def update_modified(id_to_find,doc_id,alternate_id,mh,sh):
-        collection_all.update_one({'_id': id_to_find},
-                                    {'$set':
-                                        {'_id':doc_id,
-                                        'alternate_id':alternate_id,
-                                        'mh': mh,
-                                        'sh': sh,
-                                        'parsing_update_date': datetime.utcnow()
-                                        }
-                                    })
+    def replace_doc_to_mongo(new_document_dict,old_id):
+        old_document =  collection_all.find_one({"_id":old_id})  
+        new_document_dict['parsing_update_date'] = datetime.utcnow()
+        new_document_dict['entry_date'] = old_document['entry_date']
+        new_document_dict['parsing_entry_date'] = old_document['parsing_entry_date']
 
-    def save_exception_to_mongo(id,type_error,detail_error,exception):   
+
+        collection_all.delete_one({'_id':old_id})
+        collection_all.insert_one(new_document_dict)
+
+
+    def save_exception_to_mongo(id,type_error,detail_error,exception):  
         errors.insert_one(dict(date_time=datetime.utcnow(),
                         doc_id=id,
                         type_error=type_error,
@@ -75,26 +75,14 @@ class Mongo:
                 collection_all.insert_one(document_dict)
                 if entry_date in YEARS and document_dict['mh'] is None:
                     collection_None_Indexed_t1.insert_one(document_dict)
-            elif condition == MODE_ONE:
+            elif condition == MODE_INDEXED:
                 collection_all.insert_one(document_dict)
 
         except Exception as e:
             Mongo.save_exception_to_mongo(document_dict['_id'],'Saving one <doc> from single XML file',document_dict['_id'],str(e))                         
 
     def save_to_mongo_updated_info(id,type,db):
-        """This method is for saving the data like _id, type, db and date, in MongoDB *data base: bvc* and collection*. 
 
-    :param id: Article document's id.
-    :type id: string
-    :param type: Type is new or update. It depends on article if it's new or just being updated.
-    :type type: string (new or update)
-    :param db: The name of article's data base (LILACS or IBECS)
-    :type db: sting
-    :returns: Nothing to return
-
-        .. note:: The date will be saved automatically. It will be actual date obtained by ``datetime.utcnow()``.
-
-    """
         date = datetime.utcnow()
         dictionary = dict({'id':id,'type':type,'db':db,'parsing_date':date}) 
         collection_Update_info.insert_one(dictionary)

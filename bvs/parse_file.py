@@ -116,16 +116,17 @@ difference_between_entry_update_date.
     :rtype: string (Ex: biblio-1001042)
     """
         base_url = 'http://pesquisa.bvsalud.org/portal/resource/en/'
-        url = base_url + alternate_id
+        url = base_url + str(alternate_id.strip())
         content = urlopen(url)
         bsObj = BeautifulSoup(content,features ='lxml') 
         data_string = (bsObj.find(attrs = {'class' :'data'})).text  #Get the string whose class is data, for extracing the id.
         found_object = re.search(r"(?<=ID:).*",data_string) # Regex For get id from the string
         doc_id = found_object.group().strip()
-        time.sleep(5)
+        time.sleep(2)
         return doc_id  
 
     def compare_t1_t2():
+        base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
 
         json_data = open(PATH_URL_JSON,"r")
         base_dictionary = json.load(json_data)
@@ -152,7 +153,7 @@ difference_between_entry_update_date.
             try:
                 print("\n",i+1, ") New Document <<",document_t2['_id'],">>\tmh: ",document_t2['mh'])
                 print()
-                Mongo.save_dict_to_mongo(document_t2,MODE_ALL)
+                Mongo.save_dict_to_mongo(document_t2,MODE_INDEXED)
                 Mongo.save_to_mongo_updated_info(id,'new',document_t2['db'])                                                        
             except (TypeError, AttributeError) as e:
                 Mongo.save_exception_to_mongo(id,'Saveing new none indexed document into mongo',id, str(e))
@@ -163,7 +164,11 @@ difference_between_entry_update_date.
             
             print("\n",i+1,") Document to modify: ",document_t1['_id'])
             if document_t1['db'] == 'IBECS':
-                doc_id = Parse.find_id_by_alternate_id(id)                
+                try:
+                    doc_id = Parse.find_id_by_alternate_id(document_t1['_id'])                
+                except:
+                    print("Error: << id >> {url}")
+                    file.write("\n"+url)
             else:
                 doc_id = id
             url = base_url + doc_id
@@ -184,7 +189,7 @@ difference_between_entry_update_date.
                 try:
                     document_dict = Parse.xml_to_dictionary(document_xml)
                     print("Updating document: ", doc_id)
-                    Mongo.update_modified(doc_id, document_dict['_id'],document_dict['alternate_id'],document_dict['mh'],document_dict['sh'])
+                    Mongo.replace_doc_to_mongo(document_dict,document_t1['_id'])
                     Mongo.save_to_mongo_updated_info(document_dict['_id'],'update',document_dict['db'])
                     print("Updated\n")
                 except Exception as e:
