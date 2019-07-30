@@ -112,7 +112,7 @@ def  create_super_folder_path(mode):
 def main(mode ,path_sub_folder,restart):
     if mode == MODE_NEW:
         Parse.get_pending_documents()
-    return 1
+        
     if mode == MODE_COMPARE:
         print("Comparing documents in mongo")
         Parse.compare_t1_t2()
