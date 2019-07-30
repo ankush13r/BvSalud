@@ -157,6 +157,7 @@ difference_between_entry_update_date.
                 try:
                     doc_id = Parse.find_id_by_alternate_id(document_t1['_id'])                
                 except:
+                    doc_id = id
                     print("Error: <<Finding id by alternate id >>")
             else:
                 doc_id = id
@@ -201,17 +202,16 @@ difference_between_entry_update_date.
             base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
 
 
-        cursor = Mongo.get_all_ids_list(COLLECTION_PANDING)
-        ids_list = []
-        for item in cursor:
-            ids_list.append(item['_id'])
-        
+        ids_list = Mongo.get_all_ids_list(COLLECTION_PANDING)
 
+        
+        modify_records_len = len(ids_list)
         for i, old_id in enumerate(ids_list):
-            print("\n",modify_records_len-i,"-> Document to modify: ",document_t1['_id'])
+            print("\n",modify_records_len -i,"-> Document to modify: ",old_id)
             try:
                 new_id = Parse.find_id_by_alternate_id(old_id)                
             except:
+                new_id = old_id
                 print("Error: <<Finding id by alternate id >>")
     
             url = base_url + new_id
