@@ -131,9 +131,9 @@ difference_between_entry_update_date.
                 
         path_url_error = os.path.join(BVSALUD_DOWNLOADS_PATH,"urlsError.txt")
         file = open(path_url_error,'w')
-
-
         file.write("No documents in urls:\n")         
+        
+        
         list_ids_t1 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T1)
         list_ids_t2 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T2)
 
@@ -184,14 +184,15 @@ difference_between_entry_update_date.
                     print("Updating document: ", doc_id)
                     Mongo.replace_doc_to_mongo(document_dict,document_t1['_id'])
                     Mongo.save_to_mongo_updated_info(document_dict['_id'],'update',document_dict['db'])
-                    print("Updated\n")
+                    print("->> Updated!\n")
+                    file.write(str("\n" + str(i)+ ". " + str(url)))
+                    
                 except Exception as e:
                     print("Error (while Mongo.replace_do_to_mongo(document_dict,document_t1['_id'])): ",e)
                     Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
+
             else:
-                try:
-                    print(f"Error: No Document Found :{url}")
-                    file.write(f"\n{i}. {url}")
-                except: pass
+                file.write(str("\n" + str(i)+ ". " + str(url)))
+                print(f"Error: No Document Found :{url}")
         file.close()
         return True              

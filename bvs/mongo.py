@@ -45,7 +45,7 @@ class Mongo:
         return ids_list
     
     def replace_doc_to_mongo(new_document_dict,old_id):
-        print("Replacing Document:{new_document[_id]} <> {old_id}")
+        print(f"Replacing Document:{new_document_dict['_id']} <> {old_id}")
         old_document =  collection_all.find_one({"_id":old_id}) 
         new_document_dict['parsing_update_date'] = datetime.utcnow()
         if old_document is not None:
