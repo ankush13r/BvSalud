@@ -6,9 +6,9 @@ Downloading all articles, always, is a waste of time, when we can just download 
 
 ### REQUERIMENT
 
-    `$ cd BvSalud`
-    
-    `$ pip install -r requirements.txt`
+`$ cd BvSalud`
+
+`$ pip install -r requirements.txt`
 
 **If you are getting problem with any library while installing requirements, so you can install id individually**
 
