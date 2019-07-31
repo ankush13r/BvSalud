@@ -30,15 +30,15 @@ If the folder already exits, it will delete it and make a new.
 
 ### How to download:
 ```bash
-shel: $ git clone https://github.com/ankush13r/BvSalud.git
+$ git clone https://github.com/ankush13r/BvSalud.git
 ```
 
 ```bash
-shel: $ cd BvSalud
+$ cd BvSalud
 ```
 ### - First time:
 ```bash
-bash: $ python bvs -m/--mode 'all' -o/--output 'folder_name' 
+$ python bvs -m/--mode 'all' -o/--output 'folder_name' 
 
 ```
 
@@ -54,7 +54,7 @@ For first time you have to run it with the argument **"all"**. It will download 
        ---------------------------------------------------- 
 ### All next time:
 ```bash
-bash: $ python bvs -m/--mode 'new' -o/--output folder_name 
+$ python bvs -m/--mode 'new' -o/--output folder_name 
 
 ```
 The next rounds are just for new articles, not available in MongoDB. In these rounds program will compare all none indexed article if they have been indexed or there is any new article. 
@@ -75,7 +75,7 @@ After all it will save all new article directly and those that have been indexed
 **If you already have *none_indexed_t1* and *none_indexed_t2*, and just need to compare and update collection *all_articles*.**
 
 ```bash
-bash: $ python bvs -m/--mode 'compare'
+$ python bvs -m/--mode 'compare'
 
 ```
 With mode "compare" you are just comparing time1 and time2 none indexed collection. And updating all articles collection depending on if there are any new article or modified.
@@ -83,7 +83,7 @@ With mode "compare" you are just comparing time1 and time2 none indexed collecti
 #### RESTART from the last failed to finish it: 
 **If the program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.**
 ```bash
-bash: $ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
+$ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
 
 ```
 With argument --restart the program will find last stop and start from that point. **Warning:** **-m/--mode** and **-o/--output** must be 
@@ -91,11 +91,11 @@ With argument --restart the program will find last stop and start from that poin
 
 ## TUTORIAL testSet:
 ```bash
-bash: $ cd BvSalud
+$ cd BvSalud
 ```
 
 ```bash
-bash: $ python tesSet.py -y 'year' -o output_file_name.json
+$ python tesSet.py -y 'year' -o output_file_name.json
 
 ```
 
@@ -108,11 +108,11 @@ The program is to make a json file for all **none indexed articles**. Those arti
 -----------------------------------------------------------------------
 ## TUTORIAL goalSet:
 ```bash
-bash: $ cd BvSalud
+$ cd BvSalud
 ```
 
 ```bash
-bash: $ python goalSet.py -y 'year' -o output_file_name.json
+$ python goalSet.py -y 'year' -o output_file_name.json
 
 ```
 
