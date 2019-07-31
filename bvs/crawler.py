@@ -91,7 +91,7 @@ class Crawl:
         return final_url
 
     def save_all_urls_list(self):
-        list_all_urls = [(selfesdeveniment.make_url(((self.per_page*i)+1),(i)+1)) for i in range(self.num_pages)] 
+        list_all_urls = [(self.make_url(((self.per_page*i)+1),(i)+1)) for i in range(self.num_pages)] 
         print("\nSaving urls")
         with open(self.path_to_url, 'w') as file:
             for url in list_all_urls:
