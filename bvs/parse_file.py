@@ -238,8 +238,8 @@ difference_between_entry_update_date.
                     print("->> Updated!\n")
                     Mongo.delete_document_in_panding_coll(old_id)
                 except Exception as e:
-                    print("Error (while Mongo.replace_do_to_mongo(document_dict,document_t1['_id'])): ",e)
-                    Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
+                    print("Error: (while in Parse_file.py >> Mongo.replace_do_to_mongo(document_dict,old_id): ",e)
+                    Mongo.save_exception_to_mongo(document_dict['_id'],"while in Parse_file.py >> Mongo.replace_do_to_mongo(document_dict,old_id)",url,str(e))
             else:
                 tmp_dict = {'_id' : old_id}
                 Mongo.save_dict_to_mongo(tmp_dict,MODE_PANDING)

@@ -49,10 +49,15 @@ class Mongo:
         return True
 
     def replace_doc_to_mongo(new_document_dict,old_id):
-        print(f"Replacing Document:{new_document_dict['_id']} <> {old_id}")
+        print(f"Replacing Document: {old_id} <<>> {new_document_dict['_id']} ")
         old_document =  collection_all.find_one({"_id":old_id}) 
         new_document_dict['parsing_update_date'] = datetime.utcnow()
         if old_document is not None:
+            try:
+                new_document_dict['selected'] = old_document['selected']
+                print("\t>>> Selected document.")
+            except:
+                print("\t>>> None selected document.")
             new_document_dict['entry_date'] = old_document['entry_date']
             new_document_dict['parsing_entry_date'] = old_document['parsing_entry_date']
         else:
