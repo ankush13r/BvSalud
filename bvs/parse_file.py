@@ -207,6 +207,7 @@ difference_between_entry_update_date.
 
         
         modify_records_len = len(ids_list)
+        print("Total panding documents: ",modify_records_len)
         for i, old_id in enumerate(ids_list):
             print("\n",modify_records_len -i,"-> Document to modify: ",old_id)
             try:

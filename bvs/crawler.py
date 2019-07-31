@@ -12,7 +12,14 @@ from socket import timeout
 socket.setdefaulttimeout(TIMEOUT_URL1)
 
 class Crawl:
+    """Crawl is a class with **__init__** option. To use it you must instance the class and it receives 4 arguments.
+        
+    """
     def __init__(self,mode,super_directory,sub_directory,per_page=int(500)):
+        """
+            :param mode: To define the mode for Crawl (all or new), all is for download all articles, 
+            new for new articles (in this case none indexed)    
+        """
         self.mode = mode
         self.base_url = self.get_base_url(mode)
         self.total_record = self.get_records_num()

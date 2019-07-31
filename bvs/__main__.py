@@ -109,10 +109,7 @@ def  create_super_folder_path(mode):
         return False
     return path_super_folder
 
-def main(mode ,path_sub_folder,restart):
-    if mode == MODE_NEW:
-        Parse.get_pending_documents()
-        
+def main(mode ,path_sub_folder,restart):       
     if mode == MODE_COMPARE:
         print("Comparing documents in mongo")
         Parse.compare_t1_t2()
@@ -129,12 +126,14 @@ def main(mode ,path_sub_folder,restart):
     crawl = Crawl(mode,path_super_folder,path_sub_folder)
     print(crawl)
     print()
-   
+       
     if restart:
       last_saving_num = loop_case_restart(crawl)
       if last_saving_num == -1: 
           return False
     else:
+        if mode == MODE_NEW:
+            Parse.get_pending_documents()
         last_saving_num = loop_case_all(crawl)
         if last_saving_num == -1:
             return False   
