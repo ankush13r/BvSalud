@@ -79,7 +79,7 @@ def main(year,output):
         outputFile.write(data_json)
         heading_text = heading_text + " " + str(' '.join(mesh_major))
 
-    outputFile.write(']}')
+    outputFile.write(']}') 
     outputFile.close()
     try:
         make_word_cloud(heading_text)
