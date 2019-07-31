@@ -41,6 +41,9 @@ $ cd BvSalud
 $ python bvs -m/--mode 'all' -o/--output 'folder_name' 
 
 ```
+- example:
+
+    python bvs -m all -o folder_name  
 
 For first time you have to run it with the argument **"all"**. It will download all articles to you MongoDb in DB **bvs** and collection **training_collection_All**, even it will create the collection **training_collection_None_Indexed_t1** with all none_indexed articles.
     
@@ -57,6 +60,10 @@ For first time you have to run it with the argument **"all"**. It will download 
 $ python bvs -m/--mode 'new' -o/--output folder_name 
 
 ```
+- example:
+
+    python bvs -m new -o folder_name  
+
 The next rounds are just for new articles, not available in MongoDB. In these rounds program will compare all none indexed article if they have been indexed or there is any new article. 
 After all it will save all new article directly and those that have been indexed will update in the collection all articles.
 
@@ -81,29 +88,29 @@ $ python bvs -m/--mode 'compare'
 With mode "compare" you are just comparing time1 and time2 none indexed collection. And updating all articles collection depending on if there are any new article or modified.
 
 ### - RESTART from the last failed to finish it: 
-    **If the program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.**
-    ```bash
-    $ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
+**If the program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.**
+```bash
+$ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
 
-    ```
-    With argument --restart the program will find last stop and start from that point. **Warning:** **-m/--mode** and **-o/--output** must be 
+```
+With argument --restart the program will find last stop and start from that point. **Warning:** **-m/--mode** and **-o/--output** must be 
 
 
 ## TUTORIAL testSet:
-    ```bash
-    $ cd BvSalud
-    ```
+```bash
+$ cd BvSalud
+```
 
-    ```bash
-    $ python tesSet.py -y 'year' -o output_file_name.json
+```bash
+$ python tesSet.py -y 'year' -o output_file_name.json
 
-    ```
+```
 
-    The program is to make a json file for all **none indexed articles**. Those article that has been select, will be update by new row **{selected: true}**, in mongoDB, collection all_articles.
+The program is to make a json file for all **none indexed articles**. Those article that has been select, will be update by new row **{selected: true}**, in mongoDB, collection all_articles.
 
-    *-y 'yyyy'*: all articles will be greater o equal than year received by argument.
+*-y 'yyyy'*: all articles will be greater o equal than year received by argument.
 
-    *-o 'output_file_name.json'*: A file_name to create a json file with article selected.
+*-o 'output_file_name.json'*: A file_name to create a json file with article selected.
 
 -----------------------------------------------------------------------
 ## TUTORIAL goalSet:
