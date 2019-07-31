@@ -7,7 +7,8 @@ import json
 import os
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS,  ImageColorGenerator
-
+import random
+from PIL import Image
 
 
 
@@ -16,11 +17,16 @@ db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
+def grey_color_func(word, font_size, position, orientation, random_state=None,
+                    **kwargs):
+    return "hsl(0,0%%, %d%%)" % random.randint(60, 100)
+
 def make_word_cloud(text):
     try:
-        word_cloud = WordCloud(width = 1920, height = 1080, background_color='black').generate(text)
+        word_cloud = WordCloud(width = 1920,height = 1080, random_state=1).generate(text)
         plt.figure(figsize=(10,8),facecolor = 'white', edgecolor='blue')
-        plt.imshow(word_cloud, interpolation='spline16')
+        plt.imshow(word_cloud.recolor(color_func=grey_color_func, random_state=3),
+           interpolation="spline16")
         plt.axis("off")
         plt.show()
     except: pass
@@ -75,8 +81,10 @@ def main(year,output):
 
     outputFile.write(']}')
     outputFile.close()
-    make_word_cloud(heading_text)
-
+    try:
+        make_word_cloud(heading_text)
+    except: 
+        pass
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
