@@ -15,7 +15,7 @@ def main(year,output):
 
     date = datetime.strptime(str(year), '%Y')
     cursor_mongo = collection_all.find({"$and":[
-                {"da": {"$gte": date}},
+                {"entry_date": {"$gte": date}},
                 {"ab_es":{"$ne": None}},
                 {"mh":{"$ne":None}},
                 {"selected":{"$ne":None}}
@@ -43,9 +43,9 @@ def main(year,output):
                 print("\t->> sh:  NULL")
                 mesh_major = document_dict['mh']
         try: 
-            year = int((document_dict['da']).strftime("%Y"))
+            year = int((document_dict['entry_date']).strftime("%Y"))
         except Exception as err: 
-            print("Error: ",err, "<< da is None >>")
+            print("Error: ",err, "<< entry_date is None >>")
 
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],

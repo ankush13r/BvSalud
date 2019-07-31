@@ -34,7 +34,7 @@ def main(year,output):
     cursor_mongo = collection_all.find({"$and":[
         {"mh":None},
         {"ab_es":{"$ne": None}},
-        {"da": {"$gte": date}},  
+        {"entry_date": {"$gte": date}},  
         {"cc":{"$in":libraries}}
         ]})
     list_json_doc = []
@@ -50,7 +50,7 @@ def main(year,output):
             journal = dict_doc['ta'][0]
         else:
             journal = dict_doc['fo']
-        year = int((dict_doc['da']).strftime("%Y"))
+        year = int((dict_doc['entry_date']).strftime("%Y"))
         data_dict = {"journal":journal,
                 "title":dict_doc['ti_es'],
                 "db":dict_doc['db'],
