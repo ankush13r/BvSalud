@@ -118,9 +118,9 @@ $ python goalSet.py -y 'year' -o output_file_name.json
 
 The program is to make a json file for all **indexed articles** that have **{selected: true}**.
 
--y 'yyyy': all articles will be greater o equal than year received by argument.
+- -y 'yyyy':                   all articles will be greater o equal than year received by argument.
 
--o 'output_file_name.json': A file_name to create a json file with article selected.
+- -o 'output_file_name.json':  A file_name to create a json file with article selected.
 
 
 ## PIPILINE
