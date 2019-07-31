@@ -11,7 +11,6 @@ db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
-
 def main(year,output):
 
     date = datetime.strptime(str(year), '%Y')
