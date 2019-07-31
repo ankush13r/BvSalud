@@ -109,7 +109,11 @@ def  create_super_folder_path(mode):
         return False
     return path_super_folder
 
-def main(mode ,path_sub_folder,restart):       
+def main(mode ,path_sub_folder,restart):
+
+    if mode not in [MODE_ALL,MODE_NEW,MODE_COMPARE]:
+        print("Wrong argument: ",mode,f"\nMust be one of these {MODE_ALL,MODE_NEW,MODE_COMPARE}")
+        return False
     if mode == MODE_COMPARE:
         print("Comparing documents in mongo")
         Parse.compare_t1_t2()
