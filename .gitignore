@@ -8,6 +8,10 @@ bvs/tmp_url
 
 bvs/prueba.py
 
+bvs/tmp_url.txt
+
+bvs/data/last_record.txt
+
 .vscode
 
 bvs/__pycache__
