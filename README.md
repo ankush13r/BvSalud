@@ -52,7 +52,7 @@ For first time you have to run it with the argument **"all"**. It will download 
     - **errors_training** *(Collection)*: Save all errors occurred while saving.
 
        ---------------------------------------------------- 
-### All next time:
+### - All next time:
 ```bash
 $ python bvs -m/--mode 'new' -o/--output folder_name 
 
@@ -71,7 +71,7 @@ After all it will save all new article directly and those that have been indexed
     - **Update_info** *(Collection)*: This collection saves information about none indexed articles, if those are new or just have been updated to indexed, and also save the date.
     - **errors_training** *(Collection)*: Save all errors occurred while saving. 
 
-#### JUST COMPARE: 
+### - JUST COMPARE: 
 **If you already have *none_indexed_t1* and *none_indexed_t2*, and just need to compare and update collection *all_articles*.**
 
 ```bash
@@ -80,7 +80,7 @@ $ python bvs -m/--mode 'compare'
 ```
 With mode "compare" you are just comparing time1 and time2 none indexed collection. And updating all articles collection depending on if there are any new article or modified.
 
-#### RESTART from the last failed to finish it: 
+### - RESTART from the last failed to finish it: 
 **If the program has been *failed* while dowinloading or saving your records or just want to restart from last time stopped.**
 ```bash
 $ python bvs -m/--mode 'must be same as last time' -o/--output 'must be same as last time' --restare
