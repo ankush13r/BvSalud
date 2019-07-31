@@ -1,5 +1,5 @@
-from constant import  * 
 import json, os,shutil
+from constant import  * 
 import math,time
 from bs4 import BeautifulSoup
 from io import open
