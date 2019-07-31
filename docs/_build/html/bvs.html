@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bvs package &#8212; BvSalud 0.0.4 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="BvSalud package" href="BvSalud.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="BvSalud.html" title="BvSalud package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">BvSalud 0.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">BvSalud</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bvs-package">
+<h1>bvs package<a class="headerlink" href="#bvs-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bvs.constant">
+<span id="bvs-constant-module"></span><h2>bvs.constant module<a class="headerlink" href="#module-bvs.constant" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bvs.crawler">
+<span id="bvs-crawler-module"></span><h2>bvs.crawler module<a class="headerlink" href="#module-bvs.crawler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bvs.crawler.Crawl">
+<em class="property">class </em><code class="descclassname">bvs.crawler.</code><code class="descname">Crawl</code><span class="sig-paren">(</span><em>mode</em>, <em>super_directory</em>, <em>sub_directory</em>, <em>per_page=500</em><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Crawl is a class with <strong>__init__</strong> option. To use it you must instance the class and it receives 4 arguments. 
+All method of this class are callable for the objects instanced by this class (Crawl)</p>
+<dl class="method">
+<dt id="bvs.crawler.Crawl.get_base_url">
+<code class="descname">get_base_url</code><span class="sig-paren">(</span><em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl.get_base_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get base url to download article. All types are saved in a file with json format. If you need you can modify it (json file).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>type</strong> (<em>string</em>) – To define the type of url, than it can find a url from the json file and args are (ibecs,lilacs,none_indexed_ibecs,none_indexed_lilacs,all,new, url_for_id).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">url (string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bvs.crawler.Crawl.get_records_num">
+<code class="descname">get_records_num</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl.get_records_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get total record number depending on article type (url). The method is callable by a object instanced by Crawl (class).
+But receives nothing just self that will be the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Integer (number of records)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bvs.crawler.Crawl.make_url">
+<code class="descname">make_url</code><span class="sig-paren">(</span><em>start_record</em>, <em>page</em>, <em>per_page=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl.make_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to make by base url to download article. It makes a url for with some conditions passed as argument. 
+By default per page is None, and if it’s None than it will get it from self.per_page, defined before in the object instanced.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_record</strong> (<em>int</em>) – Documents (records/article) are start from the number that receives as start_records.</li>
+<li><strong>page</strong> (<em>int</em>) – To define the number of page in the web.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">url (string)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bvs.crawler.Crawl.save_all_urls_list">
+<code class="descname">save_all_urls_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl.save_all_urls_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method make a list of all urls for downloading documents. And the list of urls will be saved into a text file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list (list of urls)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bvs.crawler.Crawl.save_records">
+<code class="descname">save_records</code><span class="sig-paren">(</span><em>starting_page=0</em><span class="sig-paren">)</span><a class="headerlink" href="#bvs.crawler.Crawl.save_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to download all document in xml format. It downloads all documents and saves into a folder defind by user. Ex: (super_directory/type/sub_directory/….).
+First of all it calls the method make_url and get the list of urls. But if user restart to finish last stopped , it will find urls from the folder. 
+After all it will download all documents and save, one by one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>starting_page</strong> (<em>int</em>) – A number to start urls_list. If number is 10 than list will start from position 10. Ex: (list[10:]). And it must be less than number of urls.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bvs-mongo-module">
+<h2>bvs.mongo module<a class="headerlink" href="#bvs-mongo-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="bvs-parse-file-module">
+<h2>bvs.parse_file module<a class="headerlink" href="#bvs-parse-file-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-bvs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-bvs" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">bvs package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-bvs.constant">bvs.constant module</a></li>
+<li><a class="reference internal" href="#module-bvs.crawler">bvs.crawler module</a></li>
+<li><a class="reference internal" href="#bvs-mongo-module">bvs.mongo module</a></li>
+<li><a class="reference internal" href="#bvs-parse-file-module">bvs.parse_file module</a></li>
+<li><a class="reference internal" href="#module-bvs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="BvSalud.html"
+                        title="previous chapter">BvSalud package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/bvs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="BvSalud.html" title="BvSalud package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">BvSalud 0.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >BvSalud</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Ankush Rana.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

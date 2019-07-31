@@ -91,6 +91,10 @@ class Crawl:
         return final_url
 
     def save_all_urls_list(self):
+        """The method make a list of all urls for downloading documents. And the list of urls will be saved into a text file.
+        
+        :return: list (list of urls)        
+        """
         list_all_urls = [(self.make_url(((self.per_page*i)+1),(i)+1)) for i in range(self.num_pages)] 
         print("\nSaving urls")
         with open(self.path_to_url, 'w') as file:
@@ -98,10 +102,19 @@ class Crawl:
                 file.write(url+'\n')
         print("Saved all urls > ",os.getcwd(), self.path_to_url, "\n")
         return list_all_urls
+
     def __str__(self):
         return (f"Document type:\t\t{self.mode}\nTotal records:\t\t{self.total_record}\nPath to save xml:\t{self.path_to_crawler }\nPer page count:\t\t{self.per_page}\nTotal Pages:\t\t{self.num_pages}")
 
     def save_records(self,starting_page = 0):
+        """Method to download all document in xml format. It downloads all documents and saves into a folder defind by user. Ex: (super_directory/type/sub_directory/....).
+        First of all it calls the method make_url and get the list of urls. But if user restart to finish last stopped , it will find urls from the folder. 
+        After all it will download all documents and save, one by one.
+
+        :param starting_page: A number to start urls_list. If number is 10 than list will start from position 10. Ex: (list[10:]). And it must be less than number of urls.
+        :type starting_page: int 
+        
+        """
         try:
             num_page = int(starting_page)
         except:
@@ -118,7 +131,6 @@ class Crawl:
             else:
                 shutil.rmtree(self.path_to_crawler)
                 os.mkdir(self.path_to_crawler)
-
         else:
             print("Restarting last downloading from", starting_page)
             try:
