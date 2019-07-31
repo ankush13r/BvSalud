@@ -61,7 +61,6 @@ $ python bvs -m/--mode 'new' -o/--output folder_name
 
 ```
 - example:
-
     python bvs -m new -o folder_name  
 
 The next rounds are just for new articles, not available in MongoDB. In these rounds program will compare all none indexed article if they have been indexed or there is any new article. 
