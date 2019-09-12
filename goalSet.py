@@ -57,7 +57,8 @@ def main(year,output):
             else:
                 mesh_major_none_slash.append(header)
 
-        mesh_major_none_slash_unique = list(dict.fromkeys(mesh_major_none_slash))
+        mesh_major_none_slash_set = set(tuple(header) for header in mesh_major_none_slash) 
+        mesh_major_none_slash_unique = list(mesh_major_none_slash_set)
 
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
