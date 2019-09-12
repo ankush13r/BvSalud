@@ -122,6 +122,12 @@ The program is to make a json file for all **indexed articles** that have **{sel
 
 - **-o 'output_file_name.json':**  A file_name to create a json file with article selected.
 
+## TUTORIAL get goalSet information as abstract length and language format:
+
+```bash
+$   python3.7 abstract_counter.py -o output_file.json input_file1.json [input_file2.json] [+] 
+
+```
 
 ## PIPILINE
 

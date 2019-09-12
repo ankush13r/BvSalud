@@ -18,11 +18,10 @@ def info_abstractText(file_root):
     return data['articles']
 
 def make_new_json(input_files,output):
-
-
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
     for input_file in input_files:
+        print("File: ", input_file)
         json_data = info_abstractText(input_file)
         data_json = json.dumps(json_data,indent=4,ensure_ascii=False)
         outputFile.write(data_json)
@@ -37,7 +36,7 @@ def main(input_files,output):
         print("Error: ", err)
         return False
     make_new_json(input_files,output)
-
+    print("\nDone!")
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='abstract_info.py',usage='%(prog)s [-o file.json] input_file_root')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   

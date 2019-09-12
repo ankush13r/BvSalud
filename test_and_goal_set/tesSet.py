@@ -21,7 +21,7 @@ def main(year,output):
         return False 
 
     try:
-        with open('data/valid_libraries.txt') as file:
+        with open('../data/valid_libraries.txt') as file:
             tmp = file.readlines()
     except Exception as err:
         print("Error: ",err)
