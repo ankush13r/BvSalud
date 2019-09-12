@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
+from langdetect import detect
 from pymongo import MongoClient
 from datetime import datetime
 import argparse
@@ -17,6 +18,7 @@ REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
 def main(year,output):
 
     date = datetime.strptime(str(year), '%Y')
+    print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
                 {"entry_date": {"$gte": date}},
                 {"ab_es":{"$ne": None}},
@@ -59,6 +61,10 @@ def main(year,output):
 
 
         mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+        abstractText = document_dict['ab_es']
+        abstractText_language = detect(abstractText)
+        length_abs_character = len(abstractText)
+        length_abs_tokens = len(abstractText.split())
 
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
@@ -66,7 +72,10 @@ def main(year,output):
                 "pmid": id,
                 "meshMajor": mesh_major_none_slash_unique,
                 "Year": year,
-                "abstractText":document_dict['ab_es']}
+                "abstractText":abstractText,
+                "characters_abstractText": length_abs_character,
+                "tokens_abstractText": length_abs_tokens,
+                "language_abstractText" : abstractText_language}
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
         outputFile.write(data_json)
 
