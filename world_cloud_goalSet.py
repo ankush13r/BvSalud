@@ -63,7 +63,9 @@ def main(year,output):
             if document_dict['mh'] is not None and document_dict['sh'] is None:
                 print("\t->> sh:  NULL")
                 mesh_major = document_dict['mh']
-        try: 
+        try:                 "characters_abstractText": length_abs_character,
+                "tokens_abstractText": length_abs_tokens,
+                "language_abstractText" : abstractText_language}
             year = int((document_dict['entry_date']).strftime("%Y"))
         except Exception as err: 
             print("Error: ",err, "<< entry_date is None >>")

@@ -61,10 +61,6 @@ def main(year,output):
 
 
         mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
-        abstractText = document_dict['ab_es']
-        abstractText_language = detect(abstractText)
-        length_abs_character = len(abstractText)
-        length_abs_tokens = len(abstractText.split())
 
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
@@ -72,10 +68,8 @@ def main(year,output):
                 "pmid": id,
                 "meshMajor": mesh_major_none_slash_unique,
                 "Year": year,
-                "abstractText":abstractText,
-                "characters_abstractText": length_abs_character,
-                "tokens_abstractText": length_abs_tokens,
-                "language_abstractText" : abstractText_language}
+                "abstractText":document_dict['ab_es'],
+}
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
         outputFile.write(data_json)
 
