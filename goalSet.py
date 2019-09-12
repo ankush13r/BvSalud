@@ -5,12 +5,15 @@ from datetime import datetime
 import argparse
 import json
 import os
+import re
+
 
 client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
+REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
 def main(year,output):
 
     date = datetime.strptime(str(year), '%Y')
@@ -46,12 +49,20 @@ def main(year,output):
             year = int((document_dict['entry_date']).strftime("%Y"))
         except Exception as err: 
             print("Error: ",err, "<< entry_date is None >>")
+        mesh_major_none_slash = []
+        for header in mesh_major:
+            if "/" in  header:
+                header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
+                mesh_major_none_slash.append(header_none_slash)
+            else:
+                mesh_major_none_slash.append(header)
+
 
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
                 "db":document_dict['db'],
                 "pmid": id,
-                "meshMajor": mesh_major,
+                "meshMajor": mesh_major_none_slash,
                 "Year": year,
                 "abstractText":document_dict['ab_es']}
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)

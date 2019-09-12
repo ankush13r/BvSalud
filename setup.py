@@ -12,7 +12,7 @@ setuptools.setup(
     packages=['bvs','data','bvs/data'],
     package_data={
         # If any package contains *.txt or *.rst files, include them:
-        '': ['*.txt', '*.md', '*.json','*.js'],
+        '': ['*.txt', '*.md', '*.json','*.js','*.py'],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
