@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import json
 from langdetect import detect
 import argparse
@@ -38,10 +40,11 @@ def main(input_files,output):
     make_new_json(input_files,output)
     print("\nDone!")
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog ='abstract_info.py',usage='%(prog)s [-o file.json] input_file_root')
-    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
-    parser.add_argument('filesname', nargs ='+', action = 'store')
+    parser = argparse.ArgumentParser(prog ='abstract_info.py',usage='%(prog)s [-i input_file_root_1, input_file_2, N+] [-o file.json]')   
+    parser.add_argument('-o','--output',metavar='output_file.json',type=str,required=True, help ='To define a name for file.')   
+    parser.add_argument('filename', help='Input file in format json')
+    
     args = parser.parse_args()
     output = args.output
-    input_files = args.filesname
+    input_files = args.filename
     main(input_files,output)

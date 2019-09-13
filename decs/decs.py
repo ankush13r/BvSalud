@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 #! /usr/bin/python
-
+# -*- coding: utf-8 -*-
 
 import getopt, sys, json
 from flashtext import KeywordProcessor
@@ -16,15 +15,15 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
    keyword_processor = KeywordProcessor()
 
    keyword_dict = {}
-   with open(codes_file_root) as f: #Saving all codes to a dictionary, key as code and value as words in format list.
+   with open(codes_file_root) as f: #Saves all codes to a dictionary, key as code and value as words in format list.
       for line in f:
-         (key, val) = line.split('@') #Seprate codes and words
+         (key, val) = line.split('@') #Seprates codes and words
          values_list = val.split(',')
          values_list[-1] = values_list[-1].strip('\n')
          keyword_dict[key] = values_list
          print(keyword_dict[key])
 
-   keyword_processor.add_keywords_from_dict(keyword_dict) # Saving all codes dictionary into keyword_processor made before.
+   keyword_processor.add_keywords_from_dict(keyword_dict) # Saves all codes dictionary into keyword_processor made before.
 
    # reads JSON goal set
    outputFile = open(output_root,'w') #output file opening
@@ -49,7 +48,8 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
       outputFile.write(']}') #writing text to close the list and json format in the file.
       outputFile.close() # file clossing
 
-def main(codes_file,input, output):
+def main(input, output):
+   codes_file = "copy_codes.txt"
    try:
       open(codes_file, "r")
       open(input, "r")
@@ -59,13 +59,10 @@ def main(codes_file,input, output):
    encode_articles(codes_file,input, output)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-c codes_file.txt] [-y ####] [-o file.json]')
-    parser.add_argument('-c','--codes_file',metavar='',required=True, type=str,help ='flashText`s codes files.\n')
-    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a output file.')  
-    parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='To define a input file.')   
-
-    args = parser.parse_args()
-    input = args.input
-    codes_file = args.codes_file 
-    output = args.output
-    main(codes_file,input, output)
+   parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-o file.json] [Input_file.json]')
+   parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a output file.')  
+   parser.add_argument('filename', help='Input file in format json')
+   args = parser.parse_args()
+   input = args.filename
+   output = args.output
+   main(input, output)

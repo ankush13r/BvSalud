@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from mongo import Mongo
 from crawler import Crawl
 from constant import *
@@ -121,7 +122,11 @@ difference_between_entry_update_date.
         return doc_id 
 
     def compare_t1_t2():
-
+        """The method compares articles new collection with the old one from mongoDB and if there is any new article or modified it will be saved into the collection correspondent.
+        
+        
+        
+        """
         json_data = open(PATH_URL_JSON,"r")
         base_dictionary = json.load(json_data)
         try:
