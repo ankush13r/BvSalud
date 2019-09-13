@@ -132,7 +132,7 @@ difference_between_entry_update_date.
         try:
             base_url =  base_dictionary["url_for_id"]
         except:
-            base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
+            base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=es&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
                            
         list_ids_t1 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T1)
         list_ids_t2 = Mongo.get_all_ids_list(COLLECTIONS_NONE_INDEXED_T2)
@@ -205,7 +205,7 @@ difference_between_entry_update_date.
         try:
             base_url =  base_dictionary["url_for_id"]
         except:
-            base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=en&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
+            base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=es&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
 
 
         ids_list = Mongo.get_all_ids_list(COLLECTION_PANDING)
