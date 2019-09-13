@@ -14,7 +14,7 @@ def info_abstractText(file_root):
             abs_info_dict['language_abstractText'] = detect(abstractText)
             abs_info_dict['characters_abstractText'] = len(abstractText)
             abs_info_dict['tokens_abstractText'] = len(abstractText.split())
-    article.update(abs_info_dict)
+            article.update(abs_info_dict)
     return data['articles']
 
 def make_new_json(input_files,output):
