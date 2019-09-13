@@ -21,7 +21,6 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
          values_list = val.split(',')
          values_list[-1] = values_list[-1].strip('\n')
          keyword_dict[key] = values_list
-         print(keyword_dict[key])
 
    keyword_processor.add_keywords_from_dict(keyword_dict) # Saves all codes dictionary into keyword_processor made before.
 
