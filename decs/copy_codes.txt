@@ -1,0 +1,83 @@
+D000203@Actividades Cotidianas,Actividades de la Vida Diaria,Actividades Diarias,ADL,Limitación Crónica de la Actividad
+D000244@Adenosina Difosfato,Adenosín Difosfato,Difosfato de Adenosina,Pirofosfato de Adenosina,Adenosina Pirofosfato,ADP,Magnesio ADP,MgADP
+D000249@Adenosina Monofosfato,Adenosín Monofosfato,Monofosfato de Adenosina,Ácido Adenílico,AMP,MFA
+D000255@Adenosina Trifosfato,Adenosín Trifosfato,Trifosfato de Adenosina,Sal Cálcica de Adenosina Trifosfato,Sal Crómica de Adenosina Trifosfato,Sal Magnésica de Adenosina Trifosfato,Sal Manganésica de Adenosina Trifosfato,Adenilpirofosfato,ATP,CaATP,CrATP,Adenosina Trifosfato de Manganeso,MgATP,MnATP
+D001806@Nitrógeno de la Urea Sanguínea,NUS,BUN
+D002245@Dióxido de Carbono,Bióxido de Carbono,CO2,Anhídrido Carbónico
+D002490@Sistema Nervioso Central,SNC,CNS
+D003565@Citidina Difosfato,CDP,Difosfato de Citidina,Citidina Pirofosfato,Pirofosfato de Citidina
+D003568@Citidina Monofosfato,CMP,CMF,Ácido Citidílico,Citidinmonofosfato,Monofosfato de Citidina
+D003570@Citidina Trifosfato,CTP,Citidintrifosfato,Trifosfato de Citidina
+D003632@Diclorodifenildicloroetano,DDD,TDE
+D003633@Diclorodifenil Dicloroetileno,DDE,DDX
+D003671@DEET,N,N-Dietil-metatoluamida,N,N-Dietil-meta-toluamida,N,N-Dietil-m-toluamida,N,N-Dietil-3-metilbenzamida,Dietiltoluamida
+D004562@Electrocardiografía,ECG,EKG,Electrocardiógrafo,Electrocardiograma
+D005182@Flavina-Adenina Dinucleótido,Dinucleótido de Flavina-Adenina,Dinucleótido de Flavina y Adenina,Dinucleótido Flavina-Adenina,FAD,Flavín-Adenín Dinucleótido
+D005740@Gases,Gas,Vapores
+D007290@Inosina Difosfato,IDF,IDP
+D007291@Inosina Monofosfato,IMF,IMP,Ácido Inosínico,Monofosfato Ribosilhipoxantina
+D007293@Inosina Trifosfato,ITF,ITP
+D007362@Unidades de Cuidados Intensivos,UCI,Unidad de Cuidados Intensivos,Unidad de Terapia Intensiva,Unidades de Terapia Intensiva
+D007531@Isoflurofato,DFP,Diisopropilfluorofosfato,Fluostigmina
+D007676@Fallo Renal Crónico,Fallo Crónico Renal,Fallo Crónico del Riñón,Nefropatía Terminal,NFF,Enfermedad Renal Terminal,Insuficiencia Renal Terminal,Fracaso Renal Crónico
+D008238@Dietilamida del Ácido Lisérgico,LSD,Lisergida
+D051379@Ratones,Ratón Casero,Ratones Caseros,Mus,Mus musculus,Ratón
+D008939@Mitotano,o,p-DDD,orto para-DDD
+D009163@Mycobacterium bovis,BCG,Calmette-Guérin Bacillus,Bacillus Calmette-Guérin
+D009243@NAD,NADH,Coenzima I,Difosfopiridina Nucleótido,DPN,Nicotinamida-Adenina Dinucleotido,Nadide
+D010175@Organización Panamericana de la Salud,AMRO,OPS,Oficina Regional de la OMS para las Américas,Oficina Regional para las Américas de la OMS
+D011138@Politetrafluoroetileno,FEP,Fluon,Politef,Teflon,TFE
+D013759@Dronabinol,THC,Tetrahidrocannabinol,Tetrahidrocanabinol,delta(9)-THC
+D013938@Timidina Monofosfato,DTMF,DTMP,Ácido Timidílico,TMF,TMP
+D014376@Tuberculosis,TB,Infección por Mycobacterium tuberculosis
+D014480@Naciones Unidas,ONU,Organización de las Naciones Unidas,FAO, Naciones Unidas,Organización de las Naciones Unidas para la Alimentación y la Agricultura,Organización para la Agricultura y Alimentacion, Naciones Unidas,UNICEF,Fondo de las Naciones Unidas para la Infancia,UNEP,PNUMA,Programa de Naciones Unidas para el Medio Ambiente,Programa de las Naciones Unidas para el Medio Ambiente,Alto Comisionado de las Naciones Unidas para los Refugiados,Centro Latinoamericano de Demografía,ESCWA,UNESCWA,Comisión Económica para Asia Occidental,Comisión Económica y Social para Asia Occidental,Comisión Económica de las Naciones Unidas para Asia Occidental,Comisión Económica y Social de las Naciones Unidas para Asia Occidental,ESCAP,UNESCAP,Comisión Económica y Social para Asia y el Pacífico,Comisión Económica y Social de las Naciones Unidas para Asia y el Pacífico
+D014481@Estados Unidos,EUA,EEUU,EE UU,EE. UU.,Estados Unidos de América
+D014486@United States Food and Drug Administration,Administración de Alimentos y Medicamentos de los EE. UU.,Administración de Medicamentos y Alimentos de los EE. UU.,Food and Drug Administration (U.S.),Agencia de Control de Alimentos y Medicamentos de los Estados Unidos,Agencia de Control de Alimentos y Medicamentos (Estados Unidos),Agencia de Control de Alimentos y Medicamentos (EE. UU.),Agencia de Control de Alimentos y Medicamentos (EE UU),Agencia de Control de Alimentos y Medicamentos (EEUU),FDA,FDA (EE. UU.),FDA (EE UU),FDA (EEUU),USFDA,US Food and Drug Administration
+D014542@Uridina Monofosfato,Monofosfato de Uridina,UMF,UMP,Ácido Uridílico
+D014303@Trinitrotolueno,TNT,6-Trinitrotolueno
+D004247@ADN,DNA,Ácido Desoxirribonucleico,ADN de Doble Cadena,ADN de Cadena Doble,ADN Bicatenario,ADN de Doble Filamento,ADN de Filamento Doble,ADN de Doble Hélice,ADN de Hélice Doble,Doble Hélice de ADN,DNA de Doble Cadena,DNA de Cadena Doble,DNA Bicatenario,DNA de Doble Filamento,DNA de Filamento Doble,DNA de Doble Hélice,DNA de Hélice Doble,Doble Hélice de DNA
+D012313@ARN,RNA,Ácido Ribonucleico,ARN no Poliadenilatado,RNA no Poliadenilatado
+D002417@Bovinos,Ganado Vacuno,Vacunos,Bos grunniens,Bos indicus,Vaca Doméstica,Yak,Cebu
+D003626@Presentación de Datos,Vdt,Terminal de Exposición de Video,Presentación de la Información
+D011054@Vacuna Antipolio de Virus Inactivados,Vacuna Antipoliomielítica de Virus Inactivados,IPV,Vacuna Inactivada del Virus de la Poliomielitis,Vacuna Salk,Vacuna Inactivada contra Poliovirus
+D006657@Histonas,H1,H2a,H2b,H3,H4
+D009074@Hormonas Estimuladoras de los Melanocitos,HEM,MSH,Melanotropina,Hormonas Estimuladoras de Melanocitos,Hormonas Estimulantes de los Melanocitos
+D012749@Enfermedades de Transmisión Sexual,Enfermedades Sexualmente Transmisibles,Enfermedades Sexualmente Transmitidas,Infecciones de Transmisión Sexual,Infecciones Sexualmente Transmitidas,ETS,ETSs,ITS,Enfermedades Venéreas
+D015704@Antígenos CD4,Antígeno CD4,CD4,Receptor CD4 de Superfície de Células T,Receptor CD4 de Superfície,Receptores CD4 de Superfície de Células T,Receptores de Superfície CD4,Molécula CD4,Receptores CD4,Receptores CD4 de Superfície,Receptor de Superfície CD4,Antígenos T4 de Célula T
+D016017@Oportunidad Relativa,Cociente de Probabilidades Relativas,Odds Ratio,Oportunidades Relativas,Posibilidad Relativa,Posibilidades Relativas,Razón de Diferencia,Razón de Odds,Razón de Oportunidades,Razón de Oposiciones,Razón de Posibilidades,RO,Relación Referencia-Producto,Producto Cruzado,Razón de Productos Cruzados,Razón del Producto Cruzado,Razón de Riesgo,Desigualdad Relativa
+D007722@Conocimientos, Actitudes y Práctica en Salud,CAP,Encuestas CAP,Conocimientos, Actitudes y Práctica Sanitarias,Conocimientos, Actitudes y Prácticas en Salud
+D016133@Reacción en Cadena de la Polimerasa,PCR,PCR Anclado,PCR Inverso,PCR Anidado
+D064702@Clasificación Internacional del Funcionamiento, de la Discapacidad y de la Salud,CIF,Clasificación Internacional del Funcionamiento, Discapacidad y Salud
+D006678@VIH,HIV,Virus del SIDA,HTLV-III,Virus de la Inmunodeficiencia Humana,Virus Tipo III Linfotrópico de la Célula Humana T,Virus Tipo III Linfotrópico-T Humano,LAV-HTLV-III,Virus Asociado a Linfadenopatia,HTLV-III-LAV
+D016887@Reanimación Cardiopulmonar,Apoyo Vital Básico Cardíaco,Azul Código,RCP,Reanimación Boca a Boca,Reanimación Cardiopulmonar Básica,Reanimación Cardiorrespiratoria,Respiración Boca a Boca,Resucitación Boca a Boca,Resucitación Cardiopulmonar
+D009320@Factor Natriurético Atrial,ANF,FNA,ANP,PNA,Atriopeptinas,Auriculina,Factor Natriurético Auricular,Péptidos Natriuréticos Atriales,Péptidos Natriuréticos Auriculares
+D017517@Comunidad de Estados Independientes,CEI,Naciones CEI
+D017402@Clorofluorocarburos,CFC,Clorofluorocarbonos,Freones
+D018119@Estavudina,D4T,3'-Didehidro-3'-desoxitimidina
+D017821@Boidae,Anaconda,Boinae,Boa,Pitón
+D001909@Virus de la Leucemia Bovina,Virus de la Leucemia del Ganado,BLV,VLB
+D004854@Herpesvirus Humano 4,Herpesvirus de Burkitt,Virus del Linfoma de Burkitt,Virus E-B,EBV,Virus de Epstein-Barr,Herpesvirus Humano Tipo 4,Virus de la Mononucleosis Infecciosa
+D016089@Virus de la Inmunodeficiencia Felina,Lentivirus T-Linfotrópico Felino,FIV,FTLV,Lentivirus Puma
+D018671@Programas de Intercambio de Agujas,Programas de Intercambio de Jeringuillas,Programas de Intercambio de Jeringas,PIJ,P.I.A.,Centros para Inyecciónes Supervisadas,Instalaciones para Inyecciónes Supervisadas
+D018478@Actividad Extravehicular,EVA,Caminata Espacial
+D019237@Cuello del Diente,CEJ,Unión Cemento-Esmalte,Cuello Dental
+D019307@1-(5-Isoquinolinesulfonil)-2-Metilpiperazina,H-7,1-(5-Isoquinolinesulfonil)-2-Metilpiperacina
+D020482@Literatura Infanto-Juvenil,Literatura Juvenil,Literatura Infantil,Literatura Infantil y Juvenil,LIJ,Literatura de los Niños,Literatura de los Jovenes
+D020077@Retrovirus Endógenos,RVE,Retrovirus Endógenos Humanos,RVEH
+D020521@Accidente Cerebrovascular,Ataque,Ictus,Ictus Cerebral,AVC,Apoplejía,Ataque Cerebral,Apoplejía Cerebral,Apoplejía Cerebrovascular,Derrame Cerebral,Accidente Vascular Encefálico,AVE,Accidente Vascular del Cerebro,Accidente Vascular Cerebral,Accidente Cerebral Vascular,Accidentes Cerebrovasculares
+D020904@Factor de Maduración de la Glia,Factor beta de Maduración de la Glia,FMG-beta,FMG,GMF-beta
+D020932@Factor de Crecimiento Nervioso,Factor de Crecimiento de Nervios,Subunidad alfa de Crecimiento Nervioso,Subunidad alfa de Crecimiento de Nervios,Subunidad beta de Crecimiento Nervioso,Subunidad beta de Crecimiento de Nervios,Subunidad gamma de Crecimiento Nerviosos,Subunidad gamma de Crecimiento de Nervios,Factor 1 de Crecimiento Nervioso,FCN,Factor 1 de Crecimiento de Nervios
+D020641@Polimorfismo de Nucleótido Simple,PSNS,PSN,PNS,SNPs
+D029663@Tabebuia,Árbol Lapacho,Handroanthus,Handroanthus impetiginosus,Handroanthus serratifolius,Ipé,Lapacho Amarillo,Lapacho,Lapachos,Pau d'Arco,Tabebuia alba,Tabebuia avellanedae,Tabebuia lapacho,Tabebuia cassinoides,Tabebuia impetiginosa,Tabebuia rosea,Tabebuia serratifolia
+D029846@Senna (Planta),Sena,Planta del Sen,Sen,Cassia angustifolia,Cassia occidentalis,Cassia senna,Sena del Café
+D036441@Osmeriformes,Ayu,Galaxias maculatus,Galaxiidae,Osmeridae,Plecoglossus altivelis,Plecoglossus altiveli,Eperlanos
+D031601@Azadirachta,Árbol Milagroso,Nim,Árbol Neem,Antelaea azadirachta,Melia azadirachta
+D044966@Antirretrovirales,Agentes Anti Retrovirales,Agentes Antirretrovirales,Agentes Antirretrovíricos,Antirretrovíricos,ARV,Fármacos Antirretrovíricos,Fármacos Antirretrovirales
+D051876@Proteína de la Región Y Determinante del Sexo,Proteína SRY,TDF,Factor Determinante Testicular,Proteína SRY de la Región Determinante del Sexo
+D050660@Factores de Unión al Sitio Principal,CBF,CBFa
+D050936@Número Básico de Reproducción,R0,Número Básico de Reproductividad,Número de Reproducción Básico
+D055818@Asociaciones entre el Sector Público y el Privado,Asociación entre el Sector Público y el Privado,Asociación entre el Sector Público-Privado,Asociaciones entre el Sector Público-Privado,PPP,Aparcería Público-Privada,Asociación Público-Privada,Colaboración Público-Privada,Cooperación Público-Privada,Mezcla Público-Privada,Participación Público-Privada
+D057405@Difusión por la Web,Difusión de Audio y Video por la Web,Difusión de Audio y Video por Internet,Difusión por Internet,Podcast,Podcasting,Podcasts,Retransmisión por Internet,RSS,Sindicación Realmente Simple,Transmisión de Audio y Video por Internet,Webcasts,Video Retransmitido,Video Difundido en Continuo,Medios de Lectura en Continuo,Video Transmitido en Continuo,Video Transmitido por Secuencias
+D059066@Producto Interno Bruto,PIB,Producto Bruto Interno,PBI,Producto Interior Bruto,PNB,Producto Bruto Nacional,PBN,Producto Nacional Bruto
+D057919@Análisis de la Demanda Biológica de Oxígeno,Análisis de la Demanda Química de Oxígeno,Análisis de las Demandas Químicas de Oxígeno,Demanda Bioquímica de Oxígeno,Demanda Biológica de Oxígeno,Análises de las Demandas Biológicas de Oxígeno,Demanda Química de Oxígeno,DBO,DQO
+D000072339@Minorías Sexuales y de Género,Bisexuales,Disidentes Sexuales,Gay,Gays,Homosexual,Homosexual Femenina,Homosexuales,Homosexuales Femeninas,Lesbianas,Lésbica,Lésbicas,Minorías de Género,Mujer Lesbiana,Mujeres Lesbianas,no Heterosexuales,Persona Lesbiana,Personas de Género no Binario,Personas Gays, Lesbianas, Bisexuales y Transexuales,Personas Gays, Lesbianas, Bisexuales, Transexuales y Queers,Personas GLBT,Personas LBG,Personas Lesbianas,Personas Lesbianas, Bisexuales y Gays,Personas Lesbianas, Gays, Bisexuales y Transexuales,Personas Lesbigays,Personas LGBT,Personas LGBTQ,Personas no Heterosexuales,Queers,Minorías Sexuales

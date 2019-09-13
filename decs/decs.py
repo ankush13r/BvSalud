@@ -19,7 +19,10 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
    with open(codes_file_root) as f: #Saving all codes to a dictionary, key as code and value as words in format list.
       for line in f:
          (key, val) = line.split('@') #Seprate codes and words
-         keyword_dict[key] = val.split(',')
+         values_list = val.split(',')
+         values_list[-1] = values_list[-1].strip('\n')
+         keyword_dict[key] = values_list
+         print(keyword_dict[key])
 
    keyword_processor.add_keywords_from_dict(keyword_dict) # Saving all codes dictionary into keyword_processor made before.
 
@@ -56,7 +59,7 @@ def main(codes_file,input, output):
    encode_articles(codes_file,input, output)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
+    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-c codes_file.txt] [-y ####] [-o file.json]')
     parser.add_argument('-c','--codes_file',metavar='',required=True, type=str,help ='flashText`s codes files.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a output file.')  
     parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='To define a input file.')   
