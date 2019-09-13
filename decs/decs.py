@@ -22,7 +22,7 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
          values_list[-1] = values_list[-1].strip('\n')
          keyword_dict[key] = values_list
 
-   keyword_processor.add_keywords_from_dict(keyword_dict) # Saves all codes dictionary into keyword_processor made before.
+         keyword_processor.add_keywords_from_dict(keyword_dict) # Saves all codes dictionary into keyword_processor made before.
 
    # reads JSON goal set
    outputFile = open(output_root,'w') #output file opening
