@@ -15,15 +15,12 @@ collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
 REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
-def main(year,output):
+def main(output):
 
-    date = datetime.strptime(str(year), '%Y')
     print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
-                {"entry_date": {"$gte": date}},
                 {"ab_es":{"$ne": None}},
                 {"mh":{"$ne":None}},
-                {"selected":{"$ne":None}}
                 ]})
 
     outputFile = open(output,'w')
@@ -51,12 +48,11 @@ def main(year,output):
             year = int((document_dict['entry_date']).strftime("%Y"))
         except Exception as err: 
             print("Error: ",err, "<< entry_date is None >>")
-       
-               removable_words_file = open("data/list_words_to_remove_english.txt",'r')
+        removable_words_file = open("../data/list_words_to_remove_english.txt",'r')
         removable_words_list = removable_words_file.readlines()
         removable_words_list_strip = [word.strip() for word in removable_words_list]
-        
         mesh_major_none_slash = []
+
         for header in mesh_major:
             if "/" in  header:
                 header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
@@ -69,7 +65,6 @@ def main(year,output):
                 print("Header None compatible ->", header)
         mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
 
-       
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
                 "db":document_dict['db'],
@@ -83,15 +78,14 @@ def main(year,output):
 
     outputFile.write(']}') 
     outputFile.close()
+    removable_words_file.close()
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
-    parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
     args = parser.parse_args()
-    year = args.year
     output = args.output
     current_dir = os.getcwd()
     path = os.path.join(current_dir,output)
-    main(year, path)
+    main(path)
