@@ -59,9 +59,9 @@ def main(inputs, output):
 
 if __name__ == '__main__':
    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-o file.json] [Input_file.json]')
+   parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='To define a input file.')  
    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a output file.')  
-   parser.add_argument('filename', help='Input file in format json')
    args = parser.parse_args()
-   inputs = args.filename
+   inputs = args.input
    output = args.output
    main(inputs, output)

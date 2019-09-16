@@ -80,7 +80,7 @@ def main(year,output):
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
         outputFile.write(data_json)
 
-    outputFile.write(']}') 
+    outputFile.write(']}')
     outputFile.close()
 
 
