@@ -9,7 +9,7 @@ setuptools.setup(
     long_description="",
     long_description_content_type="",
     url="https://github.com/ankush13r/BvSalud.git",
-    packages=['bvs','data','bvs/data'],
+    packages=['BvSalud/bvs','BvSalud/data','BvSalud/bvs/data'],
     package_data={
         # If any package contains *.txt or *.rst files, include them:
         '': ['*.txt', '*.md', '*.json','*.js','*.py'],

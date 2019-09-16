@@ -19,7 +19,7 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
    with open(codes_file_root) as f: #Saves all codes to a dictionary, key as code and value as words in format list.
       for line in f:
          (key, val) = line.split('@') #Seprates codes and words
-         values_list = val.split('|')
+         values_list = val.split('|') #Synonims separater
          values_list[-1] = values_list[-1].strip('\n')
          keyword_dict[key] = values_list
       keyword_processor.add_keywords_from_dict(keyword_dict) # Saves all codes dictionary into keyword_processor made before.
