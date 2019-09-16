@@ -48,7 +48,7 @@ def main(output):
             year = int((document_dict['entry_date']).strftime("%Y"))
         except Exception as err: 
             print("Error: ",err, "<< entry_date is None >>")
-        removable_words_file = open("../data/list_words_to_remove_english.txt",'r')
+        removable_words_file = open("data/list_words_to_remove_english.txt",'r')
         removable_words_list = removable_words_file.readlines()
         removable_words_list_strip = [word.strip() for word in removable_words_list]
         mesh_major_none_slash = []
