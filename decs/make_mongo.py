@@ -20,7 +20,7 @@ def main(output):
     print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
                 {"ab_es":{"$ne": None}},
-                {"mh":{"$ne":None}list_words_to_remove_english},
+                {"mh":{"$ne":None}},
                 ]})
 
     outputFile = open(output,'w')
