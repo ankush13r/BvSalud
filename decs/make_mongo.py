@@ -20,7 +20,7 @@ def main(output):
     print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
                 {"ab_es":{"$ne": None}},
-                {"mh":{"$ne":None}},
+                {"mh":{"$ne":None}list_words_to_remove_english},
                 ]})
 
     outputFile = open(output,'w')
@@ -70,7 +70,7 @@ def main(output):
                 "db":document_dict['db'],
                 "pmid": id,
                 "meshMajor": mesh_major_none_slash_unique,
-                "Year": year,
+                "year": year,
                 "abstractText":document_dict['ab_es'],
 }
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)

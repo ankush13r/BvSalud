@@ -68,14 +68,13 @@ def main(year,output):
             else:
                 print("Header None compatible ->", header)
         mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
-
        
         data_dict = {"journal":journal,
                 "title":document_dict['ti_es'],
                 "db":document_dict['db'],
                 "pmid": id,
                 "meshMajor": mesh_major_none_slash_unique,
-                "Year": year,
+                "year": year,
                 "abstractText":document_dict['ab_es'],
 }
         data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
