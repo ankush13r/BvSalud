@@ -32,11 +32,13 @@ def main(year,output):
         print(i)
         if i > 0:
             outputFile.write(',')
-        if document_dict['db'] == 'IBECS':
-            id =  document_dict['alternate_id']
-        else:
-            id =  document_dict['_id']
-
+        #if document_dict['db'] == 'IBECS':
+        #   id =  document_dict['alternate_id']
+        #    print(id)
+        #else:
+        #    id =  document_dict['_id']
+        id =  document_dict['_id']
+        
         if document_dict['ta'] is not None:
             journal = document_dict['ta'][0]
         else:

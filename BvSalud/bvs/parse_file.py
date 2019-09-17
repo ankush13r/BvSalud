@@ -109,7 +109,7 @@ difference_between_entry_update_date.
 
     def find_id_by_alternate_id(alternate_id):
        
-        base_url = 'http://pesquisa.bvsalud.org/portal/resource/en/'
+        base_url = 'http://pesquisa.bvsalud.org/portal/resource/es/'
         url = base_url + str(alternate_id.strip())
         content = urlopen(url)
         bsObj = BeautifulSoup(content,features ='lxml') 

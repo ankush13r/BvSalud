@@ -125,13 +125,13 @@ The program is to make a json file for all **indexed articles** that have **{sel
 ## TUTORIAL get goalSet information as abstract length and language format:
 
 ```bash
-$   python3.7 abstract_counter.py -o output_file.json input_file1.json [input_file2.json] [+] 
+$   python3.7 count_abstrect_toquens.py -o output_file.json input_file1.json [input_file2.json] [+] 
 
 ```
 
 ## PIPILINE
 
-![Pipeline](pics/pipeline.png)
+![Pipeline](BvSalud/pics/pipeline.png)
 
  
 For more information contact:* *ankush.ran13@gmail.com*
