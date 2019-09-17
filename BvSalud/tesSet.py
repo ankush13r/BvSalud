@@ -5,6 +5,7 @@ from datetime import datetime
 import argparse
 import json
 import os
+import re
 
 client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
@@ -31,11 +32,13 @@ def main(year,output):
         libraries.append(item.strip())
 
     date = datetime.strptime(str(year), '%Y')
+    regex_ES = re.compile("^ES", re.IGNORECASE)
+    print("Getting data...")
     cursor_mongo = collection_all.find({"$and":[
         {"mh":None},
         {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
         {"entry_date": {"$gte": date}},  
-        {"cc":{"$in":libraries}}
+        {"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
         ]})
     list_json_doc = []
     outputFile = open(output,'w')
@@ -61,7 +64,7 @@ def main(year,output):
         outputFile.write(data_json)
         collection_all.update_one({'_id': dict_doc['_id']},
                                     {'$set':
-                                        {'selected': True}
+                                        {'prueba': True}
                                     }) 
     outputFile.write(']}')
     outputFile.close()
