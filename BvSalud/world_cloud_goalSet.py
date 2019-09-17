@@ -71,12 +71,12 @@ def main(year,output):
         for mh in mesh_major:
             try:
                 mesh_major_language = detect(mh)
-                print('lang: ',mesh_major_language )
             except:
-                print("Error")
+                mesh_major_language = "None compatible"
             if mesh_major_language != 'es':
-                row = [id,mh,mesh_major_language]
-                csv_writer.writerow(row)
+                pass
+            row = [id,mh,mesh_major_language]
+            csv_writer.writerow(row)
 
 
         outputFile_headers_count.write((str(len(mesh_major)) +'\n'))
