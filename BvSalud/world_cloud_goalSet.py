@@ -72,7 +72,8 @@ def main(year,output):
             try:
                 mesh_major_language = detect(mh)
                 print('lang: ',mesh_major_language )
-
+            except:
+                print("Error")
             if mesh_major_language != 'es':
                 row = [id,mh,mesh_major_language]
                 csv_writer.writerow(row)
