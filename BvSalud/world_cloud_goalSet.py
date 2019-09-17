@@ -72,9 +72,6 @@ def main(year,output):
             try:
                 mesh_major_language = detect(mh)
                 print('lang: ',mesh_major_language )
-            except:
-                print("header -> ",mh,id)
-                print("\n")
 
             if mesh_major_language != 'es':
                 row = [id,mh,mesh_major_language]
