@@ -21,7 +21,7 @@ def main(year,output):
     print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
                 {"entry_date": {"$gte": date}},
-                {"ab_es":{"$ne": None}},
+                {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
                 {"mh":{"$ne":None}},
                 {"selected":{"$ne":None}}
                 ]})

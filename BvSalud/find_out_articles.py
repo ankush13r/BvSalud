@@ -6,12 +6,14 @@ import argparse
 import json
 import os
 import csv
+import re
 from langdetect import detect
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS,  ImageColorGenerator
 import random
 from PIL import Image
 
+REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
 
 
 client = MongoClient('localhost:27017')
@@ -39,7 +41,7 @@ def main(year,output):
 
     cursor_mongo = collection_all.find({"$and":[
                 {"entry_date": {"$gte": date}},
-                {"ab_es":{"$ne": None}},
+                {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
                 {"mh":{"$ne":None}}
                 ]})
 
@@ -48,9 +50,10 @@ def main(year,output):
     csv.register_dialect('myDialect',quoting=csv.QUOTE_NONNUMERIC,skipinitialspace=True)
     outputFile_csv = open(output+'.csv','w')
     csv_writer = csv.writer(outputFile_csv,dialect='myDialect')
-    csv_writer.writerow(["id",'header','language'])
+    csv_writer.writerow(["id",'language','abstract text'])
     heading_text = ""
     mesh_major_length_list = []
+
     for i, document_dict in enumerate(cursor_mongo):
         print(i)
 
@@ -60,7 +63,6 @@ def main(year,output):
 #            id =  document_dict['_id']
 
         id =  document_dict['_id']
-
         try:
             mesh_major = list(set(document_dict['mh']+document_dict['sh']))
         except Exception as err:
@@ -68,20 +70,24 @@ def main(year,output):
                 print("\t->> sh:  NULL")
                 mesh_major = document_dict['mh']
 
-        for mh in mesh_major:
-            try:
-                mesh_major_language = detect(mh)
-            except:
-                mesh_major_language = "None compatible"
-            if mesh_major_language != 'es':
-                pass
-            row = [id,mh,mesh_major_language]
+        abstractText = document_dict['ab_es'] #saving abstract text in a variable
+        abstractText_langage = detect(abstractText)  # detecting language, return string language type (es,pt,fr,en, etc...).
+        if abstractText_langage != 'es':
+            row = [id,abstractText_langage,abstractText]
             csv_writer.writerow(row)
 
+        outputFile_headers_count.write((str(len(mesh_major)) +'\n')) #writing number of mesh major into file
 
-        outputFile_headers_count.write((str(len(mesh_major)) +'\n'))
+        mesh_major_none_slash = []
+        for header in mesh_major:
+            if "/" in  header:
+                header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
+            else:
+                header_none_slash = header
+            mesh_major_none_slash.append(header_none_slash)
 
-        heading_text = heading_text + " " + str(' '.join(mesh_major))
+        heading_text = heading_text + " " + str(' '.join(mesh_major_none_slash)) #Joining all mesh major giving it a space between
+
     try:
         make_word_cloud(heading_text)
     except:

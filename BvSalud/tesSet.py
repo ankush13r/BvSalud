@@ -33,7 +33,7 @@ def main(year,output):
     date = datetime.strptime(str(year), '%Y')
     cursor_mongo = collection_all.find({"$and":[
         {"mh":None},
-        {"ab_es":{"$ne": None}},
+        {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
         {"entry_date": {"$gte": date}},  
         {"cc":{"$in":libraries}}
         ]})

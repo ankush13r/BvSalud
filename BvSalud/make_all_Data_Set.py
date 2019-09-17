@@ -19,8 +19,8 @@ def main(output):
 
     print("Collecting data.")
     cursor_mongo = collection_all.find({"$and":[
-                {"ab_es":{"$ne": None}},
-                {"mh":{"$ne":None}},
+                {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
+                {"mh":{"$ne":None}}
                 ]})
 
     outputFile = open(output,'w')
