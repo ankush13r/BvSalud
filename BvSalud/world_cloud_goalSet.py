@@ -78,13 +78,9 @@ def main(year,output):
                 row = [id,mh,mesh_major_language]
                 csv_writer.writerow(row)
 
+        outputFile_headers_count.write((str(len(mesh_major)) +'\n'))
 
         heading_text = heading_text + " " + str(' '.join(mesh_major))
-
-        len_mesh_major = len(mesh_major)
-        mesh_major_length_list.append(len_mesh_major)
-
-        outputFile_headers_count.write(str(len_mesh_major) +'\n')
     try:
         make_word_cloud(heading_text)
     except:
