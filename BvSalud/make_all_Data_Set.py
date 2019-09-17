@@ -83,7 +83,7 @@ def main(output):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
+    parser = argparse.ArgumentParser(prog ='make_all_Data_Set.py',usage='%(prog)s [file.json]')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
     args = parser.parse_args()
     output = args.output
