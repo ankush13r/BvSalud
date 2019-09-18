@@ -11,7 +11,7 @@ import re
 
 client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
-collection_all = db["english_all_articles"]
+collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
 REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
@@ -25,7 +25,7 @@ def main(output):
 
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-    removable_words_file = open("data/list_words_to_remove_english.txt",'r')
+    removable_words_file = open("data/list_words_to_remove.txt",'r')
     i = 0
     for document_dict in cursor_mongo:
         if len(document_dict["ab_es"]) < 100:
