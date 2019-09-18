@@ -37,8 +37,8 @@ def main(year,output):
     cursor_mongo = collection_all.find({"$and":[
         {"mh":None},
         {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
-        {"entry_date": {"$gte": date}},  
-        {"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
+        {"entry_date": {"$gte": date}}#, 
+        #{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
         ]})
     list_json_doc = []
     outputFile = open(output,'w')
