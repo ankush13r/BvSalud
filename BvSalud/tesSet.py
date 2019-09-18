@@ -21,15 +21,15 @@ def main(year,output):
         print(f"\n\tError: The year must be between {last_year} and {current_year}\n")
         return False 
 
-    try:
-        with open('data/valid_libraries.txt') as file:
-            tmp = file.readlines()
-    except Exception as err:
-        print("Error: ",err)
-        return False
-    libraries = []
-    for item in tmp:
-        libraries.append(item.strip())
+    #try:
+    #    with open('data/valid_libraries.txt') as file:
+    #        tmp = file.readlines()
+    #except Exception as err:
+    #    print("Error: ",err)
+    #    return False
+    #libraries = []
+    #for item in tmp:
+    #    libraries.append(item.strip())
 
     date = datetime.strptime(str(year), '%Y')
     regex_ES = re.compile("^ES", re.IGNORECASE)
