@@ -50,7 +50,7 @@ def main(year,output):
     csv.register_dialect('myDialect',quoting=csv.QUOTE_NONNUMERIC,skipinitialspace=True)
     outputFile_csv = open(output+'.csv','w')
     csv_writer = csv.writer(outputFile_csv,dialect='myDialect')
-    csv_writer.writerow(["id",'language','abstract text'])
+    csv_writer.writerow(["id",'language','abstractText_length','abstract text'])
     heading_text = ""
     mesh_major_length_list = []
 
@@ -72,8 +72,12 @@ def main(year,output):
 
         abstractText = document_dict['ab_es'] #saving abstract text in a variable
         abstractText_langage = detect(abstractText)  # detecting language, return string language type (es,pt,fr,en, etc...).
+        abstractText_length = len(abstractText)
+        if abstractText_length < 100:
+            row = [id,abstractText_langage,abstractText_length,abstractText]
+            csv_writer.writerow(row)
         if abstractText_langage != 'es':
-            row = [id,abstractText_langage,abstractText]
+            row = [id,abstractText_langage,abstractText_length,abstractText]
             csv_writer.writerow(row)
 
         outputFile_headers_count.write((str(len(mesh_major)) +'\n')) #writing number of mesh major into file
