@@ -73,6 +73,7 @@ def main(year,output):
         abstractText = document_dict['ab_es'] #saving abstract text in a variable
         abstractText_langage = detect(abstractText)  # detecting language, return string language type (es,pt,fr,en, etc...).
         abstractText_length = len(abstractText)
+        
         if abstractText_length < 100:
             row = [id,abstractText_langage,abstractText_length,abstractText]
             csv_writer.writerow(row)
