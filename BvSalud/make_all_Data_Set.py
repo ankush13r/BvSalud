@@ -31,55 +31,63 @@ def main(output):
         if len(document_dict["ab_es"]) < 100:
             print(document_dict["ab_es"])
         else:
-            print(i)
-            if i > 0:
-                outputFile.write(',')
-    #        if document_dict['db'] == 'IBECS':
-    #            id =  document_dict['alternate_id']
-    #        else:
-    #            id =  document_dict['_id']
-            id =  document_dict['_id']
-
-            if document_dict['ta'] is not None:
-                journal = document_dict['ta'][0]
-            else:
-                journal = document_dict['fo']
             try:
-                mesh_major = list(set(document_dict['mh']+document_dict['sh']))
-            except Exception as err:
-                if document_dict['mh'] is not None and document_dict['sh'] is None:
-                    print("\t->> sh:  NULL")
-                    mesh_major = document_dict['mh']
-            try: 
-                year = int((document_dict['entry_date']).strftime("%Y"))
-            except Exception as err: 
-                print("Error: ",err, "<< entry_date is None >>")
-            removable_words_list = removable_words_file.readlines()
-            removable_words_list_strip = [word.strip() for word in removable_words_list]
-            mesh_major_none_slash = []
+                ab_language = detect(document_dict["ab_es"])
+            except:
+                ab_language = "No detected"
+                print("\tError detecting language: ab_es ->>",document_dict["ab_es"][:20])
+            if ab_language != 'es':
+                print("\tlanguage error: ", ab_language,"  -----  ",document_dict["ab_es"][:20] )
+            else:
+                print(i)
+                if i > 0:
+                    outputFile.write(',')
+        #        if document_dict['db'] == 'IBECS':
+        #            id =  document_dict['alternate_id']
+        #        else:
+        #            id =  document_dict['_id']
+                id =  document_dict['_id']
 
-            for header in mesh_major:
-                if "/" in  header:
-                    header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
+                if document_dict['ta'] is not None:
+                    journal = document_dict['ta'][0]
                 else:
-                    header_none_slash = header
-            
-                if header_none_slash not in removable_words_list_strip:
-                    mesh_major_none_slash.append(header_none_slash)
-                else:
-                    print("Header None compatible ->", header)
-            mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+                    journal = document_dict['fo']
+                try:
+                    mesh_major = list(set(document_dict['mh']+document_dict['sh']))
+                except Exception as err:
+                    if document_dict['mh'] is not None and document_dict['sh'] is None:
+                        print("\t->> sh:  NULL")
+                        mesh_major = document_dict['mh']
+                try: 
+                    year = int((document_dict['entry_date']).strftime("%Y"))
+                except Exception as err: 
+                    print("Error: ",err, "<< entry_date is None >>")
+                removable_words_list = removable_words_file.readlines()
+                removable_words_list_strip = [word.strip() for word in removable_words_list]
+                mesh_major_none_slash = []
 
-            data_dict = {"journal":journal,
-                    "title":document_dict['ti_es'],
-                    "db":document_dict['db'],
-                    "pmid": id,
-                    "meshMajor": mesh_major_none_slash_unique,
-                    "year": year,
-                    "abstractText":document_dict['ab_es']}
-            data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
-            outputFile.write(data_json)
-            i = i + 1
+                for header in mesh_major:
+                    if "/" in  header:
+                        header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
+                    else:
+                        header_none_slash = header
+                
+                    if header_none_slash not in removable_words_list_strip:
+                        mesh_major_none_slash.append(header_none_slash)
+                    else:
+                        print("Header None compatible ->", header)
+                mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+
+                data_dict = {"journal":journal,
+                        "title":document_dict['ti_es'],
+                        "db":document_dict['db'],
+                        "pmid": id,
+                        "meshMajor": mesh_major_none_slash_unique,
+                        "year": year,
+                        "abstractText":document_dict['ab_es']}
+                data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
+                outputFile.write(data_json)
+                i = i + 1
 
     outputFile.write(']}') 
     outputFile.close()

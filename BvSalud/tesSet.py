@@ -2,6 +2,7 @@
 from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,COLLECTION_UPDATE_INFO
 from pymongo import MongoClient
 from datetime import datetime
+from langdetect import detect
 import argparse
 import json
 import os
@@ -44,28 +45,41 @@ def main(year,output):
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
     
- 
-    for i, dict_doc in enumerate(cursor_mongo):
-        print(i)
-        if i > 0:
-            outputFile.write(',')
-        if dict_doc['ta'] is not None:
-            journal = dict_doc['ta'][0]
+    i = 0
+    for  dict_doc in cursor_mongo:
+        if len(dict_doc["ab_es"]) < 100: # If the length is 
+            print("\tabstract language less than 100: ",dict_doc["ab_es"])
         else:
-            journal = dict_doc['fo']
-        year = int((dict_doc['entry_date']).strftime("%Y"))
-        data_dict = {"journal":journal,
-                "title":dict_doc['ti_es'],
-                "db":dict_doc['db'],
-                "pmid": dict_doc['_id'],
-                "Year":year,
-                "abstractText":dict_doc['ab_es']}
-        data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
-        outputFile.write(data_json)
-        collection_all.update_one({'_id': dict_doc['_id']},
-                                    {'$set':
-                                        {'prueba': True}
-                                    }) 
+            try:
+                ab_language = detect(dict_doc["ab_es"])
+            except:
+                ab_language = "No detected"
+                print("\tError detecting language: ab_es ->>",dict_doc["ab_es"])
+
+            if ab_language != 'es':
+                print("\tlanguage error: ", ab_language,"  -----  ",dict_doc["ab_es"] )
+            else:
+                print(i)
+                if i > 0:
+                    outputFile.write(',')
+                if dict_doc['ta'] is not None:
+                    journal = dict_doc['ta'][0]
+                else:
+                    journal = dict_doc['fo']
+                year = int((dict_doc['entry_date']).strftime("%Y"))
+                data_dict = {"journal":journal,
+                        "title":dict_doc['ti_es'],
+                        "db":dict_doc['db'],
+                        "pmid": dict_doc['_id'],
+                        "Year":year,
+                        "abstractText":dict_doc['ab_es']}
+                data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
+                outputFile.write(data_json)
+                collection_all.update_one({'_id': dict_doc['_id']},
+                                            {'$set':
+                                                {'selected': True}
+                                            })
+                i = i + 1
     outputFile.write(']}')
     outputFile.close()
 
