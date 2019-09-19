@@ -71,9 +71,15 @@ def main(year,output):
                 mesh_major = document_dict['mh']
 
         abstractText = document_dict['ab_es'] #saving abstract text in a variable
-        abstractText_langage = detect(abstractText)  # detecting language, return string language type (es,pt,fr,en, etc...).
-        abstractText_length = len(abstractText)
-        
+        try:
+            abstractText_langage = detect(abstractText)  # detecting language, return string language type (es,pt,fr,en, etc...).
+        except:
+            abstractText_langage = "No detected"
+
+        try:
+            abstractText_length = len(abstractText)
+        except:
+            abstractText_langage = 0
         if abstractText_length < 100:
             row = [id,abstractText_langage,abstractText_length,abstractText]
             csv_writer.writerow(row)

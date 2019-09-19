@@ -7,6 +7,8 @@ import argparse
 import json
 import os
 import re
+from langdetect import detect
+
 
 
 client = MongoClient('localhost:27017')
@@ -31,7 +33,12 @@ def main(year,output):
     i = 0
     for document_dict in cursor_mongo:
         if len(document_dict["ab_es"]) < 100: # If the length is 
-            print(document_dict["ab_es"])
+            print("\tabstract language less than 100: ",document_dict["ab_es"])
+        elif detect(document_dict["ab_es"]):
+            try:
+                print("\tlanguage error: ",document_dict["ab_es"])
+            except:
+                pass
         else:
             print(i)
             if i > 0:
