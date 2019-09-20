@@ -114,7 +114,6 @@ difference_between_entry_update_date.
         print(url)
         content = urlopen(url)
         bsObj = BeautifulSoup(content,features ='lxml') 
-        print(bsObj)
         data_string = (bsObj.find(attrs = {'class' :'dataArticle'})).text  #Get the string whose class is data, for extracing the id.
         found_object = re.search(r"(?<=ID:).*",data_string) # Regex For get id from the string
         doc_id = found_object.group().strip()
