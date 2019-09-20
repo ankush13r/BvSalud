@@ -37,7 +37,7 @@ def main(year,output):
     print("Getting data...")
     cursor_mongo = collection_all.find({"$and":[
         {"mh":None},
-        {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
+        {"ab_es":{"$ne": None}},
         {"entry_date": {"$gte": date}}#, 
         #{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
         ]})
@@ -45,42 +45,39 @@ def main(year,output):
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
     
+    
     i = 0
     for  dict_doc in cursor_mongo:
-        if len(dict_doc["ab_es"]) < 100: # If the length is 
-            print("length < 100 :",dict_doc["ab_es"])
+        try:
+            ab_language = detect(dict_doc["ab_es"])
+        except:
+            ab_language = "No detected"
+            print("\tError detecting language: ab_es ->>",dict_doc["ab_es"])
 
+        if ab_language != 'es':
+            print("\tlanguage error: ", ab_language,"  -----  ",dict_doc["ab_es"] )
         else:
-            try:
-                ab_language = detect(dict_doc["ab_es"])
-            except:
-                ab_language = "No detected"
-                print("\tError detecting language: ab_es ->>",dict_doc["ab_es"])
-
-            if ab_language != 'es':
-                print("\tlanguage error: ", ab_language,"  -----  ",dict_doc["ab_es"] )
+            print(i)
+            if i > 0:
+                outputFile.write(',')
+            if dict_doc['ta'] is not None:
+                journal = dict_doc['ta'][0]
             else:
-                print(i)
-                if i > 0:
-                    outputFile.write(',')
-                if dict_doc['ta'] is not None:
-                    journal = dict_doc['ta'][0]
-                else:
-                    journal = dict_doc['fo']
-                year = int((dict_doc['entry_date']).strftime("%Y"))
-                data_dict = {"journal":journal,
-                        "title":dict_doc['ti_es'],
-                        "db":dict_doc['db'],
-                        "pmid": dict_doc['_id'],
-                        "Year":year,
-                        "abstractText":dict_doc['ab_es']}
-                data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
-                outputFile.write(data_json)
-                collection_all.update_one({'_id': dict_doc['_id']},
-                                            {'$set':
-                                                {'selected': True}
-                                            })
-                i = i + 1
+                journal = dict_doc['fo']
+            year = int((dict_doc['entry_date']).strftime("%Y"))
+            data_dict = {"journal":journal,
+                    "title":dict_doc['ti_es'],
+                    "db":dict_doc['db'],
+                    "pmid": dict_doc['_id'],
+                    "Year":year,
+                    "abstractText":dict_doc['ab_es']}
+            data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
+            outputFile.write(data_json)
+            collection_all.update_one({'_id': dict_doc['_id']},
+                                        {'$set':
+                                            {'selected': True}
+                                        })
+            i = i + 1
     outputFile.write(']}')
     outputFile.close()
 
