@@ -252,7 +252,3 @@ difference_between_entry_update_date.
                 Mongo.save_dict_to_mongo(tmp_dict,MODE_PANDING)
                 print(f"Error: No Document Found: {url}")
 
-
-id = Parse.find_id_by_alternate_id('ibc-ET1-3282')
-
-print(id)
