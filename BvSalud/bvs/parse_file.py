@@ -110,10 +110,12 @@ difference_between_entry_update_date.
     def find_id_by_alternate_id(alternate_id):
        
         base_url = 'http://pesquisa.bvsalud.org/portal/resource/es/'
-        url = base_url + str(alternate_id.strip())
+        url = base_url + str(alternate_id.strip(' '))
+        print(url)
         content = urlopen(url)
         bsObj = BeautifulSoup(content,features ='lxml') 
-        data_string = (bsObj.find(attrs = {'class' :'data'})).text  #Get the string whose class is data, for extracing the id.
+        print(bsObj)
+        data_string = (bsObj.find(attrs = {'class' :'dataArticle'})).text  #Get the string whose class is data, for extracing the id.
         found_object = re.search(r"(?<=ID:).*",data_string) # Regex For get id from the string
         doc_id = found_object.group().strip()
         print("url:", url)
@@ -250,3 +252,8 @@ difference_between_entry_update_date.
                 tmp_dict = {'_id' : old_id}
                 Mongo.save_dict_to_mongo(tmp_dict,MODE_PANDING)
                 print(f"Error: No Document Found: {url}")
+
+
+id = Parse.find_id_by_alternate_id('ibc-ET1-3282')
+
+print(id)
