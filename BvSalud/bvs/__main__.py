@@ -63,6 +63,7 @@ def backup_collection(mode):
         Mongo.change_collections_name(DATA_BASE,COLLECTION_ALL,COLLECTION_ALL+"_old")
         Mongo.change_collections_name(DATA_BASE,COLLECTIONS_NONE_INDEXED_T1,COLLECTIONS_NONE_INDEXED_T1+"_old")
         Mongo.change_collections_name(DATA_BASE,COLLECTIONS_NONE_INDEXED_T2,COLLECTIONS_NONE_INDEXED_T2+"_old")
+        Mongo.change_collections_name(DATA_BASE,COLLECTION_PANDING,COLLECTION_PANDING+"_old")
     else:
         print("----------------change")
         Mongo.change_collections_name(DATA_BASE,COLLECTIONS_NONE_INDEXED_T2,COLLECTIONS_NONE_INDEXED_T1)
