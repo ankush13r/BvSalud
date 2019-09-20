@@ -29,7 +29,7 @@ def main(output):
     i = 0
     for document_dict in cursor_mongo:
         if len(document_dict["ab_es"]) < 100:
-            print(document_dict["ab_es"])
+            print("length < 100 :",document_dict["ab_es"])
         else:
             try:
                 ab_language = detect(document_dict["ab_es"])

@@ -217,9 +217,9 @@ difference_between_entry_update_date.
             print("\n",modify_records_len -i,"-> Document to modify: ",old_id)
             try:
                 new_id = Parse.find_id_by_alternate_id(old_id)                
-            except:
+            except Exception as err:
                 new_id = old_id
-                print("Error: <<Finding id by alternate id >>")
+                print(f"Error ({err}): <<Finding id by alternate id >>")
     
             url = base_url + new_id
             count = 0

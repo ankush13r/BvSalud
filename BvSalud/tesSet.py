@@ -48,7 +48,8 @@ def main(year,output):
     i = 0
     for  dict_doc in cursor_mongo:
         if len(dict_doc["ab_es"]) < 100: # If the length is 
-            print("\tabstract language less than 100: ",dict_doc["ab_es"])
+            print("length < 100 :",dict_doc["ab_es"])
+
         else:
             try:
                 ab_language = detect(dict_doc["ab_es"])
