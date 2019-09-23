@@ -11,29 +11,19 @@ import re
 
 client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
-collection_difference_dates= db["difference_in_date"]
+collection_difference_dates= db["abstract_es"]
 
 
 def mongo_to_csv(o_path):
     cursor_mongo = collection_difference_dates.find()
     print("total records:",collection_difference_dates.count_documents({}))
-    csv_columns = ["Difference_update_entry_Date","da","entry_date","update_date","Library","Journal","_id","meshMajor","abstract_es"]
+    csv_columns = ["id","abstract_text"]
     with open(o_path, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, delimiter='|',fieldnames=csv_columns)
         writer.writeheader()
         for i, doc in enumerate(cursor_mongo):
             print(i)
             writer.writerow(doc)
-
-    
-
-
-
-
-
-
-
-
 
 def main(o_path):
     mongo_to_csv(o_path)

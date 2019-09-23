@@ -44,8 +44,7 @@ def main(year,output):
     list_json_doc = []
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-    
-    
+    print("Total Records: ", cursor_mongo.count(True))
     i = 0
     for  dict_doc in cursor_mongo:
         try:
@@ -53,10 +52,14 @@ def main(year,output):
         except:
             ab_language = "No detected"
             print("\tError detecting language: ab_es ->>",dict_doc["ab_es"])
-
+        try:
+            articles_matched = collection_all.find(
+                {"ti_es":dict_doc["ti_es"]})
+        except:
+            pass
         if ab_language != 'es':
             print("\tlanguage error: ", ab_language,"  -----  ",dict_doc["ab_es"] )
-        else:
+        """else:
             print(i)
             if i > 0:
                 outputFile.write(',')
@@ -77,7 +80,7 @@ def main(year,output):
                                         {'$set':
                                             {'selected': True}
                                         })
-            i = i + 1
+            i = i + 1"""
     outputFile.write(']}')
     outputFile.close()
 
