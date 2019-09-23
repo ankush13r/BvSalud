@@ -17,7 +17,7 @@ collection_difference_dates= db["abstract_es"]
 def mongo_to_csv(o_path):
     cursor_mongo = collection_difference_dates.find()
     print("total records:",collection_difference_dates.count_documents({}))
-    csv_columns = ["id","abstract_text"]
+    csv_columns = ["_id","ab_es"]
     with open(o_path, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, delimiter='|',fieldnames=csv_columns)
         writer.writeheader()
