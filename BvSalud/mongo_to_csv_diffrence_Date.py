@@ -22,6 +22,7 @@ def mongo_to_csv(o_path):
         writer = csv.DictWriter(csvfile, delimiter='|',fieldnames=csv_columns)
         writer.writeheader()
         for i, doc in enumerate(cursor_mongo):
+            print(i)
             writer.writerow(doc)
 
     
