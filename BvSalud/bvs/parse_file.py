@@ -36,7 +36,7 @@ difference_between_entry_update_date.
                     document_dict[code] = value #Saving the value to the dictionary by code as key. In this case it must be None.      
                 elif code == 'da':
                     try:
-                        document_dict[code] = (datetime.strptime(value.text[:6],'%Y%m%d'))
+                        document_dict[code] = (datetime.strptime(value.text[:6],'%Y%m'))
                     except:
                         try:
                             document_dict[code] = (datetime.strptime(value.text[:4],'%Y'))
