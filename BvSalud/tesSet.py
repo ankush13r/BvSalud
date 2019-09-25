@@ -47,20 +47,21 @@ def main(year,output):
     print("Total Records: ", cursor_mongo.count(True))
     i = 0
     for  dict_doc in cursor_mongo:
+        print(i)
         try:
             ab_language = detect(dict_doc["ab_es"])
-        except:
+        except Exception as err:
             ab_language = "No detected"
-            print("\tError detecting language: ab_es ->>",dict_doc["ab_es"])
+            print(f"\tError detecting language: ab_es (error: {err}) ->>",dict_doc["ab_es"])
         try:
             articles_matched = collection_all.find(
                 {"ti_es":dict_doc["ti_es"]})
         except:
             pass
         if ab_language != 'es':
-            print("\tlanguage error: ", ab_language,"  -----  ",dict_doc["ab_es"] )
-        """else:
-            print(i)
+            print("\tlanguage not Spanish: ", ab_language,"  -----  ",dict_doc["ab_es"] )
+        else:
+            
             if i > 0:
                 outputFile.write(',')
             if dict_doc['ta'] is not None:
@@ -80,7 +81,8 @@ def main(year,output):
                                         {'$set':
                                             {'selected': True}
                                         })
-            i = i + 1"""
+            
+        i = i + 1
     outputFile.write(']}')
     outputFile.close()
 
