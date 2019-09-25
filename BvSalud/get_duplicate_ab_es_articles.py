@@ -3,7 +3,7 @@ from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1,CO
 from pymongo import MongoClient
 import json
 import os, csv
-
+import argparse
 
 
 
@@ -45,4 +45,4 @@ if __name__ == '__main__':
     output = args.output
     current_dir = os.getcwd()
     path = os.path.join(current_dir,output)
-    find_articles("pr.csv")
+    find_articles(path)
