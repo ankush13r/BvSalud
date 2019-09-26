@@ -14,39 +14,41 @@ db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
-REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
+REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*" # Regex to delete any word after a slash (/) and also the slash
+
 def main(output):
 
     print("Collecting data.")
+    #Collecting all data from mongoDB with some conditions.
     cursor_mongo = collection_all.find({"$and":[
                 {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
                 {"mh":{"$ne":None}}
                 ]})
 
-    outputFile = open(output,'w')
-    outputFile.write('{"articles":[')
-    removable_words_file = open("data/list_words_to_remove.txt",'r')
+    outputFile = open(output,'w') #Output file where all record will be saved.
+    outputFile.write('{"articles":[') #Starting with creating a json format file, all article will be inside the article.
+    try:
+        valid_mh_header = open("data/mesh_valid_list.txt",'r') 
+    except Exception as err:
+        print(err)
     i = 0
     for document_dict in cursor_mongo:
-        if len(document_dict["ab_es"]) < 100:
-            print("length < 100 :",document_dict["ab_es"])
+        # if len(document_dict["ab_es"]) < 100:
+        #     print("length < 100 :",document_dict["ab_es"])
+        # else:
 
-        else:
             try:
                 ab_language = detect(document_dict["ab_es"])
             except:
                 ab_language = "No detected"
-                print("\tError detecting language: ab_es ->>",document_dict["ab_es"][:20])
+                print("\tError detecting language: ab_es ->>",document_dict["ab_es"])
             if ab_language != 'es':
-                print("\tlanguage error: ", ab_language,"  -----  ",document_dict["ab_es"][:20] )
+                print("\tlanguage error: ", ab_language,"  -----  ",document_dict["ab_es"])
             else:
                 print(i)
                 if i > 0:
                     outputFile.write(',')
-        #        if document_dict['db'] == 'IBECS':
-        #            id =  document_dict['alternate_id']
-        #        else:
-        #            id =  document_dict['_id']
+
                 id =  document_dict['_id']
 
                 if document_dict['ta'] is not None:
@@ -63,10 +65,11 @@ def main(output):
                     year = int((document_dict['entry_date']).strftime("%Y"))
                 except Exception as err: 
                     print("Error: ",err, "<< entry_date is None >>")
+
                 removable_words_list = removable_words_file.readlines()
                 removable_words_list_strip = [word.strip() for word in removable_words_list]
+               
                 mesh_major_none_slash = []
-
                 for header in mesh_major:
                     if "/" in  header:
                         header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)

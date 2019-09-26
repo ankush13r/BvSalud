@@ -42,7 +42,10 @@ def main(year,output):
         #{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
         ]})
     list_json_doc = []
-    outputFile = open(output,'w')
+    try:
+        outputFile = open(output,'w')
+    except Exception as err:
+        print("Error: ",err)
     outputFile.write('{"articles":[')
     print("Total Records: ", cursor_mongo.count(True))
     i = 0
@@ -69,6 +72,7 @@ def main(year,output):
             else:
                 journal = dict_doc['fo']
             year = int((dict_doc['entry_date']).strftime("%Y"))
+            
             data_dict = {"journal":journal,
                     "title":dict_doc['ti_es'],
                     "db":dict_doc['db'],

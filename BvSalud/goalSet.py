@@ -9,7 +9,8 @@ import os
 import re
 from langdetect import detect
 
-
+cTraining = "training"
+cGold = "gold"
 
 client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
@@ -17,25 +18,40 @@ collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
 REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
-def main(year,output):
-
-    date = datetime.strptime(str(year), '%Y')
+def main(year,output,condition):
     print("Collecting data.")
-    cursor_mongo = collection_all.find({"$and":[
-                {"entry_date": {"$gte": date}},
-                {"$and":[{"ab_es":{"$ne": "No disponible"}},{"ab_es":{"$ne": None}}]},
-                {"mh":{"$ne":None}},
-                {"selected":{"$ne":None}}
-                ]})
+    if condition == cGold:
+        date = datetime.strptime(str(year), '%Y')
 
+        cursor_mongo = collection_all.find({"$and":[
+                    {"entry_date": {"$gte": date}},
+                    {"ab_es":{"$ne": None}},
+                    {"mh":{"$ne":None}},
+                    {"selected":{"$ne":None}}
+                    ]})
+    elif condition == cTraining:
+        cursor_mongo = collection_all.find({"$and":[
+            {"ab_es":{"$ne": None}},
+            {"mh":{"$ne":None}}
+            ]})
+    else:
+        print(f"\tError: condition must be {cTraining} or {cGold}")
+        return False
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
+    try:
+        valid_mh_headers_file = open("data/mesh_valids_list.txt",'r')
+        valid_mh_headers_list = valid_mh_headers_file.readlines()
+        valid_mh_headers_list_strip = [word.strip() for word in valid_mh_headers_list]
+    except Exception as err:
+        print(err)
+        return False
     i = 0
     for document_dict in cursor_mongo:
-        if len(document_dict["ab_es"]) < 100: # If the length is 
-            print("length < 100 :",document_dict["ab_es"])
+        # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
+        #     print("length < 100 :",document_dict["ab_es"])
+        # else:
 
-        else:
             try:
                 ab_language = detect(document_dict["ab_es"])
             except:
@@ -47,11 +63,7 @@ def main(year,output):
                 print(i)
                 if i > 0:
                     outputFile.write(',')
-                #if document_dict['db'] == 'IBECS':
-                #   id =  document_dict['alternate_id']
-                #    print(id)
-                #else:
-                #    id =  document_dict['_id']
+
                 id =  document_dict['_id']
                 
                 if document_dict['ta'] is not None:
@@ -69,9 +81,7 @@ def main(year,output):
                 except Exception as err: 
                     print("Error: ",err, "<< entry_date is None >>")
             
-                removable_words_file = open("data/list_words_to_remove_english.txt",'r')
-                removable_words_list = removable_words_file.readlines()
-                removable_words_list_strip = [word.strip() for word in removable_words_list]
+
                 
                 mesh_major_none_slash = []
                 for header in mesh_major:
@@ -80,12 +90,13 @@ def main(year,output):
                     else:
                         header_none_slash = header
                 
-                    if header_none_slash not in removable_words_list_strip:
+                    if header_none_slash in valid_mh_headers_list_strip:
                         mesh_major_none_slash.append(header_none_slash)
                     else:
-                        print("Header None compatible ->", header)
+                        print("Header None compatible ->", header_none_slash)
+                input()
                 mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
-            
+
                 data_dict = {"journal":journal,
                         "title":document_dict['ti_es'],
                         "db":document_dict['db'],
@@ -102,11 +113,17 @@ def main(year,output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
-    parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
-    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
+    parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
+    parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
+    parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
+
     args = parser.parse_args()
     year = args.year
+    condition = args.condition
     output = args.output
-    current_dir = os.getcwd()
-    path = os.path.join(current_dir,output)
-    main(year, path)
+    if condition == cGold and year is None:
+        parser.error('The -c/--condition "gold" argument requires the --{year [-y ####]} or -SourceFile')
+    else:
+        current_dir = os.getcwd()
+        path = os.path.join(current_dir,output)
+        main(year, path, condition)
