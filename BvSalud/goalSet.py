@@ -94,7 +94,6 @@ def main(year,output,condition):
                         mesh_major_none_slash.append(header_none_slash)
                     else:
                         print("Header None compatible ->", header_none_slash)
-                input()
                 mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
 
                 data_dict = {"journal":journal,
