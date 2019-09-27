@@ -17,8 +17,8 @@ db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 
-REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
-def main(year,output,condition):
+
+def main(year,output,condition,valid_decs):
     print("Collecting data.")
     if condition == cGold:
         date = datetime.strptime(str(year), '%Y')
@@ -27,13 +27,16 @@ def main(year,output,condition):
                     {"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
                     {"mh":{"$ne":None}},
-                    {"selected":{"$ne":None}}
+                    {"selected": True}
                     ]})
+        print(cursor_mongo.count())
+
     elif condition == cTraining:
         cursor_mongo = collection_all.find({"$and":[
             {"ab_es":{"$ne": None}},
-            {"mh":{"$ne":None}}
+            {"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
             ]})
+        print(cursor_mongo.count())
     else:
         print(f"\tError: condition must be {cTraining} or {cGold}")
         return False
@@ -46,6 +49,7 @@ def main(year,output,condition):
     except Exception as err:
         print(err)
         return False
+    count_test_to_training = 0
     i = 0
     for document_dict in cursor_mongo:
         # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
@@ -66,35 +70,55 @@ def main(year,output,condition):
 
                 id =  document_dict['_id']
                 
+                
                 if document_dict['ta'] is not None:
                     journal = document_dict['ta'][0]
                 else:
                     journal = document_dict['fo']
+
+                mesh_major = ""
                 try:
                     mesh_major = list(set(document_dict['mh']+document_dict['sh']))
-                except Exception as err:
+                except:
                     if document_dict['mh'] is not None and document_dict['sh'] is None:
                         print("\t->> sh:  NULL")
                         mesh_major = document_dict['mh']
+                
                 try: 
                     year = int((document_dict['entry_date']).strftime("%Y"))
                 except Exception as err: 
                     print("Error: ",err, "<< entry_date is None >>")
-            
+                
+                
+                if condition == cTraining and "test_training" in document_dict:
+                    mesh_major_none_slash_unique = ""
+                    count_test_to_training = count_test_to_training + 1    
 
-                
-                mesh_major_none_slash = []
-                for header in mesh_major:
-                    if "/" in  header:
-                        header_none_slash = re.sub(REGEX_WORD_AFTER_SLASH,"",header)
-                    else:
-                        header_none_slash = header
-                
-                    if header_none_slash in valid_mh_headers_list_strip:
-                        mesh_major_none_slash.append(header_none_slash)
-                    else:
-                        print("Header None compatible ->", header_none_slash)
-                mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+                else:
+                    mesh_major_none_slash = []
+                    for header in mesh_major:
+                        if "/" in  header:
+                            slash_position = header.find("/")
+                            header_none_slash = header[:(slash_position-1)]
+                        else:
+                            header_none_slash = header
+
+                        if valid_decs:
+                            if header_none_slash in valid_mh_headers_list_strip:
+                                mesh_major_none_slash.append(header_none_slash)
+                            else:
+                                print("Header None compatible ->", header_none_slash, "Doc id: ",document_dict["_id"])
+                        else:
+                            mesh_major_none_slash.append(header_none_slash)
+
+                    mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+                    
+                if condition == cGold and "test_training" in document_dict:
+                        collection_all.update_one({'_id': document_dict['_id']},
+                                            {'$set':{'test_training_gold': True}})
+                                            
+                        collection_all.update_one({'_id': document_dict['_id']},
+                                            {'$unset':{'test_training':True}})
 
                 data_dict = {"journal":journal,
                         "title":document_dict['ti_es'],
@@ -105,9 +129,14 @@ def main(year,output,condition):
                         "abstractText":document_dict['ab_es']}
                 data_json = json.dumps(data_dict,indent=4,ensure_ascii=False)
                 outputFile.write(data_json)
+
+                
                 i = i + 1 
     outputFile.write(']}')
     outputFile.close()
+    if condition == cTraining:
+        print("Total documents to training: ",i)
+        print("Documents from test to training",count_test_to_training)
 
 
 if __name__ == '__main__':
@@ -115,9 +144,12 @@ if __name__ == '__main__':
     parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
     parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
+    parser.add_argument('-v','--valid',action='store_true', help ='Valid header with decs')  
 
     args = parser.parse_args()
     year = args.year
+    valid_decs = args.valid
+
     condition = args.condition
     output = args.output
     if condition == cGold and year is None:
@@ -125,4 +157,4 @@ if __name__ == '__main__':
     else:
         current_dir = os.getcwd()
         path = os.path.join(current_dir,output)
-        main(year, path, condition)
+        main(year, path, condition,valid_decs)

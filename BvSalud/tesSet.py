@@ -15,7 +15,7 @@ collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 collection_Update_info = db[COLLECTION_UPDATE_INFO]
 
 
-def main(year,output):
+def main(year,output,devide):
     current_year = int(datetime.now().strftime('%Y'))
     last_year = 2000
     if year < last_year or year > current_year:
@@ -36,7 +36,7 @@ def main(year,output):
     regex_ES = re.compile("^ES", re.IGNORECASE)
     print("Getting data...")
     cursor_mongo = collection_all.find({"$and":[
-        {"mh":None},
+        {"$or":[{"mh":None},{"test_training_gold" :True}]},
         {"ab_es":{"$ne": None}},
         {"entry_date": {"$gte": date}}#, 
         #{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
@@ -50,43 +50,58 @@ def main(year,output):
     print("Total Records: ", cursor_mongo.count(True))
     i = 0
     for  dict_doc in cursor_mongo:
-        print(i)
         try:
             ab_language = detect(dict_doc["ab_es"])
         except Exception as err:
             ab_language = "No detected"
             print(f"\tError detecting language: ab_es (error: {err}) ->>",dict_doc["ab_es"])
-        try:
-            articles_matched = collection_all.find(
-                {"ti_es":dict_doc["ti_es"]})
-        except:
-            pass
+        # try:
+        #     articles_matched = collection_all.find(
+        #         {"ti_es":dict_doc["ti_es"]})
+        # except:
+        #     pass
         if ab_language != 'es':
             print("\tlanguage not Spanish: ", ab_language,"  -----  ",dict_doc["ab_es"] )
         else:
-            
-            if i > 0:
-                outputFile.write(',')
-            if dict_doc['ta'] is not None:
-                journal = dict_doc['ta'][0]
+            print(i)
+            if i % 2 == 0 and devide: #If number of document is even
+                print("\nTo Training")
+                collection_all.update_one({'_id': dict_doc['_id']},
+                                            {'$set':
+                                                {'test_training': True}
+                                            })
             else:
-                journal = dict_doc['fo']
-            year = int((dict_doc['entry_date']).strftime("%Y"))
-            
-            data_dict = {"journal":journal,
-                    "title":dict_doc['ti_es'],
-                    "db":dict_doc['db'],
-                    "pmid": dict_doc['_id'],
-                    "Year":year,
-                    "abstractText":dict_doc['ab_es']}
-            data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
-            outputFile.write(data_json)
+                print("\nTo testSet")
+                if i > 0:
+                    outputFile.write(',')
+                if dict_doc['ta'] is not None:
+                    journal = dict_doc['ta'][0]
+                else:
+                    journal = dict_doc['fo']
+                year = int((dict_doc['entry_date']).strftime("%Y"))
+                
+                data_dict = {"journal":journal,
+                        "title":dict_doc['ti_es'],
+                        "db":dict_doc['db'],
+                        "pmid": dict_doc['_id'],
+                        "Year":year,
+                        "abstractText":dict_doc['ab_es']}
+                data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
+                outputFile.write(data_json)
+
+                try:
+                    dict_doc["test_training_gold"]
+                    collection_all.update_one({'_id': dict_doc['_id']},
+                                        {'$unset':{'test_training_gold':True}})
+                except:
+                    pass    
+
             collection_all.update_one({'_id': dict_doc['_id']},
-                                        {'$set':
-                                            {'selected': True}
+                                        {'$set':{'selected': True}
                                         })
-            
-        i = i + 1
+
+            i = i + 1
+
     outputFile.write(']}')
     outputFile.close()
 
@@ -95,9 +110,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='tesSet.py',usage='%(prog)s [-y ####] [-o file.json]')
     parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
+    parser.add_argument('-d','--devide',action='store_true', help ='Valid header with decs')  
+    
+
     args = parser.parse_args()
     year = args.year
+    devide = args.devide
+
     output = args.output
     current_dir = os.getcwd()
     path = os.path.join(current_dir,output)
-    main(year, path)
+    main(year, path,devide)
