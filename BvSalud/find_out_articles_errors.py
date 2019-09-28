@@ -50,7 +50,7 @@ def main(year,output):
     csv.register_dialect('myDialect',quoting=csv.QUOTE_NONNUMERIC,skipinitialspace=True)
     outputFile_csv = open(output+'.csv','w')
     csv_writer = csv.writer(outputFile_csv,dialect='myDialect')
-    csv_writer.writerow(["id",'language','abstractText_length','abstract text'])
+    csv_writer.writerow(["id",'language','abstractText_length','abstract_text'])
     heading_text = ""
     mesh_major_length_list = []
 

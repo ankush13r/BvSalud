@@ -38,6 +38,9 @@ def find_articles(o_path):
         
     csv_file.close()
 
+def main(o_path):
+    find_articles(o_path)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='get_duplicate_ab_es_articles.py',usage='%(prog)s[-o file.csv]')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
@@ -45,4 +48,4 @@ if __name__ == '__main__':
     output = args.output
     current_dir = os.getcwd()
     path = os.path.join(current_dir,output)
-    find_articles(path)
+    main(path)
