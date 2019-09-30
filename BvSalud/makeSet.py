@@ -158,19 +158,22 @@ def main(year,output,condition,valid_decs):
         valid_mh_headers_list = None
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-    
+    count_valid_docs = 0
     for i, document_dict in enumerate(cursor_mongo):
-        print(total_len - i)
+        print(total_len - i ,"ID:",document_dict["_id"])
+        
         dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list)
-        if i > 0:
-            outputFile.write(',')
+        if dict_data_gold:
+            count_valid_docs = count_valid_docs + 1
+            if i > 0:
+                outputFile.write(',')
 
-        data_json = json.dumps(dict_data_gold,indent=4,ensure_ascii=False)
-        outputFile.write(data_json)
+            data_json = json.dumps(dict_data_gold,indent=4,ensure_ascii=False)
+            outputFile.write(data_json)
             
     outputFile.write(']}')
     outputFile.close()
-
+    print("Total valid documents: ",count_valid_docs)
 
 
 if __name__ == '__main__':

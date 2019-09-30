@@ -100,8 +100,8 @@ def main(year,output,divide):
      
     outputFile.write(']}')
     outputFile.close()
-
-
+    
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='tesSet.py',usage='%(prog)s [-y ####] [-o file.json]')
     parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
