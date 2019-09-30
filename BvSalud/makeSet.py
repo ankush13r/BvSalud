@@ -178,7 +178,7 @@ if __name__ == '__main__':
     parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
     parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
-    parser.add_argument('-v','--valid',action='store_true', help ='Valid header with decs')  
+    parser.add_argument('--valid',action='store_true', help ='Valid header with decs')  
 
     args = parser.parse_args()
     year = args.year
