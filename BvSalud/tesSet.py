@@ -106,7 +106,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='tesSet.py',usage='%(prog)s [-y ####] [-o file.json]')
     parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
-    parser.add_argument('-d','--divide',action='store_true', help ='Valid header with decs')  
+    parser.add_argument('--divide',action='store_true', help ='Valid header with decs')  
     
 
     args = parser.parse_args()
