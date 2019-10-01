@@ -9,19 +9,25 @@ import os
 import re
 from langdetect import detect
 
-cTraining = "training"
-cGold = "gold"
-
+cTraining = "training" #Condition to select if training. 
+cGold = "gold" #Condition for gold Set
 client = MongoClient('localhost:27017')
-db = client[DATA_BASE]
-collection_all = db[COLLECTION_ALL]
-collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
+db = client[DATA_BASE] #DATA_BASE is a constant, please check bvs/constant.py for all constants.
+collection_all = db[COLLECTION_ALL] # Also a constant COLLECTION_ALL
+collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant COLLECTION_NONE_INDEXED_T1
 
-def get_mongo_cursor(condition,year):
+def get_mongo_cursor(condition,year): 
+    #The method returns a cursor of data from mongoDB collection.
+    #Condition parameter is if it for training ot gold Set.
+    # Year parameter is for gold set, if you want data since any specific year, until today. 
     print("Collecting data.")
-    if condition == cGold:
+    if condition == cGold: #If the condition is "gold".
         date = datetime.strptime(str(year), '%Y')
-
+        # Conditions for gold: 
+                                # entry date must be greater than year received as parameters.
+                                # ab_es (abstract spanish ) mustn't have null value.
+                                # mh (medical subject header) mustn't have null value.
+                                # selected: All article must be selected before for test Set 
         cursor_mongo = collection_all.find({"$and":[
                     {"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
@@ -29,79 +35,87 @@ def get_mongo_cursor(condition,year):
                     {"selected": True}
                     ]})
   
-    elif condition == cTraining:
+    elif condition == cTraining: #If the condition is "training".
+
+        # Condition for training:
+                                    # ab_es can't be null.
+                                    # if test_training is true or (mh not null and test_training not true)
         cursor_mongo = collection_all.find({"$and":[
             {"ab_es":{"$ne": None}},
             {"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
             ]})
-    else:
+    else:# If the condition is wrong or different, it will print an error massage and return false
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
     total_len = cursor_mongo.count()
-    return cursor_mongo,total_len
+    return cursor_mongo,total_len # Returns cursos and it's size.
 
-def read_valid_decs_file(path_valid_decs):
-    try:
-        valid_mh_headers_file = open(path_valid_decs,'r')
-        valid_mh_headers_list = valid_mh_headers_file.readlines()
-        valid_mh_headers_list_strip = [word.strip() for word in valid_mh_headers_list]
-        valid_mh_headers_file.close()
-        return valid_mh_headers_list_strip
-    except Exception as err:
+def read_valid_decs_file(path_valid_decs): # Method to read the file of valid decs (header). In the file each line must have just one header or synonym, no more. 
+    
+    try: #try to catch any errors if the root is bad or doesn't exist, .... 
+        valid_mh_headers_file = open(path_valid_decs,'r') # Reading the file.
+        valid_mh_headers_list = valid_mh_headers_file.readlines() # Reeding each line.
+        valid_mh_headers_list_strip = [word.strip() for word in valid_mh_headers_list] #Eliminate all none printable word as space , before and after string.
+        valid_mh_headers_file.close() # Close file
+        return valid_mh_headers_list_strip # It return the list of valid headers
+
+    except Exception as err: #If any error it will print the Exception and return false.
         print("\t-Error reading file: ",path_valid_decs," :",err)
         return False
 
 
-def is_Spanish_lang(document_dict):
+def is_Spanish_lang(document_dict): # Method for detection language of abstract tet from a article. It receives whole article and will find ab_es
     try:
-        ab_language = detect(document_dict["ab_es"])
+        ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
     except:
         print("\tError detecting language: ab_es ->>",document_dict["ab_es"])
         return False
 
-    if ab_language == 'es':
+    if ab_language == 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
         return True
     else:
         print("\tlanguage error: ", ab_language,"  -----  ",document_dict["ab_es"] )
         return False
 
 
-def get_journal_year(document_dict):
+def get_journal_year(document_dict): # Method to get year and journal from document.
 
-    if document_dict['ta'] is not None:
+    if document_dict['ta'] is not None: # "ta" is journal but in some article it's null, and if it's null then it will get "fo"
         journal = document_dict['ta'][0]
     else:
         journal = document_dict['fo']
-
        
-    try: 
+    try: # Trying to format entry date and obtains just year, but if it's null than it will print the error.
         year = int((document_dict['entry_date']).strftime("%Y"))
-    except Exception as err: 
+    except Exception as err:
         print("Error: ",err, "<< entry_date is None >>")
-    return journal, year
+    return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,valid_mh_headers_list):
-    try:
+def get_mesh_major_list(document_dict,valid_mh_headers_list): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+    
+    try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
-    except:
-        if document_dict['mh'] is not None and document_dict['sh'] is None:
-            mesh_major = document_dict['mh']
+    except: #Just get mh
+        #if document_dict['mh'] is not None and document_dict['sh'] is None: # sh is null
+        mesh_major = document_dict['mh']
             
-    mesh_major_none_slash = []
-    for header in mesh_major:
-        if "/" in  header:
-            slash_position = header.find("/")
-            header_none_slash = header[:(slash_position-1)]
-        else:
-            header_none_slash = header
+    mesh_major_none_slash = [] # A local variabel to create the list of mesh headers.
+    for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
 
-        if valid_mh_headers_list:
-            if header_none_slash in valid_mh_headers_list:
+        if "/" in  header: # If header contains (/).
+            slash_position = header.find("/") #find the position of slash
+            header_none_slash = header[:(slash_position-1)] # Header before slash (/).
+        else:
+            header_none_slash = header 
+
+        if valid_mh_headers_list: #this variable can be None or a list it's none will just append headers to the list without comparing with valid headers.
+            
+            if header_none_slash in valid_mh_headers_list: # The header exists in the list of valid mesh header than it will append else it will ignore and print a massage.
                 mesh_major_none_slash.append(header_none_slash)
             else:
                 print("Header None compatible ->", header_none_slash, "Doc id: ",document_dict["_id"])
-        else:
+        else: #Append header to the list.
             mesh_major_none_slash.append(header_none_slash)
 
     mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
