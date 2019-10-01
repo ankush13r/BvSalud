@@ -161,10 +161,10 @@ class Crawl:
                     print(count,") Error: ",err)
                     print("Sleeping: ",SLEEP_TIME1,"seconds")
                     time.sleep(SLEEP_TIME1)
-            print("\tFinished downloading\n")          
-            if num_page == (self.num_pages -1):  
-                print("Saved all records in ",self.path_to_crawler)
-                with open(PATH_TO_LAST_RECORD,"w") as file:
+            print("\tFinished downewloading\n")          
+            if num_page == (self.newum_pages -1):  
+                print("Saved all newecords in ",self.path_to_crawler)
+                with open(PATH_TOnewLAST_RECORD,"w") as file:
                     file.write("0 saving "+ str(self.path_to_crawler)+" "+ str(self.mode))      
             num_page = num_page+1
             time.sleep(30)

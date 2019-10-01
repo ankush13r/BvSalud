@@ -194,13 +194,13 @@ difference_between_entry_update_date.
                     Mongo.save_exception_to_mongo(document_dict['_id'],'Update information from single <doc>',url,str(e))
             else:
                 tmp_dict = {'_id' : doc_id}
-                Mongo.save_dict_to_mongo(tmp_dict,MODE_PANDING)
+                Mongo.save_dict_to_mongo(tmp_dict,MODE_PENDING)
                 print(f"Error: No Document Found: {url}")
 
         return True        
 
     def get_pending_documents():
-        print("Finding all panding documents")
+        print("Finding all pending documents")
         json_data = open(PATH_URL_JSON,"r")
         base_dictionary = json.load(json_data)
         try:
@@ -209,11 +209,11 @@ difference_between_entry_update_date.
             base_url =  "http://pesquisa.bvsalud.org/portal/?output=xml&lang=es&from=&sort=&format=&count=&fb=&page=1&index=tw&q=id%3A"
 
 
-        ids_list = Mongo.get_all_ids_list(COLLECTION_PANDING)
+        ids_list = Mongo.get_all_ids_list(COLLECTION_PENDING)
 
         
         modify_records_len = len(ids_list)
-        print("Total panding documents: ",modify_records_len)
+        print("Total pending documents: ",modify_records_len)
         for i, old_id in enumerate(ids_list):
             print("\n",modify_records_len -i,"-> Document to modify: ",old_id)
             try:
@@ -243,12 +243,12 @@ difference_between_entry_update_date.
                     Mongo.replace_doc_to_mongo(document_dict,old_id)
                     Mongo.save_to_mongo_updated_info(document_dict['_id'],'update',document_dict['db'])
                     print("->> Updated!\n")
-                    Mongo.delete_document_in_panding_coll(old_id)
+                    Mongo.delete_document_in_pending_coll(old_id)
                 except Exception as e:
                     print("Error: (while in Parse_file.py >> Mongo.replace_do_to_mongo(document_dict,old_id): ",e)
                     Mongo.save_exception_to_mongo(document_dict['_id'],"while in Parse_file.py >> Mongo.replace_do_to_mongo(document_dict,old_id)",url,str(e))
             else:
                 tmp_dict = {'_id' : old_id}
-                Mongo.save_dict_to_mongo(tmp_dict,MODE_PANDING)
+                Mongo.save_dict_to_mongo(tmp_dict,MODE_PENDING)
                 print(f"Error: No Document Found: {url}")
 
