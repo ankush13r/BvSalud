@@ -136,7 +136,7 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     return mesh_major_none_slash_unique
 
 
-def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list):
+def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
     #     print("length < 100 :",document_dict["ab_es"])
     #     return False
@@ -150,7 +150,7 @@ def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list):
             print("\t-From test to training: ",document_dict["_id"])
             mesh_major = ""
         else:
-            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list)
+            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
             
         if condition == cGold and "test_training" in document_dict:
                 collection_all.update_one({'_id': document_dict['_id']},
