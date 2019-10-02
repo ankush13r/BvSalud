@@ -30,7 +30,7 @@ def get_mongo_cursor(condition,year):
                                 # mh (medical subject header) mustn't have null value.
                                 # selected: All article must be selected before for test Set 
         cursor_mongo = collection_all.find({"$and":[
-                    #{"entry_date": {"$gte": date}},
+                    {"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
                     {"mh":{"$ne":None}},
                     {"selected": True}
@@ -179,8 +179,6 @@ def main(year,output,condition,valid_decs):
         try:
             valid_mh_headers_list = read_valid_decs_file("data/mesh_valid_codes_2019.txt")
             valid_mh_headers_list_upper = list(map(str.upper, valid_mh_headers_list))
-
-            return 1 
         except Exception as err:
             print("\tError: while reading file >> ",err,)
             return False
