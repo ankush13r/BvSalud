@@ -3,8 +3,6 @@
 from pymongo import MongoClient
 
 
-
-
 client = MongoClient('localhost:27017')
 db = client["BvSalud"]
 collection_all = db["all_articles"]
@@ -13,8 +11,11 @@ collection_all = db["all_articles"]
 
 def select_docs(ids_list):
     for i, id in enumerate(ids_list):
-        print(i)
-        collection_all.update_one({'_id':id},
+        _id = id.strip(" \n")
+        print(i,_id)
+        cursor = collection_all.find({'_id':_id})
+
+        collection_all.update_one({'_id':_id},
                                     {'$set':{'selected':True}})
 
             
