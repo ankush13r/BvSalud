@@ -23,13 +23,14 @@ def get_mongo_cursor(condition,year):
     print("Collecting data.")
     if condition == cGold: #If the condition is "gold".
         date = datetime.strptime(str(year), '%Y')
+        print(date)
         # Conditions for gold: 
                                 # entry date must be greater than year received as parameters.
                                 # ab_es (abstract spanish ) mustn't have null value.
                                 # mh (medical subject header) mustn't have null value.
                                 # selected: All article must be selected before for test Set 
         cursor_mongo = collection_all.find({"$and":[
-                    {"entry_date": {"$gte": date}},
+                    #{"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
                     {"mh":{"$ne":None}},
                     {"selected": True}
