@@ -47,7 +47,7 @@ def get_mongo_cursor(condition,year):
     else:# If the condition is wrong or different, it will print an error massage and return false
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
-    total_len = cursor_mongo.count()
+    total_len = cursor_mongo.count(True)
     return cursor_mongo,total_len # Returns cursos and it's size.
 
 def read_valid_decs_file(path_valid_decs): # Method to read the file of valid decs (header). In the file each line must have just one header or synonym, no more. 
@@ -92,8 +92,13 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
     return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,valid_mh_headers_list): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
-    
+def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+    try:
+        mesh_case_info_file = open("mesh_case_info.txt","w")
+        mesh_case_info_file.write("ID\tMeSH header")
+    except Exception as err:
+        print("Error while opening file for headers case insensitive info: ",err)
+
     try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
     except: #Just get mh
@@ -104,8 +109,10 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list): #Method to extract
     for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
 
         if "/" in  header: # If header contains (/).
-            slash_position = header.find("/") #find the position of slash
-            header_none_slash = header[:(slash_position-1)] # Header before slash (/).
+
+            headers_split = '/'.split(header)[0]
+            if len(headers_split) != 0:
+                header_none_slash = headers_split # Header before slash (/).
         else:
             header_none_slash = header 
 
@@ -113,8 +120,12 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list): #Method to extract
             
             if header_none_slash in valid_mh_headers_list: # The header exists in the list of valid mesh header than it will append else it will ignore and print a massage.
                 mesh_major_none_slash.append(header_none_slash)
+            elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
+                mesh_major_none_slash.append(header_none_slash)
+                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash))
             else:
-                print("Header None compatible ->", header_none_slash, "Doc id: ",document_dict["_id"])
+                print("Header not Valid ->", header_none_slash, "Doc id: ",document_dict["_id"])
+
         else: #Append header to the list.
             mesh_major_none_slash.append(header_none_slash)
 
@@ -165,18 +176,23 @@ def main(year,output,condition,valid_decs):
 
     if valid_decs:
         try:
-            valid_mh_headers_list = read_valid_decs_file("data/mesh_valids_list.txt")
+            valid_mh_headers_list = read_valid_decs_file("data/mesh_valid_codes_2019.txt")
+            valid_mh_headers_list_upper = list(map(str.upper, valid_mh_headers_list))
+
+            return 1 
         except Exception as err:
             print("\tError: while reading file >> ",err,)
+            return False
     else:
         valid_mh_headers_list = None
+        valid_mh_headers_list_upper = None
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
     count_valid_docs = 0
     for i, document_dict in enumerate(cursor_mongo):
         print(total_len - i ,"ID:",document_dict["_id"])
         
-        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list)
+        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
         if dict_data_gold:
             count_valid_docs = count_valid_docs + 1
             if i > 0:
