@@ -96,7 +96,7 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
 def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
     try:
         mesh_case_info_file = open("mesh_case_info.txt","w")
-        mesh_case_info_file.write("ID\tMeSH header")
+        mesh_case_info_file.write("ID\tMeSH header\n")
     except Exception as err:
         print("Error while opening file for headers case insensitive info: ",err)
 
@@ -123,7 +123,7 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
                 mesh_major_none_slash.append(header_none_slash)
             elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
                 mesh_major_none_slash.append(header_none_slash)
-                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash))
+                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
             else:
                 print("Header not Valid ->", header_none_slash, "Doc id: ",document_dict["_id"])
 
