@@ -104,12 +104,12 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     mesh_major_none_slash = [] # A local variabel to create the list of mesh headers.
     for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
 
-        if "/" in  header: # If header contains (/).
-            headers_split = str(header).split('/')[0]
-            if len(headers_split) != 0:
+        if "/" in  header: # If header contains (/) it will enter in the condition and will get just the string before /.
+            headers_split = str(header).split('/')[0] #String before /
+            if len(headers_split) != 0: # If the string length is 0 like (/humans). Before / is empty.
                 header_none_slash = headers_split # Header before slash (/).
-            else:
-                continue                       
+            else: #if string length was 0, it will omit all next functions and enter into next loop 
+                continue                   
         else:
             header_none_slash = header 
             
@@ -127,14 +127,10 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
             else:
                 print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"]))
               
-
         else: #Append header to the list.
             mesh_major_none_slash.append(header_none_slash)
 
     mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
-
-    mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
-
  
     return mesh_major_none_slash_unique
 
