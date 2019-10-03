@@ -1,0 +1,5 @@
+ID	MeSH header
+lil-218082	Propofol
+lil-218082	Propofol
+lil-406059	Diagnosis
+lil-343702	Fibrosarcoma

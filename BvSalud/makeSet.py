@@ -93,12 +93,7 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
     return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
-    try:
-        mesh_case_info_file = open("mesh_case_info.txt","w")
-        mesh_case_info_file.write("ID\tMeSH header\n")
-    except Exception as err:
-        print("Error while opening file for headers case insensitive info: ",err)
+def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
 
     try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
@@ -110,22 +105,28 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
 
         if "/" in  header: # If header contains (/).
-
-            headers_split = '/'.split(header)[0]
+            headers_split = str(header).split('/')[0]
             if len(headers_split) != 0:
                 header_none_slash = headers_split # Header before slash (/).
+            else:
+                continue                       
         else:
             header_none_slash = header 
-
-        if valid_mh_headers_list: #this variable can be None or a list it's none will just append headers to the list without comparing with valid headers.
+            
+        if valid_mh_headers_list and header_none_slash: #this variable can be None or a list it's none will just append headers to the list without comparing with valid headers.
             
             if header_none_slash in valid_mh_headers_list: # The header exists in the list of valid mesh header than it will append else it will ignore and print a massage.
                 mesh_major_none_slash.append(header_none_slash)
+            
             elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
                 mesh_major_none_slash.append(header_none_slash)
-                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
+                try:
+                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
+                except:
+                    pass        
             else:
-                print("Header not Valid ->", header_none_slash, "Doc id: ",document_dict["_id"])
+                print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"]))
+              
 
         else: #Append header to the list.
             mesh_major_none_slash.append(header_none_slash)
@@ -133,10 +134,12 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
 
     mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
+
+ 
     return mesh_major_none_slash_unique
 
 
-def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
+def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file):
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
     #     print("length < 100 :",document_dict["ab_es"])
     #     return False
@@ -150,7 +153,7 @@ def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,va
             print("\t-From test to training: ",document_dict["_id"])
             mesh_major = ""
         else:
-            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
+            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file)
             
         if condition == cGold and "test_training" in document_dict:
                 collection_all.update_one({'_id': document_dict['_id']},
@@ -185,13 +188,22 @@ def main(year,output,condition,valid_decs):
     else:
         valid_mh_headers_list = None
         valid_mh_headers_list_upper = None
+
+    try:
+        mesh_case_info_file = open("mesh_case_info.txt","w")
+        mesh_case_info_file.write("ID\tMeSH header\n")
+    except Exception as err:
+        print("Error while opening file for headers case insensitive info: ",err)
+
+    
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
+
     count_valid_docs = 0
     for i, document_dict in enumerate(cursor_mongo):
         print(total_len - i ,"ID:",document_dict["_id"])
         
-        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
+        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file)
         if dict_data_gold:
             count_valid_docs = count_valid_docs + 1
             if i > 0:
@@ -201,6 +213,11 @@ def main(year,output,condition,valid_decs):
             outputFile.write(data_json)
             
     outputFile.write(']}')
+    try:
+        mesh_case_info_file.close()
+    except:
+        pass
+
     outputFile.close()
     print("Total valid documents: ",count_valid_docs)
 
