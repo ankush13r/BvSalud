@@ -4,6 +4,8 @@ import csv
 from collections import defaultdict
 import ast
 import json
+import argparse
+import os
 
 def read_csv(csv_path):
     documents_list = []
@@ -19,18 +21,17 @@ def read_csv(csv_path):
     return documents_list
 
 
-
 def get_list_dict_by_code(list_documents):
     matching_code = 0
-    documents_list_dict_by_match_code = defaultdict(list)
+    documents_list_dict_by_match_code = defaultdict(list) # This methode defaultdict create a dictionary with list inside, so you can append into those list.
     for row in list_documents:
         documents_list_dict_by_match_code[row[0]].append(row)
     return documents_list_dict_by_match_code
 
 
 
-def compare_headers(documents_list_dict_by_code):
-    output_file = open("matched_mh_list.json","w")
+def compare_headers(documents_list_dict_by_code,output_path):
+    output_file = open(output_path,"w")
     output_file.write('{"articles":[')
     count_coma = 0
     for i, list_documents_matched in enumerate(documents_list_dict_by_code.values()):
@@ -39,7 +40,7 @@ def compare_headers(documents_list_dict_by_code):
         matched_dict_list= list()
         for x, documents_1 in enumerate(list_documents_matched):
             
-            j = x + 1
+            j = x + 1 # j(second document) is next of i(firstDocument)
             while j < len(list_documents_matched):
                 documents_2 = list_documents_matched[j]
                 meSH1 = documents_1[7]
@@ -71,6 +72,18 @@ def compare_headers(documents_list_dict_by_code):
     output_file.write("]}")
     output_file.close()
 
-documents_list = read_csv("duplicate_articles.csv")
-documents_list_dict_by_code = get_list_dict_by_code(documents_list)
-compare_headers(documents_list_dict_by_code)
+def main(path_output,path_input):
+    documents_list = read_csv(path_input)
+    documents_list_dict_by_code = get_list_dict_by_code(documents_list)
+    compare_headers(documents_list_dict_by_code)
+
+
+if __name__ == "main":
+    parser = argparse.ArgumentParser(prog ='match_mh.py',usage='%(prog)s[-o file.csv]')
+    parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='Input file path.') 
+    args = parser.parse_args()
+    input = args.input
+    current_dir = os.getcwd()
+    path_input = os.path.join(current_dir,input)
+    path_output = (str(path_input) + ".json")
+    main(path_output,path_input)
