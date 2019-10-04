@@ -14,10 +14,12 @@ collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant CO
 
 def main():
     cursor_mongo = collection_all.find({"$and":[
-            {"ab_es":{"$ne": None}},
+            {"ab_es":{"$nin":[None,"No disponible","No disponble","No dispoinble","No disponbile",
+                                                        "No disponibles","No  disponible","No dsiponible",
+                                                        "resumen está disponible en el texto completo","No dipsonible","es","."]}},
             {"mh":{"$ne":None}}]})
 
-
+    print("Total Doc:",cursor_mongo.count())
     error_file = open("abstract_lang_error.txt","w")
 
 
