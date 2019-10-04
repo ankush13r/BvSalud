@@ -73,7 +73,7 @@ def compare_headers(documents_list_dict_by_code,output_path):
 def main(path_output,path_input):
     documents_list = read_csv(path_input)
     documents_list_dict_by_code = get_list_dict_by_code(documents_list)
-    compare_headers(documents_list_dict_by_code)
+    compare_headers(documents_list_dict_by_code,path_output)
 
 
 if __name__ == "__main__":
