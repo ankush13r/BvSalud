@@ -19,12 +19,13 @@ def main():
                                                         "resumen está disponible en el texto completo","No dipsonible","es","."]}},
             {"mh":{"$ne":None}}]})
 
-    print("Total Doc:",cursor_mongo.count())
+    len_cursor = cursor_mongo.count()
+    print("Total Doc:",len_cursor)
     error_file = open("abstract_lang_error.txt","w")
 
 
     for i, document_dict in enumerate(cursor_mongo):
-        print(i)
+        print(len_cursor-i)
         try:
             ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
             if ab_language != 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
