@@ -7,7 +7,6 @@ import argparse
 import json
 import os
 import re
-from langdetect import detect
 
 cTraining = "training" #Condition to select if training. 
 cGold = "gold" #Condition for gold Set
@@ -15,6 +14,18 @@ client = MongoClient('localhost:27017')
 db = client[DATA_BASE] #DATA_BASE is a constant, please check bvs/constant.py for all constants.
 collection_all = db[COLLECTION_ALL] # Also a constant COLLECTION_ALL
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant COLLECTION_NONE_INDEXED_T1
+
+try:
+    abstract_language_error_file = open("training_errors/abstract_language_error.txt","w")
+except Exception as err:
+    print("Error while opening file for meSh language errors: ",err)
+
+try:
+    mesh_case_info_file = open("training_errors/mesh_case_info.txt","w")
+    mesh_case_info_file.write("ID\tMeSH header\n")
+except Exception as err:
+    print("Error while opening file for headers case insensitive info: ",err)
+
 
 def get_mongo_cursor(condition,year): 
     #The method returns a cursor of data from mongoDB collection.
@@ -64,18 +75,17 @@ def read_valid_decs_file(path_valid_decs): # Method to read the file of valid de
         print("\t-Error reading file: ",path_valid_decs," :",err)
         return False
 
-
 def is_Spanish_lang(document_dict): # Method for detection language of abstract tet from a article. It receives whole article and will find ab_es
     try:
         ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
     except:
-        print("\tError detecting language: ab_es ->>",document_dict["ab_es"])
+        abstract_language_error_file.write(str("null\t"+ document_dict["ab_es"] + "\n"))
         return False
 
     if ab_language == 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
         return True
     else:
-        print("\tlanguage error: ", ab_language,"  -----  ",document_dict["ab_es"] )
+        abstract_language_error_file.write(str(ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
         return False
 
 
@@ -93,7 +103,7 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
     return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
 
     try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
@@ -103,7 +113,6 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
             
     mesh_major_none_slash = [] # A local variabel to create the list of mesh headers.
     for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
-
         if "/" in  header: # If header contains (/) it will enter in the condition and will get just the string before /.
             headers_split = str(header).split('/')[0] #String before /
             if len(headers_split) != 0: # If the string length is 0 like (/humans). Before / is empty.
@@ -120,10 +129,8 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
             
             elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
                 mesh_major_none_slash.append(header_none_slash)
-                try:
-                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
-                except:
-                    pass        
+                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
+      
             else:
                 print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"]))
               
@@ -135,7 +142,7 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     return mesh_major_none_slash_unique
 
 
-def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file):
+def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
     #     print("length < 100 :",document_dict["ab_es"])
     #     return False
@@ -149,7 +156,7 @@ def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,va
             print("\t-From test to training: ",document_dict["_id"])
             mesh_major = ""
         else:
-            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file)
+            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
             
         if condition == cGold and "test_training" in document_dict:
                 collection_all.update_one({'_id': document_dict['_id']},
@@ -185,12 +192,6 @@ def main(year,output,condition,valid_decs):
         valid_mh_headers_list = None
         valid_mh_headers_list_upper = None
 
-    try:
-        mesh_case_info_file = open("mesh_case_info.txt","w")
-        mesh_case_info_file.write("ID\tMeSH header\n")
-    except Exception as err:
-        print("Error while opening file for headers case insensitive info: ",err)
-
     
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
@@ -199,7 +200,7 @@ def main(year,output,condition,valid_decs):
     for i, document_dict in enumerate(cursor_mongo):
         print(total_len - i ,"ID:",document_dict["_id"])
         
-        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper,mesh_case_info_file)
+        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
         if dict_data_gold:
             count_valid_docs = count_valid_docs + 1
             if i > 0:
@@ -207,7 +208,6 @@ def main(year,output,condition,valid_decs):
 
             data_json = json.dumps(dict_data_gold,indent=4,ensure_ascii=False)
             outputFile.write(data_json)
-            
     outputFile.write(']}')
     try:
         mesh_case_info_file.close()

@@ -12,7 +12,8 @@ collection_all = db[COLLECTION_ALL] # Also a constant COLLECTION_ALL
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant COLLECTION_NONE_INDEXED_T1
 
 
-def main():
+def main(hola):
+    
     cursor_mongo = collection_all.find({"$and":[
             {"ab_es":{"$nin":[None,"No disponible","No disponble","No dispoinble","No disponbile",
                                                         "No disponibles","No  disponible","No dsiponible",
@@ -22,7 +23,6 @@ def main():
     len_cursor = cursor_mongo.count()
     print("Total Doc:",len_cursor)
     error_file = open("abstract_lang_error.txt","w")
-
 
     for i, document_dict in enumerate(cursor_mongo):
         print(len_cursor-i)

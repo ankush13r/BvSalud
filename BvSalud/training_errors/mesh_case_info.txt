@@ -1,0 +1,1192 @@
+ID	MeSH header
+lil-218082	Propofol
+lil-218082	Propofol
+lil-406059	Diagnosis
+lil-343702	Fibrosarcoma
+lil-338009	Osteoporosis
+lil-269138	Pneumonia
+lil-269143	Hepatitis C
+lil-269143	Hepatitis C
+lil-290322	Avena
+lil-253607	Anemia
+lil-251796	Giardiasis
+lil-251800	Larva
+lil-251800	Malaria
+lil-202918	Osteosarcoma
+lil-202927	Angina Pectoris
+lil-203021	Diabetes Mellitus
+lil-203025	Odds Ratio
+lil-216270	Acidosis
+lil-216271	Apnea
+lil-216272	Hepatitis
+lil-216272	Pericarditis
+lil-208114	Tibia
+lil-208116	Diabetes Mellitus
+lil-208117	Hallux Valgus
+lil-208119	Talus
+lil-184169	Mastoiditis
+lil-184169	Otitis Media
+lil-184522	Enterovirus
+lil-184525	Neuritis
+lil-184553	Proteinuria
+lil-794512	Color
+lil-794515	Gingivitis
+lil-794515	Periodontitis
+biblio-830716	Anemia
+biblio-844984	Larva
+lil-792934	Analgesia
+biblio-948288	Anemia
+ibc-154508	Anemia
+ibc-154508	Anemia
+ibc-154511	Abdomen
+ibc-154588	Sepsis
+ibc-154589	Semen
+ibc-154589	Prostatitis
+ibc-154589	Prostatitis
+ibc-154594	Melanoma
+ibc-154605	Glaucoma
+ibc-154605	Timolol
+ibc-154606	Calcinosis
+ibc-154607	Retinoblastoma
+lil-776512	Colon
+lil-776515	Diabetes Mellitus
+biblio-981097	Sepsis
+biblio-981099	Peritonitis
+biblio-904687	Sepsis
+biblio-907861	Analgesia
+lil-654583	Gonadoblastoma
+lil-654583	Gonadoblastoma
+lil-654583	Gonadoblastoma
+lil-654583	Gonadoblastoma
+lil-651109	Malaria
+lil-138376	Diagnosis
+lil-148985	Rifampin
+lil-179467	Malaria
+lil-179467	Malaria
+lil-179522	Malaria
+lil-179524	Malaria
+lil-179599	Malaria
+lil-179601	Malaria
+lil-179648	Malaria
+lil-176109	Angiofibroma
+lil-176109	Angiofibroma
+lil-176109	Angiofibroma
+lil-238500	Endocarditis
+lil-238501	Tuberculosis
+lil-238501	Tuberculoma
+lil-238501	Meningitis
+lil-238502	Colon
+lil-121808	Proctocolitis
+ibc-110859	Gastritis
+ibc-110859	Saliva
+ibc-110860	Biofilms
+ibc-110866	Bacteremia
+ibc-110866	Pneumonia
+ibc-110866	Sepsis
+ibc-110929	Anemia
+ibc-110940	Delirium
+ibc-111009	Hemangiosarcoma
+ibc-111115	Malaria
+ibc-111123	Internet
+ibc-111125	Enterobiasis
+ibc-111125	Enterobiasis
+ibc-111125	Enterobiasis
+ibc-111133	Malaria
+ibc-111133	Malaria
+ibc-111134	Odds Ratio
+ibc-111439	Osteoporosis
+ibc-111439	Osteoporosis
+ibc-111439	Osteoporosis
+ibc-117888	Sarcoma
+ibc-117892	Histoplasmosis
+ibc-117893	Teratoma
+ibc-119245	Internet
+ibc-119245	Control
+ibc-113571	Alopecia
+ibc-113576	Melanoma
+ibc-113580	Mediastinitis
+ibc-113780	Midazolam
+ibc-113910	Enterovirus
+ibc-111724	Osteoporosis
+ibc-111725	Pneumonia
+ibc-111961	Analgesia
+ibc-111982	Seminoma
+ibc-112462	Pseudotumor Cerebri
+ibc-112466	Granuloma
+ibc-112467	Glaucoma
+ibc-139775	Microbiota
+ibc-107667	Vulva
+ibc-107668	Amniocentesis
+ibc-108285	Delirium
+ibc-108285	Delirium
+ibc-108919	Osteonecrosis
+ibc-109147	Meningioma
+ibc-109147	Meningioma
+ibc-109147	Apoptosis
+ibc-109148	Carcinoma
+ibc-109148	Carcinoma
+ibc-109148	Carcinoma
+ibc-109150	Adenocarcinoma
+ibc-109150	Adenocarcinoma
+ibc-109154	Meningioma
+ibc-109154	Meningioma
+ibc-109276	Misoprostol
+ibc-109276	Misoprostol
+ibc-109690	Parasomnias
+ibc-109781	Metaplasia
+ibc-109781	Metaplasia
+ibc-109781	Metaplasia
+ibc-109782	Hemangioma
+ibc-109782	Hemangioma
+ibc-109782	Hemangioma
+ibc-109782	Hemangioma
+ibc-109782	Hemangioma
+ibc-109847	Fibrosis
+ibc-109847	Fibrosis
+ibc-109851	Carcinoma
+ibc-109851	Carcinoma
+ibc-109851	Carcinoma
+ibc-129965	Molar
+ibc-129966	Biofilms
+ibc-129967	Molar
+lil-5292	Zinc
+lil-5296	Fenoterol
+lil-5315	Glaucoma
+lil-5319	Glaucoma
+lil-5320	Glaucoma
+lil-5358	Diabetes Mellitus
+lil-5359	Alopecia
+lil-5365	Alopecia
+lil-5368	Glioma
+lil-5373	Insulinoma
+lil-5414	Leishmaniasis
+lil-5415	Malaria
+lil-5416	Leptospirosis
+lil-5419	Rifampin
+lil-5419	Tuberculosis
+lil-5422	Leishmaniasis
+lil-5439	Toxoplasmosis
+lil-5445	Giardiasis
+lil-5450	Pneumonia
+lil-5451	Teratoma
+lil-5452	Acrodermatitis
+lil-5452	Zinc
+lil-5463	Peritonitis
+ibc-157126	Gastroenteritis
+ibc-157126	Gastroenteritis
+ibc-157144	Stents
+ibc-157160	Pseudotumor Cerebri
+ibc-157160	Glaucoma
+ibc-157160	Pseudotumor Cerebri
+ibc-157160	Glaucoma
+ibc-157161	Glaucoma
+ibc-157162	Rituximab
+ibc-157165	Adenocarcinoma
+ibc-160673	Ego
+ibc-160678	Internet
+biblio-848272	Omalizumab
+biblio-967863	Tuberculosis
+biblio-972590	Hemangioma
+biblio-972590	Hemangioma
+biblio-972593	Hernia
+biblio-972593	Hernia
+biblio-907411	Coca
+biblio-907411	Cedron
+ibc-158371	Propofol
+ibc-158374	Neutropenia
+ibc-158375	Balanitis
+ibc-158375	Balanitis
+ibc-157221	Pneumonia
+ibc-157221	Linezolid
+ibc-157244	Analgesia
+ibc-157244	Fascia
+ibc-157245	Placebos
+ibc-157248	Propofol
+ibc-157248	Midazolam
+ibc-157250	Propofol
+ibc-157256	Pelvis
+ibc-157260	Apoptosis
+ibc-157299	Ileus
+ibc-157301	Adenocarcinoma in Situ
+ibc-157379	Psoriasis
+ibc-157380	Melanoma
+ibc-157381	Melanoma
+ibc-157381	Cetuximab
+ibc-157382	Psoriasis
+ibc-157383	Melanoma
+ibc-157420	Pleura
+ibc-157421	Epoprostenol
+ibc-157508	Paclitaxel
+ibc-157510	Fibrosis
+ibc-157515	Proteinuria
+ibc-157571	Sirolimus
+ibc-157572	Megacolon
+ibc-157572	Megacolon
+ibc-157572	Megacolon
+ibc-157576	Halitosis
+ibc-157576	Halitosis
+ibc-157576	Halitosis
+ibc-157605	Glioblastoma
+ibc-157643	Mindfulness
+ibc-157643	Mindfulness
+ibc-157643	Mindfulness
+ibc-157643	Mindfulness
+ibc-157643	Mindfulness
+ibc-157669	Bacteriuria
+ibc-157672	Hematuria
+ibc-157734	Sepsis
+ibc-157735	Hemangioma
+ibc-157735	Hemangioma
+ibc-157790	Bulimia Nervosa
+ibc-157790	Bulimia Nervosa
+ibc-157797	Odds Ratio
+lil-414249	Zinc
+lil-401417	Sepsis
+lil-408326	Malaria
+lil-408327	Dengue
+lil-408327	Malaria
+lil-408329	Dengue
+lil-408329	Malaria
+lil-408329	Pneumonia
+lil-408330	Malaria
+lil-408331	Dengue
+lil-408331	Meningitis
+lil-408333	Dengue
+lil-408333	Leptospirosis
+lil-410105	Colon
+lil-410106	Melena
+lil-410272	Ductus Arteriosus
+lil-410361	Osteonecrosis
+lil-410361	Osteonecrosis
+lil-410363	Tibia
+lil-410407	Bulimia
+lil-410407	Bulimia
+lil-410410	Neuralgia
+lil-410410	Neuralgia
+lil-440539	Metaplasia
+lil-440539	Adenocarcinoma
+lil-440540	Internet
+lil-441204	Carcinoma
+lil-441204	Carcinoma
+lil-441204	Carcinoma
+lil-436436	Gastritis
+lil-436567	Colon
+lil-436567	Enema
+lil-436570	Colon
+lil-436571	Proctitis
+lil-436571	Proctitis
+lil-436571	Glutaral
+lil-436571	Glutaral
+lil-436571	Proctitis
+lil-436573	Megacolon
+lil-436573	Megacolon
+lil-436573	Colon
+lil-436573	Megacolon
+lil-436573	Megacolon
+lil-436573	Colon
+lil-436574	Megacolon
+lil-436574	Megacolon
+lil-436574	Enema
+lil-436574	Megacolon
+lil-436575	Diltiazem
+lil-436575	Diltiazem
+lil-436624	Pelvis
+lil-436624	Seminoma
+lil-436624	Teratoma
+lil-436624	Seminoma
+lil-436624	Teratoma
+lil-620045	Sarcoidosis
+lil-620045	Sarcoidosis
+lil-620046	Vulva
+lil-620313	Melanoma
+lil-620313	Melanoma
+lil-620313	Melanoma
+lil-620313	Melanoma
+lil-620541	Alopecia
+lil-620543	Neurofibroma
+lil-620543	Neurofibromatosis 1
+lil-620543	Neurofibromatosis 1
+lil-620926	Abdomen
+lil-648775	Tuberculosis
+lil-121154	Hepatitis C
+lil-121154	Hepatitis C
+lil-121157	Semen
+lil-293679	Enema
+lil-293684	Osteoporosis
+lil-262263	Neutropenia
+lil-262265	Mediastinitis
+lil-262265	Pneumonia
+lil-148034	Endometritis
+lil-161849	Hepatitis B
+lil-163074	Gingivitis
+lil-163081	Adenoma
+lil-137890	Aorta
+lil-138995	Osteoporosis
+lil-138995	Osteoporosis
+lil-139062	Neuroblastoma
+lil-177029	Placebos
+lil-177030	Dextrocardia
+lil-177099	Amiloride
+lil-177100	Flurazepam
+lil-177100	Nitrazepam
+lil-177100	Pentobarbital
+lil-177100	Temazepam
+lil-141874	Captopril
+lil-142943	Hepatitis B
+lil-142943	Hepatitis B
+lil-134964	Analgesia
+lil-134967	Carcinoma
+lil-134967	Carcinoma
+lil-134967	Sarcoma
+lil-134967	Sarcoma
+lil-134968	Analgesia
+lil-135077	Rifampin
+lil-135077	Epidermis
+lil-135080	Lupus Vulgaris
+lil-135080	Lupus Vulgaris
+lil-135522	Necrosis
+lil-156358	Molar
+lil-158436	Armadillos
+lil-158438	Fascioliasis
+lil-158438	Fascioliasis
+lil-158439	Giardiasis
+lil-158439	Giardiasis
+lil-158440	Leptospirosis
+lil-158440	Leptospirosis
+lil-158440	Leptospirosis
+lil-158443	Tuberculosis
+lil-158443	Tuberculosis
+lil-158447	Leptospirosis
+lil-340181	Propranolol
+lil-417352	Pelvis
+lil-417356	Pneumonia
+lil-417357	Adenocarcinoma
+lil-417358	Osteosarcoma
+lil-417360	Psoriasis
+lil-422671	Malaria
+lil-422673	Sepsis
+lil-422674	Neutropenia
+lil-422674	Neutropenia
+lil-483696	Pancreatitis
+lil-472903	Apoptosis
+lil-403906	Analgesia
+lil-403906	Propofol
+lil-403906	Midazolam
+lil-403907	Meningitis
+lil-418381	Malaria
+lil-418382	Tibia
+lil-418383	Glioma
+lil-401993	Enteritis
+lil-401995	Teratoma
+lil-402037	Carcinosarcoma
+lil-324724	Enteritis
+lil-325314	Diagnosis
+lil-330180	Hepatitis C
+lil-330181	Diabetes Mellitus
+lil-330186	Metaplasia
+lil-330190	Anemia
+lil-322595	Colon
+lil-201834	Gastritis
+lil-201835	Hepatitis A
+lil-201835	Hepatitis A
+lil-201835	Hepatitis A
+lil-201836	Ataxia
+lil-192430	Sarcoidosis
+lil-192430	Sarcoidosis
+lil-192430	Sarcoidosis
+lil-192433	Balanitis
+lil-192433	Balanitis
+lil-192434	Melanoma
+lil-192434	Melanoma
+lil-193268	Alopecia
+lil-193269	Hemangiosarcoma
+lil-193269	Hemangiosarcoma
+lil-193269	Hemangiosarcoma
+lil-193270	Adenocarcinoma
+lil-193270	Adenocarcinoma
+lil-193272	Angioedema
+lil-193272	Angioedema
+lil-193272	Angioedema
+lil-193272	Plasma
+lil-226766	Semen
+lil-226777	Diabetes Mellitus
+lil-226777	Diabetes Mellitus
+lil-226777	Diabetes Mellitus
+lil-226777	Diabetes Mellitus
+lil-226992	Diabetes Mellitus
+lil-226992	Diabetes Mellitus
+lil-226992	Diabetes Mellitus
+lil-226996	Osteoporosis
+lil-226996	Osteoporosis
+lil-226996	Osteoporosis
+lil-226996	Osteoporosis
+lil-226996	Osteoporosis
+lil-227112	Tibia
+lil-227112	Tibia
+lil-227114	Tibia
+lil-227115	Tibia
+lil-227244	Placebos
+lil-194912	Colon
+lil-194913	Colitis
+lil-194955	Hemangioma
+lil-194955	Hemangioma
+lil-194960	Hemangiosarcoma
+lil-194960	Hemangiosarcoma
+lil-194960	Hemangiosarcoma
+lil-195860	Aorta
+lil-195860	Aorta
+lil-195861	Angina Pectoris
+lil-195893	Analgesia
+lil-195895	Ganglioneuroma
+lil-237178	Osteoporosis
+lil-224503	Odds Ratio
+lil-224508	Pericarditis
+lil-225145	Peritonitis
+lil-200153	Misoprostol
+lil-200155	Saliva
+lil-200157	Molar
+lil-227330	Shock
+lil-227330	Peritonitis
+lil-227333	Albuterol
+lil-227336	Leishmaniasis
+lil-227336	Leishmaniasis
+lil-227336	Leishmaniasis
+lil-227336	Leishmaniasis
+lil-227336	Leishmaniasis
+lil-227336	Leishmaniasis
+lil-227451	Iris
+lil-227452	Hamartoma
+lil-227452	Teratoma
+lil-227452	Hamartoma
+lil-227452	Teratoma
+ibc-167070	Internet
+biblio-1005070	Melanosis
+biblio-1005072	Sepsis
+biblio-1005144	Tuberculosis
+biblio-1005213	Acrospiroma
+biblio-1005217	Meningioma
+biblio-892327	Hamartoma
+biblio-894618	Diabetes Mellitus
+biblio-894609	Meningioma
+biblio-897279	Tuberculosis
+biblio-897281	Tuberculosis
+biblio-886428	Meningitis
+biblio-886433	Glioma
+biblio-953312	Zika Virus
+biblio-953313	Tuberculosis
+biblio-953314	Tuberculosis
+biblio-953318	Tuberculosis
+biblio-953318	Diabetes Mellitus
+biblio-996631	Peritonitis
+biblio-986587	Uremia
+biblio-986604	Endometriosis
+biblio-962534	Amnesia
+biblio-859061	Zika Virus
+biblio-859063	Prolactinoma
+ibc-164977	Sarcopenia
+ibc-164977	Sarcopenia
+ibc-164980	Ureterocele
+ibc-164980	Ureterocele
+ibc-164982	Lordosis
+ibc-164982	Lordosis
+ibc-164996	Retina
+ibc-164996	Retina
+ibc-165078	Mucocele
+ibc-165078	Peritonitis
+ibc-165324	Endometriosis
+ibc-165744	Biofilms
+ibc-166007	Pneumonia
+ibc-162040	Fascia Lata
+ibc-162041	Tibia
+ibc-162042	Ataxia
+ibc-162064	Carcinoma
+ibc-162093	Diabetes Mellitus
+ibc-162113	Diabetes Mellitus
+ibc-163544	Carcinoma in Situ
+ibc-163547	Bursitis
+ibc-163548	Hemangioma
+ibc-163548	Hemangioma
+lil-692530	Anorexia
+lil-692930	Ego
+lil-629370	Leishmaniasis
+lil-629370	Leishmaniasis
+lil-629374	Tuberculosis
+lil-629374	Tuberculosis
+lil-629375	Dengue
+lil-629376	Dengue
+lil-629376	Dengue
+lil-691101	Molar
+lil-704357	Delirium
+lil-704357	Delirium
+lil-684313	Hepatitis C
+lil-684313	Hepatitis C
+lil-688381	Ego
+lil-786445	Psoriasis
+lil-658655	Osteoporosis
+lil-658656	Osteoporosis
+lil-658656	Osteoporosis
+lil-659951	Dengue
+lil-659951	Dengue
+lil-659951	Dengue
+lil-660054	Tuberculosis
+lil-660054	Tuberculosis
+lil-660054	Tuberculosis
+lil-660054	Tuberculosis
+lil-675049	Fibrosis
+lil-675050	Carcinoma
+lil-663777	Stents
+lil-677245	Misoprostol
+lil-50017	Hepatitis
+lil-50024	Pneumonia
+lil-50024	Pneumonia
+lil-50027	Hepatitis
+lil-50030	Necrosis
+lil-50032	Oligospermia
+lil-50036	Isoproterenol
+lil-50036	Isoproterenol
+lil-50050	Vasculitis
+lil-50050	Vasculitis
+lil-50050	Vasculitis
+lil-50051	Carcinoma
+lil-50051	Carcinoma
+lil-56557	Diabetes Mellitus
+lil-56559	Diabetes Mellitus
+lil-56568	Glaucoma
+lil-56571	Glaucoma
+lil-56571	Diabetes Mellitus
+lil-56695	Hematuria
+lil-56699	Adenocarcinoma
+lil-56705	Carcinoma
+lil-56768	Adenocarcinoma
+lil-56769	Placebos
+lil-56774	Glaucoma
+lil-56775	Hematuria
+lil-56778	Sarcoma
+lil-56779	Hematuria
+lil-56779	Carcinoma
+lil-56783	Carcinoma
+lil-56784	Carcinoma
+lil-56887	Hematuria
+lil-56888	Hematuria
+lil-56896	Ileum
+lil-56900	Ileum
+lil-57000	Osteoporosis
+lil-42246	Droperidol
+lil-42305	Lordosis
+lil-42305	Lordosis
+lil-42318	Fibrosis
+lil-42850	Placenta Previa
+lil-42881	Ascariasis
+lil-42882	Flunitrazepam
+lil-42884	Otitis Media
+lil-42884	Otitis Media
+lil-42894	Adenocarcinoma
+lil-421390	Enterovirus
+lil-421513	Tuberculosis
+lil-412230	Dengue
+lil-412230	Dengue
+lil-412232	Marketing
+lil-412235	Odds Ratio
+lil-412701	Internet
+lil-413968	Placenta
+lil-413973	Pneumonia
+lil-414084	Sinusitis
+lil-401233	Atenolol
+lil-401233	Enalapril
+lil-401237	Colon
+lil-401238	Ileum
+lil-401238	Ileum
+lil-402725	Biofilms
+lil-402726	Psoriasis
+lil-406562	Osteomalacia
+biblio-849422	Urticaria
+biblio-869404	Apoptosis
+biblio-869405	Color
+biblio-868386	Tuberculosis
+biblio-836378	Silicosis
+biblio-836378	Silicosis
+biblio-836378	Silicosis
+biblio-836378	Silicosis
+biblio-837135	Coma
+biblio-837724	Hepatitis
+lil-280330	Tuberculosis
+lil-280468	Amniocentesis
+lil-286175	Paraganglioma
+lil-286175	Paraganglioma
+lil-286188	Endometriosis
+lil-286188	Estradiol
+lil-286188	Oncogenes
+lil-286190	Placenta
+lil-286192	Placenta
+lil-286192	Apoptosis
+lil-286235	Amniocentesis
+lil-286238	Shock
+lil-283750	Pinealoma
+lil-284481	Proctocolitis
+lil-277215	Pancreatitis
+lil-277215	Pancreatitis
+lil-274044	Arteriosclerosis
+lil-274044	Arteriosclerosis
+lil-274432	Ofloxacin
+lil-274432	Ofloxacin
+lil-274432	Ofloxacin
+lil-274432	Ofloxacin
+lil-263722	Delirium
+lil-263722	Delirium
+lil-263722	Delirium
+lil-263927	Melanoma
+lil-263927	Melanoma
+lil-263931	Granuloma
+lil-265184	Gonadoblastoma
+lil-265184	Gonadoblastoma
+lil-265184	Gonadoblastoma
+lil-265185	Melanoma
+lil-265185	Melanoma
+lil-265185	Melanoma
+lil-265185	Melanoma
+lil-265240	Lipoma
+lil-258604	Urticaria
+lil-261175	Talus
+lil-261175	Osteonecrosis
+lil-261385	Nevus
+lil-261385	Nevus
+lil-261390	Acne Vulgaris
+lil-261532	Albuterol
+lil-262232	Gastritis
+lil-262232	Gastritis
+lil-262235	Gastritis
+lil-262235	Gastritis
+lil-262235	Gastritis
+lil-468670	Diabetes Mellitus
+lil-468673	Diagnosis
+lil-585434	Meningitis
+lil-585772	Meningioma
+lil-503863	Gastroenteritis
+lil-531254	Giardiasis
+lil-531257	Retinoblastoma
+lil-531259	Toxoplasmosis
+lil-531259	Toxoplasmosis
+lil-531259	Toxoplasmosis
+lil-439978	Diagnosis
+lil-440528	Pelvis
+lil-440530	Meningitis
+lil-440754	Vaccinia
+lil-435767	Analgesia
+lil-435767	Tramadol
+lil-435770	Propofol
+lil-436717	Vasculitis
+lil-434432	Triazoles
+lil-434543	Sepsis
+lil-434544	Diuresis
+lil-434546	Microsporidiosis
+lil-434548	Genes
+lil-434550	Parasitemia
+lil-434552	Tuberculosis
+lil-434553	Dengue
+lil-434557	Dengue
+lil-428561	Apoptosis
+lil-428562	Analgesia
+ibc-111026	Dermatitis
+ibc-135682	Aorta
+ibc-135685	Stents
+ibc-135685	Arteriosclerosis
+ibc-135688	Arteriosclerosis
+ibc-21162	Lipoma
+ibc-21160	Tuberculosis
+ibc-133770	Analgesia
+lil-347012	Internet
+lil-345830	Glaucoma
+lil-345850	Eclampsia
+lil-345873	Captopril
+lil-345873	Enalapril
+lil-353061	Tuberculosis
+lil-357062	Toxocariasis
+lil-357067	Eclampsia
+lil-342106	Ascariasis
+lil-342106	Ascariasis
+lil-331938	Sepsis
+lil-331938	Kernicterus
+lil-331939	Malaria
+lil-331940	Hepatitis A
+lil-331940	Tuberculosis
+biblio-968917	Diabetes Mellitus
+lil-552633	Folklore
+lil-552685	Azoles
+lil-552686	Tuberculosis
+lil-552686	Tuberculosis
+lil-552686	Tuberculosis
+lil-552687	Internet
+lil-552794	Neurofibromatosis 1
+lil-552794	Neurofibromatosis 1
+lil-552794	Neurofibromatosis 1
+lil-552797	Periodontitis
+ibc-87456	Tuberculosis
+ibc-87461	Factor VIIa
+ibc-94821	Gastroenteritis
+ibc-94824	Globus Pallidus
+ibc-94824	Putamen
+ibc-90774	Hepatitis E
+ibc-90774	Hepatitis A
+ibc-88910	Osteoporosis
+ibc-89011	Paraganglioma
+ibc-73082	Silicosis
+ibc-73082	Silicosis
+ibc-73082	Silicosis
+ibc-73082	Silicosis
+ibc-73256	Neutropenia
+ibc-73256	Neutropenia
+ibc-73268	Carcinoma
+ibc-73268	Carcinoma
+ibc-61651	Listeriosis
+ibc-61652	Bacteriuria
+ibc-61653	Enterovirus
+ibc-61653	Enterovirus
+ibc-85433	Internet
+ibc-139700	Calcinosis
+ibc-139700	Calcinosis
+ibc-139701	Neurofibromatosis 2
+ibc-139701	Neurofibromatosis 2
+ibc-139701	Neurofibromatosis 1
+ibc-139701	Neurofibromatosis 1
+ibc-139701	Neurofibromatosis 1
+ibc-139701	Neurofibromatosis 2
+ibc-139702	Pseudotumor Cerebri
+ibc-139702	Pseudotumor Cerebri
+ibc-139704	Meninges
+ibc-98134	Pericarditis
+ibc-84152	Lordosis
+ibc-84152	Lordosis
+ibc-84157	Edema
+ibc-84157	Edema
+ibc-84158	Tibia
+ibc-84158	Tibia
+ibc-84478	Arteriosclerosis
+ibc-84479	Arteriosclerosis
+ibc-84524	Bacteriuria
+ibc-84524	Ofloxacin
+ibc-84528	Pelvis
+ibc-84529	Hematuria
+ibc-84533	Hematuria
+ibc-84535	Angiolipoma
+ibc-84535	Shock
+ibc-044713	Hematoma
+ibc-044713	Hematoma
+ibc-37228	Melanoma
+ibc-37228	Nevus
+ibc-37307	Apoptosis
+ibc-37912	Estradiol
+ibc-37914	Hepatitis C
+ibc-37914	Hepatitis C
+lil-406325	Diabetes Mellitus
+lil-406326	Diabetes Mellitus
+lil-400111	Molar
+lil-400117	Lipoma
+lil-400121	Periodontitis
+lil-400133	Gingivitis
+lil-400140	Ameloblastoma
+lil-400200	Hepatitis C
+lil-400201	Hepatitis C
+lil-141357	Toxoplasmosis
+lil-141357	Toxoplasmosis
+lil-152884	Mucocele
+lil-152884	Sinusitis
+lil-237222	Anemia
+lil-237222	Anemia
+lil-129879	Gingivitis
+lil-129879	Gingivitis
+lil-131631	Pneumonia
+lil-131631	Pneumonia
+lil-131631	Pneumonia
+lil-131632	Gastritis
+lil-131632	Gastritis
+lil-132521	Adenocarcinoma
+lil-132521	Adenocarcinoma
+lil-132526	Carcinoma
+lil-131801	Varicocele
+lil-131813	Necrosis
+lil-134711	Vagina
+lil-134717	Endometritis
+lil-134717	Endometritis
+lil-134717	Endometritis
+lil-134723	Hernia
+lil-134724	Abdomen
+lil-134724	Meningocele
+lil-134728	Analgesia
+lil-395650	Pneumonia
+lil-395650	Pneumonia
+lil-691140	Diabetes Mellitus
+lil-691144	Diagnosis
+lil-328607	Sepsis
+lil-218211	Angioedema
+lil-198849	Abdomen
+lil-198851	Abdomen
+lil-168545	Vasculitis
+lil-170152	Anemia
+lil-170153	Albuminuria
+lil-170161	Adenocarcinoma
+lil-170162	Teratoma
+lil-313310	Lordosis
+lil-313663	Hallux Valgus
+lil-313663	Primates
+lil-313664	Diabetes Mellitus
+lil-392269	Diagnosis
+lil-392271	Diagnosis
+lil-395217	Osteoporosis
+lil-395221	Hemostasis
+lil-395222	Anaerobiosis
+lil-338117	Sinusitis
+lil-338119	Meninges
+lil-338119	Meningitis
+lil-338120	Ataxia Telangiectasia
+lil-339664	Analgesia
+lil-339667	Analgesia
+lil-339668	Placenta
+lil-335357	Melanoma
+lil-335387	Dengue
+lil-335829	Anaplasia
+lil-335830	Meningioma
+lil-424023	Diabetes Mellitus
+lil-424591	Sepsis
+lil-424593	Diagnosis
+lil-309024	Oncogenes
+lil-309038	Dengue
+lil-309041	Endometriosis
+lil-309041	Abdomen
+lil-343159	Sepsis
+lil-343159	Neutropenia
+lil-346443	Gastritis
+lil-566689	Analgesia
+lil-566691	Adenocarcinoma
+lil-566697	Fibrosis
+ibc-94878	Parasomnias
+ibc-94956	Tics
+ibc-94964	Tics
+ibc-89357	Facies
+ibc-89358	Facies
+ibc-89359	Facies
+ibc-88498	Hockey
+ibc-88500	Osteoporosis
+ibc-72999	Adenocarcinoma
+ibc-72999	Adenocarcinoma
+ibc-73001	Proctitis
+ibc-73001	Proctitis
+ibc-73001	Proctitis
+ibc-73718	Meningitis
+ibc-73718	Meningitis
+ibc-73718	Meningitis
+ibc-73718	Enterovirus
+ibc-73718	Enterovirus
+ibc-73718	Meningitis
+ibc-73719	Pneumonia
+ibc-73719	Pneumonia
+ibc-73719	Pneumonia
+ibc-73719	Pneumonia
+ibc-73804	Analgesia
+ibc-73806	Analgesia
+ibc-73807	Tramadol
+ibc-73807	Analgesia
+ibc-59671	Pneumonia
+ibc-59671	Pneumonia
+ibc-59843	Paraganglioma
+ibc-59843	Paraganglioma
+ibc-59844	Paraganglioma
+ibc-59844	Paraganglioma
+ibc-59844	Paraganglioma
+ibc-59845	Paraganglioma
+ibc-59846	Paraganglioma
+ibc-59846	Paraganglioma
+ibc-59847	Paraganglioma
+ibc-59848	Paraganglioma
+ibc-59848	Paraganglioma
+ibc-59849	Paraganglioma
+ibc-59850	Paraganglioma
+ibc-59850	Paraganglioma
+ibc-59850	Paraganglioma
+ibc-59851	Paraganglioma
+ibc-59851	Paraganglioma
+ibc-59852	Paraganglioma
+ibc-59854	Paraganglioma
+ibc-59854	Paraganglioma
+ibc-59854	Paraganglioma
+ibc-59855	Paraganglioma
+ibc-59855	Paraganglioma
+ibc-59856	Paraganglioma
+ibc-59857	Paraganglioma
+ibc-59857	Paraganglioma
+ibc-59944	Hemostasis
+ibc-59996	Carcinoma
+ibc-59996	Hematuria
+ibc-59996	Carcinoma
+ibc-59997	Carcinoma
+ibc-59997	Carcinoma
+ibc-59997	Carcinoma
+ibc-60001	Necrosis
+ibc-60001	Necrosis
+ibc-60001	Necrosis
+ibc-60002	Vagina
+ibc-60002	Adenocarcinoma
+ibc-60002	Vagina
+ibc-60002	Adenocarcinoma
+ibc-60004	Hematuria
+ibc-60004	Hematuria
+ibc-60004	Abdomen
+ibc-60004	Enuresis
+ibc-60005	Adenocarcinoma
+ibc-60005	Lipoma
+ibc-60005	Lipoma
+ibc-60005	Lipoma
+ibc-60005	Adenocarcinoma
+ibc-60008	Adenocarcinoma
+ibc-60008	Adenocarcinoma
+ibc-60008	Adenocarcinoma
+ibc-60097	Sepsis
+ibc-60097	Sepsis
+ibc-60098	Sepsis
+ibc-60101	Hepatitis B
+ibc-60101	Hepatitis C
+ibc-61728	Viremia
+ibc-61732	Bacteremia
+ibc-61732	Bacteremia
+ibc-61732	Bacteremia
+ibc-61733	Carbapenems
+ibc-61755	Retina
+ibc-61761	Adenoma
+ibc-62031	Hemangioblastoma
+ibc-62043	Adenocarcinoma
+ibc-62043	Adenocarcinoma
+ibc-62043	Adenocarcinoma
+ibc-62044	Adenocarcinoma
+ibc-62044	Adenocarcinoma
+ibc-62045	Mucocele
+ibc-62045	Mucocele
+ibc-112132	Tinnitus
+ibc-112132	Tinnitus
+ibc-112133	Diagnosis
+ibc-85491	Apoptosis
+ibc-76150	Diabetes Mellitus
+ibc-74347	Proctitis
+ibc-74347	Proctitis
+ibc-74347	Adenocarcinoma
+ibc-74350	Ileum
+ibc-74354	Aorta
+ibc-78155	Osteoporosis
+ibc-78156	Sepsis
+ibc-78158	Vasculitis
+ibc-78159	Sarcoidosis
+ibc-71536	Carcinoma
+ibc-71536	Carcinoma
+ibc-71539	Ofloxacin
+ibc-71539	Tularemia
+ibc-71539	Tularemia
+ibc-71817	Adenocarcinoma
+ibc-71817	Adenocarcinoma
+ibc-72271	Shock
+ibc-72272	Electroshock
+ibc-81592	Saliva
+ibc-59239	Otitis Media
+ibc-59239	Meningitis
+lil-665967	Tuberculosis
+lil-666689	Tuberculosis
+lil-671312	Hepatitis C
+lil-671312	Hepatitis C
+lil-671665	Bulimia Nervosa
+lil-671666	Homeostasis
+lil-671685	Bacteremia
+lil-671686	Osteoporosis
+lil-671686	Osteoporosis
+lil-671702	Melanoma
+lil-671702	Melanoma
+lil-671702	Melanoma
+lil-671720	Retinitis
+lil-671720	Retinitis
+lil-671872	Ductus Arteriosus
+lil-671872	Ductus Arteriosus
+lil-671944	Coloboma
+lil-671945	Fibrosis
+lil-672049	Placenta
+lil-672049	Placenta
+lil-672050	Otitis Media
+lil-672050	Otitis Media
+lil-672050	Bacteremia
+lil-672050	Bacteremia
+lil-750051	Anemia
+lil-752511	Saliva
+lil-743976	Pneumonia
+lil-744544	Ego
+lil-744732	Toxoplasmosis
+lil-744844	Pleurodesis
+lil-744845	Inositol
+lil-744845	Inositol
+lil-744845	Inositol
+lil-744845	Placebos
+lil-744852	MicroRNAs
+lil-745081	Mediastinitis
+lil-745081	Mediastinitis
+lil-745081	Necrosis
+lil-745081	Mediastinitis
+lil-745084	Ileum
+lil-745618	Sinusitis
+lil-745621	Saliva
+lil-745704	Dengue
+lil-745704	Dengue
+lil-745704	Dengue
+lil-753816	Sepsis
+lil-753817	Diabetes Mellitus
+lil-753819	Pneumonia
+biblio-982099	Diabetes Mellitus
+biblio-982099	Diabetes Mellitus
+biblio-999388	Analgesia
+biblio-999390	Hamartoma
+biblio-961623	Diabetes Mellitus
+biblio-900273	Miosis
+biblio-900256	Glaucoma
+biblio-900267	Anemia
+biblio-958082	Arteritis
+biblio-958074	Psoriasis
+biblio-958076	Vasculitis
+biblio-982774	Osteoporosis
+biblio-994473	Aorta
+lil-425149	Levonorgestrel
+lil-425184	Colon
+lil-425186	Diverticulitis
+lil-425188	Pancreatitis
+lil-444063	Tibia
+lil-455853	Diabetes Mellitus
+lil-476871	Folklore
+lil-476876	Zinc
+lil-462096	Shock
+lil-462097	Diabetes Mellitus
+lil-462099	Anemia
+lil-483757	Melanoma
+lil-483759	Alopecia
+lil-483760	Tacrolimus
+lil-463022	Rumen
+lil-463023	Larva
+lil-463057	Colon
+lil-475301	Tuberculosis
+lil-594287	Neuralgia
+lil-594289	Histoplasmosis
+lil-502794	Plasma
+lil-526462	Mercurius Solubilis
+lil-519364	Larva
+lil-519364	Larva
+lil-521550	Mucocele
+lil-521662	Tuberculosis
+lil-559108	Internet
+lil-559278	Adenocarcinoma
+lil-559282	Hepatitis B
+lil-559283	Diagnosis
+lil-559287	Melanoma
+lil-559433	Rumen
+lil-552704	Apoptosis
+lil-552705	Captopril
+lil-566494	Paraganglioma
+lil-566494	Paraganglioma
+lil-566494	Paraganglioma
+lil-566494	Paraganglioma
+lil-566495	Angiofibroma
+lil-566495	Angiofibroma
+lil-566495	Angiofibroma
+lil-566495	Angiolipoma
+lil-566495	Angiolipoma
+lil-566495	Angiolipoma
+lil-566503	Prolactinoma
+lil-566503	Prolactinoma
+lil-581287	Abdomen
+lil-535630	Pneumonia
+lil-535630	Pneumonia
+lil-535630	Pneumonia
+lil-535632	Tuberculosis
+lil-535632	Tuberculosis
+lil-535632	Tuberculosis
+lil-535632	Tuberculosis
+lil-535632	Tuberculosis
+lil-526202	Amebiasis
+lil-526203	Fascioliasis
+lil-526204	Toxoplasmosis
+lil-526205	Toxoplasmosis
+lil-737548	Adenocarcinoma
+lil-737548	Eczema
+ibc-94940	Levodopa
+ibc-90805	Loiasis
+ibc-90805	Filariasis
+ibc-90807	Melarsoprol
+ibc-90807	Nifurtimox
+ibc-73119	Lupus Vulgaris
+ibc-73119	Lupus Vulgaris
+ibc-73119	Lupus Vulgaris
+ibc-73119	Lupus Vulgaris
+ibc-73193	Adenocarcinoma
+ibc-73194	Osteoporosis
+ibc-73194	Osteoporosis
+ibc-73338	Diabetes Mellitus
+ibc-73831	Neuralgia
+ibc-73831	Analgesia
+ibc-73836	Analgesia
+lil-234085	Germinoma
+lil-234085	Meningioma
+lil-234085	Teratoma
+lil-234090	Placenta
+lil-234151	Diabetes Mellitus
+lil-234154	Plasma
+lil-234156	Toxoplasmosis
+lil-234156	Toxoplasmosis
+lil-234159	Captopril
+lil-234159	Natriuresis
+lil-234184	Amebiasis
+lil-234184	Amebiasis
+lil-240541	Abdomen
+lil-240853	Peritonitis
+lil-240853	Sepsis
+lil-240853	Sepsis
+lil-241120	Tuberculosis
+lil-241120	Tuberculosis
+lil-242605	Coccidiosis
+lil-242605	Coccidiosis
+lil-242605	Coccidiosis
+lil-242606	Neuroma
+lil-242606	Lipomatosis
+lil-242606	Lipomatosis
+lil-242606	Lipomatosis
+lil-242606	Neuroma
+lil-242609	Ectromelia
+lil-242653	Adenocarcinoma
+lil-242653	Abdomen
+lil-242658	Hemangiosarcoma
+lil-242658	Hemangiosarcoma
+lil-242658	Hemangiosarcoma
+lil-242658	Hemangiosarcoma
+lil-242660	Carcinoma
+lil-243051	Abdomen
+lil-243051	Abdomen
+lil-243053	Abdomen
+lil-243053	Abdomen
+lil-243128	Hepatitis C
+lil-243131	Diabetes Mellitus
+lil-243131	Diabetes Mellitus
+lil-243132	Enema
+lil-341114	Pneumonia
+lil-341114	Pneumonia
+lil-341114	Pneumonia
+lil-341118	Arteriosclerosis
+lil-543940	Tuberculosis
+lil-543942	Diabetes Mellitus
+lil-544377	Tuberculosis
+lil-544382	Malaria
+lil-546745	Dengue
+lil-546749	Candidiasis
+lil-546749	Eczema
+ibc-048373	Abdomen
+ibc-048373	Pelvis
+ibc-048373	Pelvis
+ibc-048373	Abdomen
+ibc-048374	Hematuria
+ibc-048374	Praziquantel
+ibc-048375	Prostatitis
+ibc-048375	Prostatitis
+ibc-048377	Sinusitis
+ibc-048863	Placebos
+ibc-044779	Periodontitis
+ibc-044779	Periodontitis
+ibc-044781	Gingivitis
+ibc-044781	Granuloma
