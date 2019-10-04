@@ -29,9 +29,9 @@ def main():
         try:
             ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
             if ab_language != 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
-                error_file.write(str(ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
+                error_file.write(str(document_dict["_id"] + ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
         except:
-            error_file.write(str("null\t"+ document_dict["ab_es"] + "\n"))
+            error_file.write(str(document_dict["_id"] +"null\t"+ document_dict["ab_es"] + "\n"))
 
 main()
        
