@@ -66,9 +66,7 @@ def compare_headers(documents_list_dict_by_code,output_path):
             count_coma = count_coma + 1
             dictionary_equal_Abstract = {"documents":matched_dict_list}
             json_dict = json.dumps(dictionary_equal_Abstract, indent=4,ensure_ascii=False)
-            output_file.write(json_dict)
-            
-            
+            output_file.write(json_dict)            
     output_file.write("]}")
     output_file.close()
 
@@ -78,7 +76,7 @@ def main(path_output,path_input):
     compare_headers(documents_list_dict_by_code)
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog ='match_mh.py',usage='%(prog)s[-o file.csv]')
     parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='Input file path.') 
     args = parser.parse_args()
