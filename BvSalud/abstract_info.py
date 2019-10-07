@@ -12,7 +12,7 @@ collection_all = db[COLLECTION_ALL] # Also a constant COLLECTION_ALL
 collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant COLLECTION_NONE_INDEXED_T1
 
 
-def main(hola):
+def main():
     
     cursor_mongo = collection_all.find({"$and":[
             {"ab_es":{"$nin":[None,"No disponible","No disponble","No dispoinble","No disponbile",
