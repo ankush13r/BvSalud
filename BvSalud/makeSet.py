@@ -27,7 +27,16 @@ except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
 
-def get_mongo_cursor(condition,year): 
+def get_mongo_cursor(condition,year):
+    """The method receives two parameters condition adn year and it returns a mongo cursor of data depending on parameters 
+    
+    :param condition: A string with condition as (gold or training)
+    :type condition: String
+    :param year: Year. Data will be greater or equal.
+    :type year: Int
+    .. Notes::
+        **training**:
+    """ 
     #The method returns a cursor of data from mongoDB collection.
     #Condition parameter is if it for training ot gold Set.
     # Year parameter is for gold set, if you want data since any specific year, until today. 
@@ -51,7 +60,7 @@ def get_mongo_cursor(condition,year):
 
         # Condition for training:
                                     # ab_es can't be null.
-                                    # if test_training is true or (mh not null and test_training not true
+                                    # if test_training is true or (mh not null and test_training not true. Uncomment line in query to do it.
                                     
         cursor_mongo = collection_all.find(#{ "$and":[
             {"ab_es":{"$ne": None}} #,
@@ -65,7 +74,13 @@ def get_mongo_cursor(condition,year):
     return cursor_mongo,total_len # Returns cursos and it's size.
 
 def read_valid_decs_file(path_valid_decs): # Method to read the file of valid decs (header). In the file each line must have just one header or synonym, no more. 
+    """Method to read the file of valid decs. It reads the file and create a list of all decs. 
     
+    :param path_valid_decs: This is the root/path for file of valid decs.
+    :type path_valid_decs: String. Ex: "data/valid_codes.txt"
+    :return: list of valid decs.
+    :rtype: List []
+    """
     try: #try to catch any errors if the root is bad or doesn't exist, .... 
         valid_mh_headers_file = open(path_valid_decs,'r') # Reading the file.
         valid_mh_headers_list = valid_mh_headers_file.readlines() # Reeding each line.
@@ -78,6 +93,15 @@ def read_valid_decs_file(path_valid_decs): # Method to read the file of valid de
         return False
 
 def is_Spanish_lang(document_dict): # Method for detection language of abstract tet from a article. It receives whole article and will find ab_es
+    """Method to detect language of abstract_es, if it's english or another. If the language is english than it will return True, otherwise it will return False.
+    
+    :param document_dict: Dictionart of document/article
+    :type document_dict: Dict()
+    :return: True/False
+    :rtype: boolean
+
+    """
+
     try:
         ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
     except:
@@ -92,11 +116,19 @@ def is_Spanish_lang(document_dict): # Method for detection language of abstract 
 
 
 def get_journal_year(document_dict): # Method to get year and journal from document.
+    """ Method to get journal and year from document/article format json/Dict. 
+
+    :param document_dict: A dictionary of document/article
+    :type document_dict: Dict()
+    :return: journal, year
+    :rtype: String, Int 
+    """
+
 
     if document_dict['ta'] is not None: # "ta" is journal but in some article it's null, and if it's null then it will get "fo"
         journal = document_dict['ta'][0]
     else:
-        journal = document_dict['fo']
+        journal = document_dict['fo'] # If "ta" was null than it will go for "fo".
        
     try: # Trying to format entry date and obtains just year, but if it's null than it will print the error.
         year = int((document_dict['entry_date']).strftime("%Y"))
@@ -106,6 +138,27 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
 
 
 def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+    
+    """Method to get list of meSH_major form the document matching with valid decs. If any header doesn't belongs to the list of valid decs, 
+    it will be exclude from the list of meSS_major. 
+    Also it will delete all words after a slash (/), if any header contains it.
+        
+    :param document_dict: Dictionary of document/article
+    :type document_dict: Dict()
+    :param valid_mh_headers_list: List of valid decs/meSH_headers
+    :type valid_mh_headers_list: List []
+    :param valid_mh_headers_list_upper: List of valid decs/meSh_headers in upper case. This list is to match in case insensitive.
+    :type  valid_mh_headers_list_upper: List []
+
+    
+    :return: List of meSH_major
+    :rtype: List []
+    """
+    
+
+    #It the mesh header is null than it will return a empty list.
+    if not document_dict['mh']:
+        return list()
 
     try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
@@ -134,9 +187,9 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
                 mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
       
             else:
-                print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"]))
+                print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"])) #If the header is not valid.
               
-        else: #Append header to the list.
+        else: #Appending header to the list.
             mesh_major_none_slash.append(header_none_slash)
 
     mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
@@ -145,40 +198,65 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
 
 
 def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
+    """Method to create dictionary for goldSet.
+    
+    :param document_dict: The document/article
+    :type document_dict: Dict()
+    :param condition: A condition as (gold or training)
+    :type condition: String
+    :param valid_mh_headers_list: valid decs list
+    :type valid_mh_headers_list: list []
+    :param valid_mh_headers_list_upper: List of valid decs/meSh_headers in upper case. This list is to match in case insensitive.
+    :type  valid_mh_headers_list_upper: List []
+    :return: dictionary
+    :rtype: Dict()
+    """
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
     #     print("length < 100 :",document_dict["ab_es"])
     #     return False
 
-        if not is_Spanish_lang(document_dict):
-            return False
- 
-        journal,year = get_journal_year(document_dict)
+    if not is_Spanish_lang(document_dict):
+        return False
 
-        if condition == cTraining and "test_training" in document_dict:
-            print("\t-From test to training: ",document_dict["_id"])
-            mesh_major = ""
-        else:
-            mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
-            
-        if condition == cGold and "test_training" in document_dict:
-                collection_all.update_one({'_id': document_dict['_id']},
-                                    {'$set':{'test_training_gold': True}})
-                                    
-                collection_all.update_one({'_id': document_dict['_id']},
-                                    {'$unset':{'test_training':True}})
+    journal,year = get_journal_year(document_dict)
 
-        data_dict = {"journal":journal,
-                "title":document_dict['ti_es'],
-                "db":document_dict['db'],
-                "pmid": document_dict['_id'],
-                "meshMajor": mesh_major,
-                "year": year,
-                "abstractText":document_dict['ab_es']}
-        return data_dict
+    if condition == cTraining and "test_training" in document_dict: # If condition is training and document was selected as test_training true in mongoDB, while doing testSet.
+        print("\t-From test to training: ",document_dict["_id"])
+        mesh_major = ""
+    else:
+        mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
+        
+    if condition == cGold and "test_training" in document_dict:
+            collection_all.update_one({'_id': document_dict['_id']},
+                                {'$set':{'test_training_gold': True}})
+                                
+            collection_all.update_one({'_id': document_dict['_id']},
+                                {'$unset':{'test_training':True}})
+
+    data_dict = {"journal":journal,
+            "title":document_dict['ti_es'],
+            "db":document_dict['db'],
+            "pmid": document_dict['_id'],
+            "meshMajor": mesh_major,
+            "year": year,
+            "abstractText":document_dict['ab_es']}
+    return data_dict
 
 
 def main(year,output,condition,valid_decs):
+    """Method main that handle all other method
     
+    :param year: [description]
+    :type year: [type]
+    :param output: [description]
+    :type output: [type]
+    :param condition: [description]
+    :type condition: [type]
+    :param valid_decs: [description]
+    :type valid_decs: [type]
+    :return: [description]
+    :rtype: [type]
+    """
     cursor_mongo,total_len = get_mongo_cursor(condition,year)
     if not cursor_mongo:
         return False
@@ -213,6 +291,10 @@ def main(year,output,condition,valid_decs):
     outputFile.write(']}')
     try:
         mesh_case_info_file.close()
+    except:
+        pass
+    try:
+        abstract_language_error_file.close
     except:
         pass
 
