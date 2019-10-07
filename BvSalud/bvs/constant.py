@@ -1,9 +1,9 @@
 import os
 
-path_home = os.environ.get('HOME')
-BVSALUD_DOWNLOADS_PATH = os.path.join(path_home,"bvSalud_downloads")
+#path_home = os.environ.get('HOME')
+#BVSALUD_DOWNLOADS_PATH = os.path.join(path_home,"bvSalud_downloads")
 
-# BVSALUD_DOWNLOADS_PATH = ("/data/MESINESP/bvSalud_downloads")
+BVSALUD_DOWNLOADS_PATH = ("/data/MESINESP/bvSalud_downloads")
 
 if not os.path.isdir(BVSALUD_DOWNLOADS_PATH):
     os.mkdir(BVSALUD_DOWNLOADS_PATH)
