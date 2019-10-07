@@ -33,6 +33,7 @@ def main(path_output):
             if ab_language != 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
                 error_file.write(str(document_dict["_id"] +"\t"+ ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
         except:
+            print("Error: Detecting lang.")
             error_file.write(str(document_dict["_id"] + "\tnull\t"+ document_dict["ab_es"] + "\n"))
 
 
