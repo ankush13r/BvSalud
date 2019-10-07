@@ -51,11 +51,13 @@ def get_mongo_cursor(condition,year):
 
         # Condition for training:
                                     # ab_es can't be null.
-                                    # if test_training is true or (mh not null and test_training not true)
-        cursor_mongo = collection_all.find({"$and":[
-            {"ab_es":{"$ne": None}},
-            {"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
-            ]})
+                                    # if test_training is true or (mh not null and test_training not true
+                                    
+        cursor_mongo = collection_all.find(#{ "$and":[
+            {"ab_es":{"$ne": None}} #,
+            #{"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
+            #]}
+             )
     else:# If the condition is wrong or different, it will print an error massage and return false
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
