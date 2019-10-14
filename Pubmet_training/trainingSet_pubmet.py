@@ -112,7 +112,6 @@ def get_list_of_articles(input_path):
     xml_content = file.read()
     xml_content_splited = xml_content.split("\n\n\n")
     file.close
-    print(xml_content_splited)
     return (xml_content_splited)
 
 def main(input_path, output_path):
