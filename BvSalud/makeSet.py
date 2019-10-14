@@ -197,7 +197,7 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     return mesh_major_none_slash_unique
 
 
-def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
+def make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
     """Method to create dictionary for goldSet.
     
     :param document_dict: The document/article
@@ -208,7 +208,7 @@ def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,va
     :type valid_mh_headers_list: list []
     :param valid_mh_headers_list_upper: List of valid decs/meSh_headers in upper case. This list is to match in case insensitive.
     :type  valid_mh_headers_list_upper: List []
-    :return: dictionary
+    :return: dictionary for gold or trainigSet
     :rtype: Dict()
     """
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
@@ -244,12 +244,12 @@ def make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,va
 
 
 def main(year,output,condition,valid_decs):
-    """Method main that handle all other method
+    """Method main that handle all other method.
     
-    :param year: [description]
-    :type year: [type]
-    :param output: [description]
-    :type output: [type]
+    :param year: A year get as parameter by terminal.
+    :type year: Int
+    :param output: Path for output file, where all articles will be save in json format.
+    :type output: String () 
     :param condition: [description]
     :type condition: [type]
     :param valid_decs: [description]
@@ -280,7 +280,7 @@ def main(year,output,condition,valid_decs):
     for i, document_dict in enumerate(cursor_mongo):
         print(total_len - i ,"ID:",document_dict["_id"])
         
-        dict_data_gold = make_dictionary_for_goldSet(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
+        dict_data_gold = make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
         if dict_data_gold:
             count_valid_docs = count_valid_docs + 1
             if i > 0:

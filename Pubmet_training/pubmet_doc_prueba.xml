@@ -1,0 +1,164 @@
+<PubmedArticle>
+    <MedlineCitation Status="In-Process" Owner="NLM">
+        <PMID Version="1">31523053</PMID>
+        <DateRevised>
+            <Year>2019</Year>
+            <Month>09</Month>
+            <Day>16</Day>
+        </DateRevised>
+        <Article PubModel="Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">2173-9110</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>93</Volume>
+                    <PubDate>
+                        <Year>2019</Year>
+                        <Month>Sep</Month>
+                        <Day>16</Day>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Revista espanola de salud publica</Title>
+                <ISOAbbreviation>Rev. Esp. Salud Publica</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>[Validation of a questionnaire on attitudes and practice of physical activity and other healthy habits through the Delphi method].</ArticleTitle>
+            <ELocationID EIdType="pii" ValidYN="Y">e201909081</ELocationID>
+            <Abstract>
+                <AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Physical inactivity and sedentary lifestyle are an emerging individual, familiar and social public health problem. The aim of this work was to validate a new questionnaire to know the attitude towards physical activity and other habits in adolescents.</AbstractText>
+                <AbstractText Label="METHODS" NlmCategory="METHODS">The Delphi method was used. It was developed in three phases: an initial phase of selection of the panel of experts, an exploratory phase in two rounds of voting using a Likert scale of 1 to 5, and statistical and qualitative analysis of the experts' contributions. The criteria for the choice of items were: average &gt;3.5 and factor V of Aiken ≥0.7. Reliability was assessed with the Cronbach alpha coefficient. A pilot test was carried out to assess the understanding of the instrument.</AbstractText>
+                <AbstractText Label="RESULTS" NlmCategory="RESULTS">21 experts agreed to participate. Their participation was 100% in the first round and 95.2% in the second one. Seven items did not meet the criteria. The final questionnaire included 93 questions and 11 dimensions: data of the student, father, mother, physical activity in the educational center, transportation, free time, psychosocial aspects of physical activity, attitude towards physical activity, food, other habits and health perception. A Cronbach's alpha of 0.974 was obtained.</AbstractText>
+                <AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">The results support the reliability and validity of the questionnaire. The Delphi method proved to be a useful technique for the proposed objective.</AbstractText>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Andrés García</LastName>
+                    <ForeName>Irene</ForeName>
+                    <Initials>I</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Servicio de Medicina Preventiva y Salud Pública. Hospital Clínico Universitario de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Facultad de Medicina. Universidad de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Muñoz Moreno</LastName>
+                    <ForeName>Mª Fe</ForeName>
+                    <Initials>MF</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Unidad de Apoyo a la Investigación. Hospital Clínico Universitario de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                    <AffiliationInfo>
+                        <Affiliation>Facultad de Medicina. Universidad de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Ruíz López Del Prado</LastName>
+                    <ForeName>Gema</ForeName>
+                    <Initials>G</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Facultad de Medicina. Universidad de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Gil Sáez</LastName>
+                    <ForeName>Blanca</ForeName>
+                    <Initials>B</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Unidad de Apoyo a la Investigación. Hospital Clínico Universitario de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Andrés Puertas</LastName>
+                    <ForeName>Melchor</ForeName>
+                    <Initials>M</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Centro Regional de Medicina Deportiva de Castilla y León. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Almaraz Gómez</LastName>
+                    <ForeName>Ana</ForeName>
+                    <Initials>A</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Facultad de Medicina. Universidad de Valladolid. Valladolid. España.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>spa</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D004740">English Abstract</PublicationType>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+            </PublicationTypeList>
+            <VernacularTitle>Validación de un cuestionario sobre actitudes y práctica de actividad física y otros hábitos saludables mediante el método Delphi.</VernacularTitle>
+            <ArticleDate DateType="Electronic">
+                <Year>2019</Year>
+                <Month>09</Month>
+                <Day>16</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Spain</Country>
+            <MedlineTA>Rev Esp Salud Publica</MedlineTA>
+            <NlmUniqueID>9600212</NlmUniqueID>
+            <ISSNLinking>1135-5727</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <OtherAbstract Type="Publisher" Language="spa">
+            <AbstractText Label="OBJETIVO" NlmCategory="UNASSIGNED">La inactividad física y el sedentarismo son un problema de salud pública emergente, tanto a nivel individual como familiar y social. El objetivo de este estudio fue validar un nuevo cuestionario para conocer la actitud ante la actividad física y otros hábitos de los adolescentes.</AbstractText>
+            <AbstractText Label="METODOS" NlmCategory="UNASSIGNED">Se utilizó el método Delphi. Se llevó a cabo una fase inicial de selección del panel de expertos, una fase exploratoria en dos rondas de votación mediante escala tipo Likert (de 1 a 5), y un análisis estadístico y cualitativo de las aportaciones de los expertos. Los criterios para la elección de ítems fueron un promedio mayor a 3,5 y V de Aiken mayor o igual a 0,7. La fiabilidad se valoró con el coeficiente alfa de Cronbach. Se realizó una prueba piloto para valorar la comprensión del instrumento.</AbstractText>
+            <AbstractText Label="RESULTADOS" NlmCategory="UNASSIGNED">Aceptaron participar 21 expertos. Su participación fue del 100% en la primera ronda y del 95,2% en la segunda. Siete ítems incumplieron los criterios. El cuestionario final contó con 93 preguntas y 11 dimensiones: datos sobre el alumno, el padre, la madre, la actividad física en el centro educativo, en el transporte y en el tiempo libre, sobre los aspectos psicosociales de la práctica de actividad física, la actitud ante la actividad física, la alimentación y otros hábitos, y sobre la percepción de salud. Se obtuvo un alfa de Cronbach de 0,974.</AbstractText>
+            <AbstractText Label="CONCLUSIONES" NlmCategory="UNASSIGNED">Los resultados avalan la fiabilidad y validez del cuestionario. El método Delphi resultó ser una técnica útil para el objetivo propuesto.</AbstractText>
+        </OtherAbstract>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Adolescents</Keyword>
+            <Keyword MajorTopicYN="N">Delphi method</Keyword>
+            <Keyword MajorTopicYN="N">Exercise</Keyword>
+            <Keyword MajorTopicYN="N">Feeding behavior</Keyword>
+            <Keyword MajorTopicYN="N">Healthy lifestyle</Keyword>
+            <Keyword MajorTopicYN="N">Questionnaire</Keyword>
+            <Keyword MajorTopicYN="N">Spain</Keyword>
+            <Keyword MajorTopicYN="N">Validation studies</Keyword>
+        </KeywordList>
+        <CoiStatement>Disclosure The authors report no conflicts of interest in this work.</CoiStatement>
+    </MedlineCitation>
+    <PubmedData>
+        <History>
+            <PubMedPubDate PubStatus="received">
+                <Year>2018</Year>
+                <Month>11</Month>
+                <Day>05</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="accepted">
+                <Year>2019</Year>
+                <Month>05</Month>
+                <Day>13</Day>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="entrez">
+                <Year>2019</Year>
+                <Month>9</Month>
+                <Day>17</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="pubmed">
+                <Year>2019</Year>
+                <Month>9</Month>
+                <Day>17</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+            <PubMedPubDate PubStatus="medline">
+                <Year>2019</Year>
+                <Month>9</Month>
+                <Day>17</Day>
+                <Hour>6</Hour>
+                <Minute>0</Minute>
+            </PubMedPubDate>
+        </History>
+        <PublicationStatus>epublish</PublicationStatus>
+        <ArticleIdList>
+            <ArticleId IdType="pubmed">31523053</ArticleId>
+        </ArticleIdList>
+    </PubmedData>
+</PubmedArticle>
+
