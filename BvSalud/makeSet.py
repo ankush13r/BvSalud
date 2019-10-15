@@ -175,18 +175,18 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
     
             if len(header_before_slash) == 0 and header_after_slash is not None:
                 if header_after_slash in values:
-                    header_code = header_after_slash
+                    header_code = key
                     break
                 elif header_after_slash.upper() in [value.upper() for value in values]:
-                    header_code = header_after_slash
+                    header_code = key
                     mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
                     break
             else:
                 if header_before_slash in values:
-                    header_code = header_before_slash
+                    header_code = key
                     break
                 elif header_before_slash.upper() in [value.upper() for value in values]:
-                    header_code = header_before_slash
+                    header_code = key
                     mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
                     break
         if header_after_slash is None:
