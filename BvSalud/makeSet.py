@@ -195,7 +195,7 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
         else:
             if len(header_before_slash) != 0:
                 final_header = str(header_code) +'/'+ str(header_after_slash)
-            elif len(header_after_slash) == 0:
+            elif len(header_before_slash) == 0:
                 final_header = '/' + str(decsCodes_list_dict)
             else:
                 print(header,"--",header_before_slash,"--",header_after_slash)
