@@ -39,6 +39,7 @@ def encode_articles(codes_file_root, articles_file_root, output_root):
          text = ''.join(map(str,[article['title'],' ',article['abstractText']]))
          keywords_found = keyword_processor.extract_keywords(text)
          mylist = list(dict.fromkeys(keywords_found)) #to remove duplicates
+         print(keywords_found)
          results["pmid"] = article['pmid'] 
          results["labels"] = mylist 
 

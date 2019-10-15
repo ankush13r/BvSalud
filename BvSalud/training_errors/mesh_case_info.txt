@@ -1,1 +1,30 @@
-ID	MeSH header
+ID	MeSH header	Decs Code
+lil-218082	Propofol	Propofol
+lil-218082	Propofol	Propofol
+lil-406059	Diagnosis	Diagnosis
+lil-343702	Fibrosarcoma	Fibrosarcoma
+lil-338009	Osteoporosis	Osteoporosis
+lil-269138	Pneumonia	Pneumonia
+lil-269143	Hepatitis C	Hepatitis C
+lil-269143	Hepatitis C	Hepatitis C
+lil-290322	Avena	Avena
+lil-253607	Anemia	Anemia
+lil-251796	Giardiasis	Giardiasis
+lil-251800	Larva	Larva
+lil-251800	Malaria	Malaria
+lil-202918	Osteosarcoma	Osteosarcoma
+lil-202927	Angina Pectoris	Angina Pectoris
+lil-203021	Diabetes Mellitus	Diabetes Mellitus
+lil-203025	Odds Ratio	Odds Ratio
+lil-216270	Acidosis	Acidosis
+lil-216271	Apnea	Apnea
+lil-216272	Pericarditis	Pericarditis
+lil-216272	Hepatitis	Hepatitis
+lil-208114	Tibia	Tibia
+lil-208116	Diabetes Mellitus	Diabetes Mellitus
+lil-208117	Hallux Valgus	Hallux Valgus
+lil-208119	Talus	Talus
+lil-184169	Mastoiditis	Mastoiditis
+lil-184169	Otitis Media	Otitis Media
+lil-184522	Enterovirus	Enterovirus
+lil-184525	Neuritis	Neuritis
