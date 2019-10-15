@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
 from langdetect import detect
 from pymongo import MongoClient
 from datetime import datetime
@@ -7,6 +6,9 @@ import argparse
 import json
 import os
 import re
+
+from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
+
 
 cTraining = "training" #Condition to select if training. 
 cGold = "gold" #Condition for gold Set
@@ -22,7 +24,7 @@ except Exception as err:
 
 try:
     mesh_case_info_file = open("training_errors/mesh_case_info.txt","w")
-    mesh_case_info_file.write("ID\tMeSH header\n")
+    mesh_case_info_file.write("ID\tMeSH header\tDecs Code\n")
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
@@ -43,17 +45,17 @@ def get_mongo_cursor(condition,year):
     print("Collecting data.")
     if condition == cGold: #If the condition is "gold".
         date = datetime.strptime(str(year), '%Y')
-        print(date)
         # Conditions for gold: 
                                 # entry date must be greater than year received as parameters.
                                 # ab_es (abstract spanish ) mustn't have null value.
                                 # mh (medical subject header) mustn't have null value.
                                 # selected: All article must be selected before for test Set 
+        
         cursor_mongo = collection_all.find({"$and":[
                     {"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
                     {"mh":{"$ne":None}},
-                    {"selected": True}
+                    {"selected": True} # Confirmar si se mantiene o se borra esta linea
                     ]})
   
     elif condition == cTraining: #If the condition is "training".
@@ -73,24 +75,18 @@ def get_mongo_cursor(condition,year):
     total_len = cursor_mongo.count(True)
     return cursor_mongo,total_len # Returns cursos and it's size.
 
-def read_valid_decs_file(path_valid_decs): # Method to read the file of valid decs (header). In the file each line must have just one header or synonym, no more. 
-    """Method to read the file of valid decs. It reads the file and create a list of all decs. 
-    
-    :param path_valid_decs: This is the root/path for file of valid decs.
-    :type path_valid_decs: String. Ex: "data/valid_codes.txt"
-    :return: list of valid decs.
-    :rtype: List []
-    """
-    try: #try to catch any errors if the root is bad or doesn't exist, .... 
-        valid_mh_headers_file = open(path_valid_decs,'r') # Reading the file.
-        valid_mh_headers_list = valid_mh_headers_file.readlines() # Reeding each line.
-        valid_mh_headers_list_strip = [word.strip() for word in valid_mh_headers_list] #Eliminate all none printable word as space , before and after string.
-        valid_mh_headers_file.close() # Close file
-        return valid_mh_headers_list_strip # It return the list of valid headers
 
-    except Exception as err: #If any error it will print the Exception and return false.
-        print("\t-Error reading file: ",path_valid_decs," :",err)
-        return False
+
+def create_Dict_codes(codes_file_root):
+    keyword_dict = {}
+    with open(codes_file_root) as f: #Saves all codes to a dictionary, key as code and value as words in format list.
+        for line in f:
+            (key, val) = line.split('@') #Seprates codes and words
+            values_list = val.split('|') #Synonims separater
+            values_list[-1] = values_list[-1].strip('\n') #Deleting line break from last number of list.
+            keyword_dict[key] = values_list
+        return keyword_dict
+
 
 def is_Spanish_lang(document_dict): # Method for detection language of abstract tet from a article. It receives whole article and will find ab_es
     """Method to detect language of abstract_es, if it's english or another. If the language is english than it will return True, otherwise it will return False.
@@ -114,7 +110,6 @@ def is_Spanish_lang(document_dict): # Method for detection language of abstract 
         abstract_language_error_file.write(str(ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
         return False
 
-
 def get_journal_year(document_dict): # Method to get year and journal from document.
     """ Method to get journal and year from document/article format json/Dict. 
 
@@ -137,7 +132,7 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
     return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
     
     """Method to get list of meSH_major form the document matching with valid decs. If any header doesn't belongs to the list of valid decs, 
     it will be exclude from the list of meSS_major. 
@@ -155,7 +150,6 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
     :rtype: List []
     """
     
-
     #It the mesh header is null than it will return a empty list.
     if not document_dict['mh']:
         return list()
@@ -166,40 +160,52 @@ def get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_lis
         #if document_dict['mh'] is not None and document_dict['sh'] is None: # sh is null
         mesh_major = document_dict['mh']
             
-    mesh_major_none_slash = [] # A local variabel to create the list of mesh headers.
+    mesh_major_decs_list = [] # A local variabel to create the list of mesh headers.
     for header in mesh_major: #Some mesh headers contain words or caracters with slash and after slash are not important. So it will delete words or caracters after slash (/)
+        header_code = "Undefind"
         if "/" in  header: # If header contains (/) it will enter in the condition and will get just the string before /.
-            headers_split = str(header).split('/')[0] #String before /
-            if len(headers_split) != 0: # If the string length is 0 like (/humans). Before / is empty.
-                header_none_slash = headers_split # Header before slash (/).
-            else: #if string length was 0, it will omit all next functions and enter into next loop 
-                continue                   
+            header_splited = str(header).split('/')
+            header_before_slash = header_splited[0]
+            header_after_slash = header_splited[1]
         else:
-            header_none_slash = header 
-            
-        if valid_mh_headers_list and header_none_slash: #this variable can be None or a list it's none will just append headers to the list without comparing with valid headers.
-            
-            if header_none_slash in valid_mh_headers_list: # The header exists in the list of valid mesh header than it will append else it will ignore and print a massage.
-                mesh_major_none_slash.append(header_none_slash)
-            
-            elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
-                mesh_major_none_slash.append(header_none_slash)
-                mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
-      
-            else:
-                print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"])) #If the header is not valid.
-              
-        else: #Appending header to the list.
-            mesh_major_none_slash.append(header_none_slash)
+            header_before_slash = header
+            header_after_slash = None
 
-    mesh_major_none_slash_unique = list(set(mesh_major_none_slash))
- 
-    return mesh_major_none_slash_unique
-
-
-def make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper):
-    """Method to create dictionary for goldSet.
+        for key , values in decsCodes_list_dict.items():
     
+            if len(header_before_slash) == 0 and header_after_slash is not None:
+                if header_after_slash in values:
+                    header_code = header_after_slash
+                    break
+                elif header_after_slash.upper() in [value.upper() for value in values]:
+                    header_code = header_after_slash
+                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
+                    break
+            else:
+                if header_before_slash in values:
+                    header_code = header_before_slash
+                    break
+                elif header_before_slash.upper() in [value.upper() for value in values]:
+                    header_code = header_before_slash
+                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
+                    break
+
+        if header_after_slash is None:
+            final_header = header_code
+        elif header_after_slash is not None and len(header_before_slash) != 0:
+            final_header = str(header_code) +'/'+ str(header_after_slash)
+        elif header_after_slash is not None and len(header_after_slash) == 0:
+            final_header = '/' + str(decsCodes_list_dict)
+
+        mesh_major_decs_list.append(final_header)
+    
+    print(mesh_major_decs_list)
+    return mesh_major_decs_list
+
+
+def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_slash):
+    """Method to create dictionary for goldSet.
+
     :param document_dict: The document/article
     :type document_dict: Dict()
     :param condition: A condition as (gold or training)
@@ -211,6 +217,7 @@ def make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_
     :return: dictionary for gold or trainigSet
     :rtype: Dict()
     """
+
     # if len(document_dict["ab_es"]) < 100: # If the length is less than 100 it won't get that article
     #     print("length < 100 :",document_dict["ab_es"])
     #     return False
@@ -222,9 +229,9 @@ def make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_
 
     if condition == cTraining and "test_training" in document_dict: # If condition is training and document was selected as test_training true in mongoDB, while doing testSet.
         print("\t-From test to training: ",document_dict["_id"])
-        mesh_major = ""
+        mesh_major = []
     else:
-        mesh_major = get_mesh_major_list(document_dict,valid_mh_headers_list,valid_mh_headers_list_upper)
+        mesh_major = get_mesh_major_list(document_dict,decsCodes_list_dict,with_slash)
         
     if condition == cGold and "test_training" in document_dict:
             collection_all.update_one({'_id': document_dict['_id']},
@@ -243,7 +250,7 @@ def make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_
     return data_dict
 
 
-def main(year,output,condition,valid_decs):
+def main(year,output,condition,with_slash):
     """Method main that handle all other method.
     
     :param year: A year get as parameter by terminal.
@@ -261,30 +268,24 @@ def main(year,output,condition,valid_decs):
     if not cursor_mongo:
         return False
 
-    if valid_decs:
-        try:
-            valid_mh_headers_list = read_valid_decs_file("data/mesh_valid_codes_2019.txt")
-            valid_mh_headers_list_upper = list(map(str.upper, valid_mh_headers_list))
-        except Exception as err:
-            print("\tError: while reading file >> ",err,)
-            return False
-    else:
-        valid_mh_headers_list = None
-        valid_mh_headers_list_upper = None
+    try:
+        decsCodes_list_dict = create_Dict_codes("data/codes.txt")
+    except Exception as err:
+        print("\tError: while reading file >> ",err,)
+        return False
 
-    
+
     outputFile = open(output,'w')
     outputFile.write('{"articles":[')
-
     count_valid_docs = 0
     for i, document_dict in enumerate(cursor_mongo):
         print(total_len - i ,"ID:",document_dict["_id"])
         
-        dict_data_gold = make_dictionary_for_Set(document_dict,condition,valid_mh_headers_list,valid_mh_headers_list_upper)
+        dict_data_gold = make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_slash)
         if dict_data_gold:
-            count_valid_docs = count_valid_docs + 1
-            if i > 0:
+            if count_valid_docs > 0:
                 outputFile.write(',')
+            count_valid_docs = count_valid_docs + 1
 
             data_json = json.dumps(dict_data_gold,indent=4,ensure_ascii=False)
             outputFile.write(data_json)
@@ -307,17 +308,91 @@ if __name__ == '__main__':
     parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
     parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
-    parser.add_argument('--valid',action='store_true', help ='Valid header with decs')  
+    parser.add_argument('--whole',action='store_true', help ='To make set with word after slash nad dec code')  
 
     args = parser.parse_args()
     year = args.year
-    to_valid_decs = args.valid
-
+    with_slash = args.whole
     condition = args.condition
     output = args.output
+
     if condition == cGold and year is None:
         parser.error('The -c/--condition "gold" argument requires the --{year [-y ####]} or -SourceFile')
     else:
         current_dir = os.getcwd()
         path = os.path.join(current_dir,output)
-        main(year, path, condition,to_valid_decs)
+        main(year, path, condition,with_slash)
+
+
+
+
+
+
+    #         header_before_slash = spliter_header[0] #String before /
+    #         header_after_slash = spliter_header[1]  #String after /
+    #     else:
+    #         header_before_slash = header
+
+    #     if len(header_before_slash) != 0: # If the string length is 0 like (/humans). Before / is empty.
+    #         header_to_check = header_before_slash
+    #     else:
+    #         header_to_check = header_after_slash
+    #     for key, values in decsCodes_list_dict.items:
+    #         if header_before_slash in values:
+    #             header_code = key;
+    #             break
+    #         elif header_before_slash.lower() in (value.lower() for value in values):
+    #             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
+    #             header_code = key;
+    #             break
+    #     if with_header:
+    #         final_header_code = '/'.header_code(header_after_slash)
+    #     else: 
+    #         final_header_code = header_code
+
+
+            
+
+    #         mesh_major_decs_list.append(header_code)
+    
+                    
+    # mesh_major_list_unique = list(set(mesh_major_list))
+    # re
+
+
+# def read_valid_decs_file(path_valid_decs): # Method to read the file of valid decs (header). In the file each line must have just one header or synonym, no more. 
+#     """Method to read the file of valid decs. It reads the file and create a list of all decs. 
+    
+#     :param path_valid_decs: This is the root/path for file of valid decs.
+#     :type path_valid_decs: String. Ex: "data/valid_codes.txt"
+#     :return: list of valid decs.
+#     :rtype: List []
+#     """
+#     try: #try to catch any errors if the root is bad or doesn't exist, .... 
+#         valid_mh_headers_file = open(path_valid_decs,'r') # Reading the file.
+#         valid_mh_headers_list = valid_mh_headers_file.readlines() # Reeding each line.
+#         valid_mh_headers_list_strip = [word.strip() for word in valid_mh_headers_list] #Eliminate all none printable word as space , before and after string.
+#         valid_mh_headers_file.close() # Close file
+#         return valid_mh_headers_list_strip # It return the list of valid headers
+
+#     except Exception as err: #If any error it will print the Exception and return false.
+#         print("\t-Error reading file: ",path_valid_decs," :",err)
+#         return False
+
+
+
+
+        # if valid_mh_headers_list and header_none_slash: #this variable can be None or a list it's none will just append headers to the list without comparing with valid headers.
+            
+        #     if header_none_slash in valid_mh_headers_list: # The header exists in the list of valid mesh header than it will append else it will ignore and print a massage.
+        #         mesh_major_list.append(header_none_slash)
+            
+        #     elif header_none_slash.upper() in valid_mh_headers_list_upper: # Searching in case insensitive
+        #         mesh_major_list.append(header_none_slash)
+        #         mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_none_slash)+"\n")
+      
+        #     else:
+        #         print("\nHeader not Valid:  >> After: ", (header_none_slash),"  >> Before: "+(header), "Doc id: " + (document_dict["_id"])) #If the header is not valid.
+              
+        # else: #Appending header to the list.
+        #     mesh_major_list.append(header_none_slash)
