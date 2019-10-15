@@ -192,12 +192,13 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
 
         if header_after_slash is None:
             final_header = header_code
-        elif header_after_slash is not None and len(header_before_slash) != 0:
-            final_header = str(header_code) +'/'+ str(header_after_slash)
-        elif header_after_slash is not None and len(header_after_slash) == 0:
-            final_header = '/' + str(decsCodes_list_dict)
         else:
-            print(header,"--",header_before_slash,"--",header_after_slash)
+            if len(header_before_slash) != 0:
+                final_header = str(header_code) +'/'+ str(header_after_slash)
+            elif len(header_after_slash) == 0:
+                final_header = '/' + str(decsCodes_list_dict)
+            else:
+                print(header,"--",header_before_slash,"--",header_after_slash)
 
         mesh_major_decs_list.append(final_header)
     
