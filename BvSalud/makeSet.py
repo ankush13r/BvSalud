@@ -189,7 +189,6 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
                     header_code = header_before_slash
                     mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
                     break
-        print(final_header)
         if header_after_slash is None:
             final_header = header_code
         else:
@@ -199,9 +198,10 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
                 final_header = '/' + str(header_code)
             else:
                 print(header,"--",header_before_slash,"--",header_after_slash)
-
+        print(final_header)
+        print()
         mesh_major_decs_list.append(final_header)
-    
+        
     print(mesh_major_decs_list)
     return mesh_major_decs_list
 
