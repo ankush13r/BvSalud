@@ -173,24 +173,28 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
 
         final_header = None
 
-        if len(header_before_slash) != 0: 
-            for key , values in decsCodes_list_dict.items():
-                if with_slash:    
+        if len(header_before_slash) != 0:  # IF header before slash, if doesn't have any qualifier so original header, exist?
+            
+            for key , values in decsCodes_list_dict.items(): # A for for find Dec code for header.
+            
+                if with_slash:   # if with slash is true, means header will save with codes and qualifiers. Otherwise just code. 
                     if header_after_slash is not None: # If there was an slash between two words.
-                        if header_before_slash in values:
-                            final_header = str(key +  '/' + header_after_slash)
-                            break
-                    elif header_after_slash is None:  # If the header is without slash.
-                        if header_before_slash in values:            
-                            final_header = str(key)
-                            break
-                else:
-                    if header_before_slash in values:
-                        final_header = str(key)
+                        if header_before_slash in values: # If header is in the list of values, it will get the key as Dec code with qualifier.
+                            final_header = str(key +  '/' + header_after_slash) # Ex: 2342/qualifier
+                            break # it will get out from the for
+
+                    elif header_after_slash is None:  # If the header is without slash (qualifier).
+                        if header_before_slash in values:  # If header is in the list of values, it will get the key as Dec code without qualifier.
+                            final_header = str(key) #Ex: 34242
+                            break  # it will get out from the for
+
+                else: # If with_slash is false
+                    if header_before_slash in values: #If header matched with any of the value from the list values.
+                        final_header = str(key) # If header is in the list of values, it will get the key as Dec code without qualifier.
                         break 
-        else:
-            if header_after_slash is not None and with_slash:
-                final_header = ('/' + header_after_slash) 
+        else: # If header before slash or original header have 0 length, means the value is empty.
+            if header_after_slash is not None and with_slash: #If the header has qualifier and with slash is true. Then it won't change.
+                final_header = header 
 
 
         if final_header:
@@ -199,34 +203,6 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
             print("Not found header:", "id:",document_dict["_id"],"header:",header)
 
-    
-        #     if len(header_before_slash) == 0 and header_after_slash is not None:
-        #         if header_after_slash in values:
-        #             header_code = key
-        #             break
-        #         elif header_after_slash.upper() in [value.upper() for value in values]:
-        #             header_code = key
-        #             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
-        #             break
-        #     else:
-        #         if header_before_slash in values:
-        #             header_code = key
-        #             break
-        #         elif header_before_slash.upper() in [value.upper() for value in values]:
-        #             header_code = header_before_slash
-        #             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header_before_slash)+"\t"+str(header_code)+"\n")               
-        #             break
-        # if header_after_slash is None:
-        #     final_header = header_code
-        # else:
-        #     if len(header_before_slash) != 0:
-        #         final_header = str(header_code) +'/'+ str(header_after_slash)
-        #     elif len(header_before_slash) == 0:
-        #         final_header = '/' + str(header_code)
-        #     else:
-        #         print(header,"--",header_before_slash,"--",header_after_slash)
-        # print(final_header)
-        # print()
         
     print(mesh_major_decs_list)
     return mesh_major_decs_list
