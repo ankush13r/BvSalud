@@ -190,8 +190,9 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
                     print("Enter in else with slash:", "id:",document_dict["_id"],"header:",header)
             else:
                 if len(header_before_slash) != 0: #if the header before slash is not empty.
-                    final_header = str(key)
-                    break
+                    if header_before_slash in values:
+                        final_header = str(key)
+                        break
                 else:
                     print("Enter in else none slash:", "id:",document_dict["_id"],"header:",header)
                    
