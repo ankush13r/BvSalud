@@ -172,39 +172,32 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
             header_after_slash = None
 
         final_header = None
-        for key , values in decsCodes_list_dict.items():
-    
-            if with_slash:    
-                if len(header_before_slash) != 0 and header_after_slash is not None: # If there was an slash between two words.
-                    if header_before_slash in values:
-                        final_header = str(key +  '/' + header_after_slash)
-                        break
-                elif len(header_before_slash) != 0 and header_after_slash is None:  # If the header is without slash.
-                    if header_before_slash in values:            
-                        final_header = str(key)
-                        break
-                elif len(header_before_slash) == 0 and header_after_slash is not None:
-                    final_header = ('/' + header_after_slash)
-                    break
+
+        if len(header_before_slash) != 0: 
+            for key , values in decsCodes_list_dict.items():
+                if with_slash:    
+                    if header_after_slash is not None: # If there was an slash between two words.
+                        if header_before_slash in values:
+                            final_header = str(key +  '/' + header_after_slash)
+                            break
+                    elif header_after_slash is None:  # If the header is without slash.
+                        if header_before_slash in values:            
+                            final_header = str(key)
+                            break
                 else:
-                    print("Error: (please check the code )Enter in else with slash:", "id:",document_dict["_id"],"header:",header)
-            else:
-                if len(header_before_slash) != 0: #if the header before slash is not empty.
                     if header_before_slash in values:
                         final_header = str(key)
-                        break
-                else:
-                    print("Enter in else none slash:", "id:",document_dict["_id"],"header:",header)
-                   
+                        break 
+        else:
+            if header_after_slash is not None and with_slash:
+                final_header = ('/' + header_after_slash) 
+
 
         if final_header:
             mesh_major_decs_list.append(final_header)
         else:
             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
             print("Not found header:", "id:",document_dict["_id"],"header:",header)
-
-
-
 
     
         #     if len(header_before_slash) == 0 and header_after_slash is not None:
