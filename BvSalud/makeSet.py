@@ -24,7 +24,7 @@ except Exception as err:
 
 try:
     mesh_case_info_file = open("training_errors/mesh_case_info.txt","w")
-    mesh_case_info_file.write("ID\tMeSH header\tDecs Code\n")
+    mesh_case_info_file.write(">Headers not found in decs code\n>ID\tMeSH header\n")
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
@@ -187,12 +187,15 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
                     final_header = ('/' + header_after_slash)
                     break
                 else:
+                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
+
                     print("Not found header:", "id:",document_dict["_id"],"header:",header)
             else:
                 if len(header_before_slash) != 0: #if the header before slash is not empty.
                     final_header = str(key)
                     break
                 else:
+                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
                     print("Not found header:", "id:",document_dict["_id"],"header:",header)
 
         if final_header:
