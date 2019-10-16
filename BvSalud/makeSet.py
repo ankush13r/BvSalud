@@ -187,19 +187,21 @@ def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method 
                     final_header = ('/' + header_after_slash)
                     break
                 else:
-                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
-
-                    print("Not found header:", "id:",document_dict["_id"],"header:",header)
+                    print("Enter in else with slash:", "id:",document_dict["_id"],"header:",header)
             else:
                 if len(header_before_slash) != 0: #if the header before slash is not empty.
                     final_header = str(key)
                     break
                 else:
-                    mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
-                    print("Not found header:", "id:",document_dict["_id"],"header:",header)
+                    print("Enter in else none slash:", "id:",document_dict["_id"],"header:",header)
+                   
 
         if final_header:
             mesh_major_decs_list.append(final_header)
+        else:
+            mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
+            print("Not found header:", "id:",document_dict["_id"],"header:",header)
+
 
 
 
