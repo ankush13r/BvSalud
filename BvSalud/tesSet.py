@@ -35,12 +35,15 @@ def main(year,output,divide):
     date = datetime.strptime(str(year), '%Y')
     regex_ES = re.compile("^ES", re.IGNORECASE)
     print("Getting data...")
+
     cursor_mongo = collection_all.find({"$and":[
-        {"$or":[{"mh":None},{"test_training_gold" :True}]},
+        {"$or":[{"mh":None},{"goldSet" :True}]},
         {"ab_es":{"$ne": None}},
-        {"entry_date": {"$gte": date}}#, 
-        #{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
+        {"entry_date": {"$gte": date}} 
+
+        #,{"$or":[{"cc":{"$in":libraries}},{"cc":regex_ES}]}
         ]})
+
     len_cursor = cursor_mongo.count(True)
 
     list_json_doc = []
@@ -90,9 +93,9 @@ def main(year,output,divide):
                 data_json = json.dumps(data_dict,indent=4, ensure_ascii=False)
                 outputFile.write(data_json)
 
-                if "test_training_gold" in dict_doc:
+                if "goldSet" in dict_doc:
                     collection_all.update_one({'_id': dict_doc['_id']},
-                                        {'$unset':{'test_training_gold':True}})
+                                        {'$unset':{'goldSet':True}})
 
             collection_all.update_one({'_id': dict_doc['_id']},
                                         {'$set':{'selected': True}
@@ -106,7 +109,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='tesSet.py',usage='%(prog)s [-y ####] [-o file.json]')
     parser.add_argument('-y','--year',metavar='',required=True, type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')   
-    parser.add_argument('--divide',action='store_true', help ='Valid header with decs')  
+    parser.add_argumentdivide('--divide',action='store_true', help ='Valid header with decs')  
     
 
     args = parser.parse_args()

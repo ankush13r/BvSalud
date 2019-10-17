@@ -54,8 +54,8 @@ def get_mongo_cursor(condition,year):
         cursor_mongo = collection_all.find({"$and":[
                     {"entry_date": {"$gte": date}},
                     {"ab_es":{"$ne": None}},
-                    {"mh":{"$ne":None}},
-                    {"selected": True} # Confirmar si se mantiene o se borra esta linea
+                    {"mh":{"$ne":None}}#,
+                    #{"selected": True} # Confirmar si se mantiene o se borra esta linea
                     ]})
   
     elif condition == cTraining: #If the condition is "training".
@@ -101,13 +101,13 @@ def is_Spanish_lang(document_dict): # Method for detection language of abstract 
     try:
         ab_language = detect(document_dict["ab_es"]) # trying to detect the language, if can't it will return false and print a massage.
     except:
-        abstract_language_error_file.write(str("null\t"+ document_dict["ab_es"] + "\n"))
+        abstract_language_error_file.write(str(document_dict['_id'])+'\t'+str("null\t"+ document_dict["ab_es"] + "\n"))
         return False
 
     if ab_language == 'es': # If the language is spanish it will return a true, else it will return false and print a error massage. 
         return True
     else:
-        abstract_language_error_file.write(str(ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
+        abstract_language_error_file.write(str(document_dict['_id'])+'\t'+str(ab_language+ "\t"+ document_dict["ab_es"] + "\n"))
         return False
 
 def get_journal_year(document_dict): # Method to get year and journal from document.
@@ -132,7 +132,7 @@ def get_journal_year(document_dict): # Method to get year and journal from docum
     return journal, year # Returns journal and year.
 
 
-def get_mesh_major_list(document_dict,decsCodes_list_dict,with_header): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
+def get_mesh_decs_list(document_dict,decsCodes_list_dict,with_header): #Method to extract mesh from a article. It receives a article and the list of valid mh header in the case  to compare all headers. 
     
     """Method to get list of meSH_major form the document matching with valid decs. If any header doesn't belongs to the list of valid decs, 
     it will be exclude from the list of meSS_major. 
@@ -219,7 +219,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     :type valid_mh_headers_list: list []
     :param valid_mh_headers_list_upper: List of valid decs/meSh_headers in upper case. This list is to match in case insensitive.
     :type  valid_mh_headers_list_upper: List []
-    :return: dictionary for gold or trainigSet
+    :return: dictionary for gold or trainingSet
     :rtype: Dict()
     """
 
@@ -232,24 +232,32 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
 
     journal,year = get_journal_year(document_dict)
 
-    if condition == cTraining and "test_training" in document_dict: # If condition is training and document was selected as test_training true in mongoDB, while doing testSet.
-        print("\t-From test to training: ",document_dict["_id"])
-        mesh_major = []
-    else:
-        mesh_major = get_mesh_major_list(document_dict,decsCodes_list_dict,with_slash)
+    # if condition == cTraining and "test_training" in document_dict: # If condition is training and document was selected as test_training true in mongoDB, while doing testSet.
+    #     print("\t-From test to training: ",document_dict["_id"])
+    #     mesh_major = []
+    # else:
+
+    mesh_decs = get_mesh_decs_list(document_dict,decsCodes_list_dict,with_slash)
         
-    if condition == cGold and "test_training" in document_dict:
+    if condition == cGold:
             collection_all.update_one({'_id': document_dict['_id']},
+                                {'$set':{'goldSet': True}})
+
+    """ This is commented.---->
+               collection_all.update_one({'_id': document_dict['_id']},
                                 {'$set':{'test_training_gold': True}})
                                 
             collection_all.update_one({'_id': document_dict['_id']},
                                 {'$unset':{'test_training':True}})
+    """
+
+                                
 
     data_dict = {"journal":journal,
             "title":document_dict['ti_es'],
             "db":document_dict['db'],
             "pmid": document_dict['_id'],
-            "meshMajor": mesh_major,
+            "decsCodes": mesh_decs,
             "year": year,
             "abstractText":document_dict['ab_es']}
     return data_dict
