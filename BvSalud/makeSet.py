@@ -29,7 +29,7 @@ except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
 
-def get_mongo_cursor(condition,year):
+def get_mongo_cursor(condition):
     """The method receives two parameters condition adn year and it returns a mongo cursor of data depending on parameters 
     
     :param condition: A string with condition as (gold or training)
@@ -44,18 +44,20 @@ def get_mongo_cursor(condition,year):
     # Year parameter is for gold set, if you want data since any specific year, until today. 
     print("Collecting data.")
     if condition == cGold: #If the condition is "gold".
-        date = datetime.strptime(str(year), '%Y')
+        #date = datetime.strptime(str(year), '%Y')
+        
         # Conditions for gold: 
                                 # entry date must be greater than year received as parameters.
                                 # ab_es (abstract spanish ) mustn't have null value.
                                 # mh (medical subject header) mustn't have null value.
                                 # selected: All article must be selected before for test Set 
         
-        cursor_mongo = collection_all.find({"$and":[
-                    {"entry_date": {"$gte": date}},
-                    {"ab_es":{"$ne": None}},
-                    {"mh":{"$ne":None}}#,
-                    #{"selected": True} # Confirmar si se mantiene o se borra esta linea
+        cursor_mongo = collection_all.find(
+                    {"$and":[
+                    {"ab_es":{"$ne": None}},#abstract can't be null.
+                    {"mh":{"$ne":None}}, #mesh header can't be null.
+                    {"trainingGold":{"$ne":{True}}} #It means the article mustn't in trainingData as trainingGold. trainingGold has mesh Headers
+                    
                     ]})
   
     elif condition == cTraining: #If the condition is "training".
@@ -207,6 +209,9 @@ def get_mesh_decs_list(document_dict,decsCodes_list_dict,with_header): #Method t
     print(mesh_major_decs_list)
     return mesh_major_decs_list
 
+def getTitle(document_dict):
+    if document_dict["ti_es"]:
+        return document_dict["ti_es"]
 
 def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_slash):
     """Method to create dictionary for goldSet.
@@ -240,16 +245,28 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     mesh_decs = get_mesh_decs_list(document_dict,decsCodes_list_dict,with_slash)
         
     if condition == cGold:
+        if "selected" not in document_dict:
             collection_all.update_one({'_id': document_dict['_id']},
-                                {'$set':{'goldSet': True}})
+                            {'$set':{'goldToTest': True}})
+        elif document_dict["selected"] is not True:
+            collection_all.update_one({'_id': document_dict['_id']},
+                {'$set':{'goldToTest': True}})
 
-    """ This is commented.---->
-               collection_all.update_one({'_id': document_dict['_id']},
+        """ This is commented.---->
+            collection_all.update_one({'_id': document_dict['_id']},
                                 {'$set':{'test_training_gold': True}})
                                 
             collection_all.update_one({'_id': document_dict['_id']},
                                 {'$unset':{'test_training':True}})
-    """
+        """
+
+    elif condition == cTraining:
+        if document_dict['mh'] is not None:
+            collection_all.update_one({'_id': document_dict['_id']},
+                                    {'$set':{'trainingGold': True}})
+        elif document_dict['mh'] is None:
+            collection_all.update_one({'_id': document_dict['_id']},
+                                    {'$set':{'trainingTest': True}})
 
                                 
 
@@ -263,7 +280,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     return data_dict
 
 
-def main(year,output,condition,with_slash):
+def main(output,condition,with_slash):
     """Method main that handle all other method.
     
     :param year: A year get as parameter by terminal.
@@ -277,7 +294,7 @@ def main(year,output,condition,with_slash):
     :return: [description]
     :rtype: [type]
     """
-    cursor_mongo,total_len = get_mongo_cursor(condition,year)
+    cursor_mongo,total_len = get_mongo_cursor(condition)
     if not cursor_mongo:
         return False
 
@@ -318,23 +335,23 @@ def main(year,output,condition,with_slash):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
-    parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
+    #parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
     parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
     parser.add_argument('--slash',action='store_true', help ='To make set with word after slash nad dec code')  
 
     args = parser.parse_args()
-    year = args.year
+    #year = args.year
     with_slash = args.slash
     condition = args.condition
     output = args.output
-
+    """
     if condition == cGold and year is None:
         parser.error('The -c/--condition "gold" argument requires the --{year [-y ####]} or -SourceFile')
-    else:
-        current_dir = os.getcwd()
-        path = os.path.join(current_dir,output)
-        main(year, path, condition,with_slash)
+    else:"""
+    current_dir = os.getcwd()
+    path = os.path.join(current_dir,output)
+    main(path, condition,with_slash) #year
 
 
 
