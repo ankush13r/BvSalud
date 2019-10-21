@@ -133,16 +133,20 @@ def main(mode ,path_sub_folder,restart):
     print()
        
     if restart:
-      last_saving_num = loop_case_restart(crawl)
-      if last_saving_num == -1: 
-          return False
+        last_saving_num = loop_case_restart(crawl)
+        if last_saving_num == -1: 
+            return False
+     
     else:
         if mode == MODE_NEW:
             Parse.get_pending_documents()
         last_saving_num = loop_case_all(crawl)
         if last_saving_num == -1:
-            return False   
-    backup_collection(crawl.mode)
+            return False
+    
+    if last_saving_num == 0:
+        backup_collection(crawl.mode)
+
     save_to_mongo(crawl.path_to_crawler,crawl.mode,last_saving_num) #Saving records to MongoDB.
     if crawl.mode == MODE_NEW:
         print("Comparing documents in mongo")
