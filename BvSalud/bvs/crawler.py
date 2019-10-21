@@ -162,7 +162,7 @@ class Crawl:
                     print("Sleeping: ",SLEEP_TIME1,"seconds")
                     time.sleep(SLEEP_TIME1)
             print("\tFinished downewloading\n")          
-            if num_page == (self.newum_pages -1):  
+            if num_page == (self.num_pages -1):  
                 print("Saved all newecords in ",self.path_to_crawler)
                 with open(PATH_TOnewLAST_RECORD,"w") as file:
                     file.write("0 saving "+ str(self.path_to_crawler)+" "+ str(self.mode))      
