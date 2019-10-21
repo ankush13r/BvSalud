@@ -15,11 +15,10 @@
 
 
 
+    
     "none_indexed_ibecs_2018_2019": "http://pesquisa.bvsalud.org/portal/?u_filter%5B%5D=fulltext&u_filter%5B%5D=collection&u_filter%5B%5D=db&u_filter%5B%5D=mj_cluster&u_filter%5B%5D=type_of_study&u_filter%5B%5D=clinical_aspect&u_filter%5B%5D=limit&u_filter%5B%5D=pais_assunto&u_filter%5B%5D=la&u_filter%5B%5D=year_cluster&u_filter%5B%5D=type&u_filter%5B%5D=ta_cluster&u_filter%5B%5D=jd&u_filter%5B%5D=pais_afiliacao&fb=&output=xml&lang=es&sort=&format=summary&q=no_indexing%3A1&index=tw&where=&filter%5Bcollection%5D%5B%5D=06-national%2FES&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&",
             
     "none_indexed_lilacs_2018_2019": "http://pesquisa.bvsalud.org/portal/?u_filter%5B%5D=fulltext&u_filter%5B%5D=collection&u_filter%5B%5D=db&u_filter%5B%5D=mj_cluster&u_filter%5B%5D=type_of_study&u_filter%5B%5D=clinical_aspect&u_filter%5B%5D=limit&u_filter%5B%5D=pais_assunto&u_filter%5B%5D=la&u_filter%5B%5D=year_cluster&u_filter%5B%5D=type&u_filter%5B%5D=ta_cluster&u_filter%5B%5D=jd&u_filter%5B%5D=pais_afiliacao&fb=&output=xml&lang=es&sort=&format=summary&q=no_indexing%3A1&index=tw&where=&filter%5Bdb%5D%5B%5D=LILACS&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&",
    
-    "new_2018_2019": "http://pesquisa.bvsalud.org/portal/?u_filter[]=fulltext&u_filter[]=collection&u_filter[]=db&u_filter[]=mj_cluster&u_filter[]=type_of_study&u_filter[]=clinical_aspect&u_filter[]=limit&u_filter[]=pais_assunto&u_filter[]=la&u_filter[]=year_cluster&u_filter[]=type&u_filter[]=ta_cluster&u_filter[]=jd&u_filter[]=pais_afiliacao&fb=&output=xml&lang=es&sort=&format=summary&q=no_indexing:1&index=tw&where=&filter[db][]=LILACS&filter[db][]=IBECS&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&",
-
-
+    "new_2018_2019": "http://pesquisa.bvsalud.org/portal/?u_filter[]=fulltext&u_filter[]=collection&u_filter[]=db&u_filter[]=mj_cluster&u_filter[]=type_of_study&u_filter[]=clinical_aspect&u_filter[]=limit&u_filter[]=pais_assunto&u_filter[]=la&u_filter[]=year_cluster&u_filter[]=type&u_filter[]=ta_cluster&u_filter[]=jd&u_filter[]=pais_afiliacao&fb=&output=xml&lang=es&sort=&format=summary&q=no_indexing:1&index=tw&where=&filter[db][]=LILACS&filter[db][]=IBECS&filter%5Byear_cluster%5D%5B%5D=2019&filter%5Byear_cluster%5D%5B%5D=2018&"
 }
