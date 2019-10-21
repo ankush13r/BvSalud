@@ -125,7 +125,7 @@ class Mongo:
                 collection_None_Indexed_t2.insert_one(document_dict)
             elif condition == MODE_ALL:
                 collection_all.insert_one(document_dict)
-                if entry_date in YEARS and document_dict['mh'] is None:
+                if  document_dict['mh'] is None:# and entry_date in YEARS:
                     collection_None_Indexed_t1.insert_one(document_dict)
             elif condition == MODE_INDEXED:
                 collection_all.insert_one(document_dict)
