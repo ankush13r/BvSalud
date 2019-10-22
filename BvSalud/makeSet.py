@@ -28,7 +28,7 @@ try:
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
-title_error_file = open("data/title_error_es_tesSet:", "w")
+title_error_file = open("data/title_error_es_tesSet", "w")
 title_error_file.write("ti_es\tti")
 def get_title(document_dict):
     ti_language = None
@@ -284,9 +284,10 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
         elif document_dict['mh'] is None:
             collection_all.update_one({'_id': document_dict['_id']},
                                     {'$set':{'trainingTest': True}})
-
-    title = get_title(document_dict)                       
-
+    try:
+        title = get_title(document_dict)                       
+    except:
+        title = None
     data_dict = {"journal":journal,
             "title":title,
             "db":document_dict['db'],

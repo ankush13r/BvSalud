@@ -15,7 +15,7 @@ collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 collection_Update_info = db[COLLECTION_UPDATE_INFO]
 
 
-title_error_file = open("data/title_error_es_tesSet:", "w")
+title_error_file = open("data/title_error_es_tesSet", "w")
 title_error_file.write("ti_es\tti")
 def get_title(document_dict):
     ti_language = None
@@ -113,8 +113,11 @@ def main(year,output):
             else:
                 journal = dict_doc['fo']
             year = int((dict_doc['entry_date']).strftime("%Y"))
+            try:
+                title = get_title(dict_doc)                
+            except:
+                title = None
             
-            title = get_title(dict_doc)
             data_dict = {"pmid": dict_doc['_id'],
                     "journal":journal,
                     "title":title,
