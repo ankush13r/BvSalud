@@ -15,6 +15,28 @@ collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 collection_Update_info = db[COLLECTION_UPDATE_INFO]
 
 
+title_error_file = open("data/title_error_es_tesSet:", "w")
+title_error_file.write("ti_es\tti")
+def get_title(document_dict):
+    ti_language = None
+    if document_dict["ti_es"]:
+        ti_language = detect(document_dict["ti_es"])
+        return document_dict["ti_es"]
+
+    if ti_language != 'es' or not  document_dict["ti_es"]:
+        for ti in document_dict["ti"]:
+            if detect(ti)== "es":
+                return ti
+
+
+    title_error_file.write(repr(document_dict['ti_es']))
+    title_error_file.write("\t")
+    title_error_file.write('|'.join(document_dict['ti']))
+    title_error_file.write("\n")
+    return None
+
+
+
 def main(year,output):
     current_year = int(datetime.now().strftime('%Y'))
     last_year = 2000
@@ -92,9 +114,10 @@ def main(year,output):
                 journal = dict_doc['fo']
             year = int((dict_doc['entry_date']).strftime("%Y"))
             
+            title = get_title(dict_doc)
             data_dict = {"pmid": dict_doc['_id'],
                     "journal":journal,
-                    "title":dict_doc['ti_es'],
+                    "title":title,
                     "db":dict_doc['db'],
                     "year":year,
                     "abstractText":dict_doc['ab_es']}

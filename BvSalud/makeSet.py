@@ -28,6 +28,25 @@ try:
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
+title_error_file = open("data/title_error_es_tesSet:", "w")
+title_error_file.write("ti_es\tti")
+def get_title(document_dict):
+    ti_language = None
+    if document_dict["ti_es"]:
+        ti_language = detect(document_dict["ti_es"])
+        return document_dict["ti_es"]
+
+    if ti_language != 'es' or not  document_dict["ti_es"]:
+        for ti in document_dict["ti"]:
+            if detect(ti)== "es":
+                return ti
+
+
+    title_error_file.write(repr(document_dict['ti_es']))
+    title_error_file.write("\t")
+    title_error_file.write('|'.join(document_dict['ti']))
+    title_error_file.write("\n")
+    return None
 
 def get_mongo_cursor(condition):
     """The method receives two parameters condition adn year and it returns a mongo cursor of data depending on parameters 
@@ -209,9 +228,7 @@ def get_mesh_decs_list(document_dict,decsCodes_list_dict,with_header): #Method t
     print(mesh_major_decs_list)
     return mesh_major_decs_list
 
-def getTitle(document_dict):
-    if document_dict["ti_es"]:
-        return document_dict["ti_es"]
+
 
 def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_slash):
     """Method to create dictionary for goldSet.
@@ -268,10 +285,10 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
             collection_all.update_one({'_id': document_dict['_id']},
                                     {'$set':{'trainingTest': True}})
 
-                                
+    title = get_title(document_dict)                       
 
     data_dict = {"journal":journal,
-            "title":document_dict['ti_es'],
+            "title":title,
             "db":document_dict['db'],
             "pmid": document_dict['_id'],
             "decsCodes": mesh_decs,
