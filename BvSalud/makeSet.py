@@ -28,8 +28,12 @@ try:
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
-title_error_file = open("data/title_error_es_tesSet", "w")
-title_error_file.write("ti_es\tti")
+title_error_file = open("data/title_is_none.tvs", "w")
+title_error_file.write("id\ttitle_es\ttitle_list")
+
+title_lang_file = open("data/titles_language.tvs", "w")
+title_lang_file.write("id\tlanguage\ttitle_es")
+
 def get_title(document_dict):
     ti_language = None
     if document_dict["ti_es"]:
@@ -42,6 +46,8 @@ def get_title(document_dict):
                 return ti
 
 
+    title_error_file.write(document_dict["_id"])
+    title_error_file.write("\t")
     title_error_file.write(repr(document_dict['ti_es']))
     title_error_file.write("\t")
     title_error_file.write('|'.join(document_dict['ti']))
@@ -285,7 +291,8 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
             collection_all.update_one({'_id': document_dict['_id']},
                                     {'$set':{'trainingTest': True}})
     try:
-        title = get_title(document_dict)                       
+        title = get_title(document_dict) 
+        title_lang_file.write(document_dict["_id"]+ "\t")..................... # Completar el codigo                      
     except:
         title = None
     data_dict = {"journal":journal,
