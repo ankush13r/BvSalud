@@ -15,8 +15,7 @@ collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1]
 collection_Update_info = db[COLLECTION_UPDATE_INFO]
 
 
-title_error_file = open("data/title_error_es_tesSet", "w")
-title_error_file.write("ti_es\tti")
+
 def get_title(document_dict):
     ti_language = None
     if document_dict["ti_es"]:
@@ -29,11 +28,6 @@ def get_title(document_dict):
             if detect(ti)== "es":
                 return ti
 
-
-    title_error_file.write(repr(document_dict['ti_es']))
-    title_error_file.write("\t")
-    title_error_file.write('|'.join(document_dict['ti']))
-    title_error_file.write("\n")
     return None
 
 
