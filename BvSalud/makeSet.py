@@ -31,7 +31,7 @@ except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
 
-title_lang_file = open("data/titles_language.tvs", "w")
+title_lang_file = open("training_errors/titles_language.tvs", "w")
 title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
 
 
