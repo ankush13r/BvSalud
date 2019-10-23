@@ -44,12 +44,12 @@ def get_title(document_dict):
     if document_dict["ti_es"]:
         ti_language = detect(document_dict["ti_es"])
         if ti_language == "es":
-            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language) + "\t" + str(document_dict("ti_es")) + "\n")
+            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language) + "\t" + str(document_dict["ti_es"]) + "\n")
             return document_dict["ti_es"]
         else:
             if not ti_language:
                 ti_language ="null"
-            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language)+"\t" + str(document_dict("ti_es")) + "\n")
+            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language)+"\t" + str(document_dict["ti_es"]) + "\n")
 
 
     if ti_language != 'es' or not  document_dict["ti_es"]:
@@ -297,9 +297,8 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
                                     {'$set':{'trainingTest': True}})
     try:
         title = get_title(document_dict)              
-    except:
-        print("Error: detecting language")
-        title = None
+    except Exception as err:
+        print(f"Error ({err}): While detect language")
 
     data_dict = {"journal":journal,
             "title":title,

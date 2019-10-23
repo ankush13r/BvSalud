@@ -1,0 +1,76 @@
+>Headers not found in decs code
+>ID	MeSH header
+lil-253415	Congress
+lil-203025	Statistics/methods
+lil-210920	Annual Report
+lil-184518	/isolation & purification
+lil-184550	Evaluation Studies
+lil-794512	Comparative Study
+biblio-997610	Review
+ibc-154630	28575
+ibc-154632	28401
+ibc-154633	28575
+biblio-897263	hola
+biblio-897263	prueba
+biblio-897264	prueba
+biblio-897264	none_test_training
+biblio-897265	prueba test_training
+biblio-960284	Journal Article
+biblio-960287	Comparative Study
+lil-785477	/methods
+lil-650993	Annual Report
+lil-651001	Legislation
+lil-651010	Legislation
+lil-651241	Legislation
+lil-146742	Handbook
+lil-138376	Statistics/trends
+lil-179500	Annual Report
+lil-179524	Biography
+lil-179948	Handbook
+lil-158039	Handbook
+lil-155055	Handbook
+ibc-110862	/22074
+ibc-110863	/methods
+ibc-110864	28441/trends
+ibc-110875	32436/adverse effects
+ibc-110929	/statistics & numerical data
+ibc-111116	/epidemiology
+ibc-111116	/prevention & control
+ibc-111116	/organization & administration
+ibc-111440	/physiology
+ibc-119242	35237
+ibc-113055	/22074
+ibc-113059	/22074
+ibc-113574	/methods
+ibc-113578	/statistics & numerical data
+ibc-113699	32479
+ibc-113707	16370
+ibc-113841	/trends
+ibc-113841	/methods
+ibc-113841	/22074
+ibc-113841	/nursing
+ibc-113843	/standards
+ibc-113846	/psychology
+ibc-113846	/methods
+ibc-113846	/ethics
+ibc-113846	/history
+ibc-113857	/epidemiology
+ibc-113909	/22074
+ibc-111720	/22074
+ibc-111869	52890
+ibc-111964	/trends
+ibc-111980	/methods
+ibc-111983	/methods
+ibc-107673	/methods
+ibc-108281	/psychology
+ibc-108285	/psychology
+ibc-108593	/psychology
+ibc-108608	32532/statistics & numerical data
+ibc-108608	32532/methods
+ibc-108917	/trends
+ibc-108917	/22074
+ibc-108918	/22074
+ibc-108919	/22074
+ibc-109276	/methods
+ibc-109276	/legislation & jurisprudence
+ibc-120241	28575
