@@ -298,7 +298,9 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     try:
         title = get_title(document_dict)              
     except:
+        print("Error")
         title = None
+
     data_dict = {"journal":journal,
             "title":title,
             "db":document_dict['db'],
