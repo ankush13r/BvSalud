@@ -84,7 +84,6 @@ def main(year,output):
             ab_language = detect(dict_doc["ab_es"])
         except Exception as err:
             ab_language = "No detected"
-            print(f"\tError detecting language: ab_es (error: {err}) ->>",dict_doc["ab_es"])
 
         # try:
         #     articles_matched = collection_all.find(
@@ -127,11 +126,11 @@ def main(year,output):
                 collection_all.update_one({'_id': dict_doc['_id']},
                                     {'$unset':{'goldSet':True}})
             """
-        collection_all.update_one({'_id': dict_doc['_id']},
-                                    {'$set':{'selected': True}
-                                    })
-        if "goldToTest" in dict_doc:
             collection_all.update_one({'_id': dict_doc['_id']},
+                                        {'$set':{'selected': True}
+                                        })
+            if "goldToTest" in dict_doc:
+                collection_all.update_one({'_id': dict_doc['_id']},
                                     {'$unset':{'goldToTest':True}})
                                     
     outputFile.close()
