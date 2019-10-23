@@ -236,10 +236,7 @@ def get_mesh_decs_list(document_dict,decsCodes_list_dict,with_header): #Method t
             mesh_major_decs_list.append(final_header)
         else:
             mesh_case_info_file.write(str(document_dict["_id"])+"\t"+str(header)+"\n")           
-            print("Not found header:", "id:",document_dict["_id"],"header:",header)
 
-        
-    print(mesh_major_decs_list)
     return mesh_major_decs_list
 
 
