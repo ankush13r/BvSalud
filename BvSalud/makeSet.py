@@ -10,6 +10,8 @@ import re
 from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
 
 
+#####################Constants#########################
+
 cTraining = "training" #Condition to select if training. 
 cGold = "gold" #Condition for gold Set
 client = MongoClient('localhost:27017')
@@ -28,30 +30,36 @@ try:
 except Exception as err:
     print("Error while opening file for headers case insensitive info: ",err)
 
-title_error_file = open("data/title_is_none.tvs", "w")
-title_error_file.write("id\ttitle_es\ttitle_list")
 
 title_lang_file = open("data/titles_language.tvs", "w")
-title_lang_file.write("id\tlanguage\ttitle_es")
+title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
+
+
+#################Methods####################################
+
 
 def get_title(document_dict):
-    ti_language = None
+    ti_language = Noneç
+
     if document_dict["ti_es"]:
         ti_language = detect(document_dict["ti_es"])
-        return document_dict["ti_es"]
+        if ti_language == "es":
+            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language) + "\t" + str(document_dict("ti_es")) + "\n")
+            return document_dict["ti_es"]
+        else:
+            if not ti_language:
+                ti_language ="null"
+            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language)+"\t" + str(document_dict("ti_es")) + "\n")
+
 
     if ti_language != 'es' or not  document_dict["ti_es"]:
         for ti in document_dict["ti"]:
             if detect(ti)== "es":
+                title_lang_file.write(str(document_dict["_id"]) + "\tes\t" + str(ti) + "\t1\n")
                 return ti
 
 
-    title_error_file.write(document_dict["_id"])
-    title_error_file.write("\t")
-    title_error_file.write(repr(document_dict['ti_es']))
-    title_error_file.write("\t")
-    title_error_file.write('|'.join(document_dict['ti']))
-    title_error_file.write("\n")
+    title_lang_file.write(str(document_dict["_id"]) + "\tnull\tnull\n")
     return None
 
 def get_mongo_cursor(condition):
@@ -291,8 +299,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
             collection_all.update_one({'_id': document_dict['_id']},
                                     {'$set':{'trainingTest': True}})
     try:
-        title = get_title(document_dict) 
-        title_lang_file.write(document_dict["_id"]+ "\t")..................... # Completar el codigo                      
+        title = get_title(document_dict)              
     except:
         title = None
     data_dict = {"journal":journal,

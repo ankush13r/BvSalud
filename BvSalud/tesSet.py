@@ -21,7 +21,8 @@ def get_title(document_dict):
     ti_language = None
     if document_dict["ti_es"]:
         ti_language = detect(document_dict["ti_es"])
-        return document_dict["ti_es"]
+        if ti_language == 'es':
+            return document_dict["ti_es"]
 
     if ti_language != 'es' or not  document_dict["ti_es"]:
         for ti in document_dict["ti"]:
