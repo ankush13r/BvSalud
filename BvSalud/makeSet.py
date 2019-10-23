@@ -298,6 +298,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     try:
         title = get_title(document_dict)              
     except Exception as err:
+        title = "null"
         print(f"Error ({err}): While detect language")
 
     data_dict = {"journal":journal,
