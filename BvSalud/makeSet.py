@@ -39,7 +39,7 @@ title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
 
 
 def get_title(document_dict):
-    ti_language = Noneç
+    ti_language = None
 
     if document_dict["ti_es"]:
         ti_language = detect(document_dict["ti_es"])
@@ -298,7 +298,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     try:
         title = get_title(document_dict)              
     except:
-        print("Error")
+        print("Error: detecting language")
         title = None
 
     data_dict = {"journal":journal,
