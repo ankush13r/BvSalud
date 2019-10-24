@@ -39,25 +39,14 @@ title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
 
 
 def get_title(document_dict):
-    ti_language = None
-
     if document_dict["ti_es"]:
-        ti_language = detect(document_dict["ti_es"])
-        if ti_language == "es":
-            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language) + "\t" + str(document_dict["ti_es"]) + "\n")
-            return document_dict["ti_es"]
-        else:
-            if not ti_language:
-                ti_language ="null"
-            title_lang_file.write(str(document_dict["_id"]) + "\t"+str(ti_language)+"\t" + str(document_dict["ti_es"]) + "\n")
-
-
-    if ti_language != 'es' or not  document_dict["ti_es"]:
+        return document_dict["ti_es"]
+        
+    else:
         for ti in document_dict["ti"]:
             if detect(ti)== "es":
                 title_lang_file.write(str(document_dict["_id"]) + "\tes\t" + str(ti) + "\t1\n")
                 return ti
-
 
     title_lang_file.write(str(document_dict["_id"]) + "\tnull\tnull\n")
     return None
