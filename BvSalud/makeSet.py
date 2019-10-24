@@ -92,7 +92,7 @@ def get_mongo_cursor(condition):
                                     
         cursor_mongo = collection_all.find({ "$and":[
             {"ab_es":{"$ne": None}},
-            {"ab_es":{"$nin":duplicate_ab_es_ids_list}}
+            {"_id":{"$nin":duplicate_ab_es_ids_list}}
             #{"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
             ]}
              )
@@ -100,7 +100,7 @@ def get_mongo_cursor(condition):
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
     total_len = cursor_mongo.count(True)
-    print("Total records: ",total_len,"\n")
+    print("Total records:",total_len,"\n")
     return cursor_mongo,total_len # Returns cursos and it's size.
 
 
