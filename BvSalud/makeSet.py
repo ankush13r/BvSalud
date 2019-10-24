@@ -84,20 +84,23 @@ def get_mongo_cursor(condition):
                     ]})
   
     elif condition == cTraining: #If the condition is "training".
-
+        duplicate_ab_es_ids_list_file = open('data/ids_list_duplicat_abstract.txt','r') 
+        duplicate_ab_es_ids_list = duplicate_ab_es_ids_list_file.read().splitlines()
         # Condition for training:
                                     # ab_es can't be null.
                                     # if test_training is true or (mh not null and test_training not true. Uncomment line in query to do it.
                                     
-        cursor_mongo = collection_all.find(#{ "$and":[
-            {"ab_es":{"$ne": None}} #,
+        cursor_mongo = collection_all.find({ "$and":[
+            {"ab_es":{"$ne": None}},
+            {"ab_es":{"$nin":duplicate_ab_es_ids_list}}
             #{"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
-            #]}
+            ]}
              )
     else:# If the condition is wrong or different, it will print an error massage and return false
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
     total_len = cursor_mongo.count(True)
+    print("Total records: ",total_len,"\n")
     return cursor_mongo,total_len # Returns cursos and it's size.
 
 
