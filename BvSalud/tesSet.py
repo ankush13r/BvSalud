@@ -16,18 +16,15 @@ collection_Update_info = db[COLLECTION_UPDATE_INFO]
 
 
 
-def get_title(document_dict):
-    ti_language = None
-    if document_dict["ti_es"]:
-        ti_language = detect(document_dict["ti_es"])
-        if ti_language == 'es':
-            return document_dict["ti_es"]
 
-    if ti_language != 'es' or not  document_dict["ti_es"]:
+def get_title(document_dict):
+    if document_dict["ti_es"]:
+        return document_dict["ti_es"]
+        
+    else:
         for ti in document_dict["ti"]:
             if detect(ti)== "es":
                 return ti
-
     return None
 
 

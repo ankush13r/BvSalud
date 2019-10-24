@@ -32,7 +32,7 @@ except Exception as err:
 
 
 title_lang_file = open("training_errors/titles_language.tvs", "w")
-title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
+title_lang_file.write("id\tlanguage\ttitle\tfrom_ti_list")
 
 
 #################Methods####################################
@@ -40,6 +40,7 @@ title_lang_file.write("id\tlanguage\ttitle\tfrom_list")
 
 def get_title(document_dict):
     if document_dict["ti_es"]:
+        title_lang_file.write(str(document_dict["_id"]) + "\tes\t" + str(document_dict["ti_es"]) + "\t0\n")
         return document_dict["ti_es"]
         
     else:
