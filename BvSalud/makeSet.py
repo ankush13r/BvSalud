@@ -297,7 +297,7 @@ def make_dictionary_for_Set(document_dict,condition,decsCodes_list_dict,with_sla
     data_dict = {"journal":journal,
             "title":title,
             "db":document_dict['db'],
-            "pmid": document_dict['_id'],
+            "id": document_dict['_id'],
             "decsCodes": mesh_decs,
             "year": year,
             "abstractText":document_dict['ab_es']}

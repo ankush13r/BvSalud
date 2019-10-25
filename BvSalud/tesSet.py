@@ -109,7 +109,7 @@ def main(year,output):
             except:
                 title = None
             
-            data_dict = {"pmid": dict_doc['_id'],
+            data_dict = {"id": dict_doc['_id'],
                     "journal":journal,
                     "title":title,
                     "db":dict_doc['db'],

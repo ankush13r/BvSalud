@@ -1,7 +1,6 @@
 """[summary]
 """
 from flask import Flask
-from flask_restplus import Api, Resource
 from flask import jsonify
 from flask import request
 from flask_pymongo import PyMongo
@@ -15,35 +14,17 @@ MONOG_URI = 'mongodb://localhost:27017/'+DB_NAME
 APP = Flask(__name__)
 APP.config['MONGO_DBNAME'] = DB_NAME
 APP.config['MONGO_URI'] = MONOG_URI
-
+MONGO = PyMongo(APP)
 
 APP_rst = Api(app=APP)
 
-name_space = APP_rst.namespace('main', description='Main APIs')
 
-MONGO = PyMongo(APP)
 
 
 
 ABSTRACT = "ab_es"
 DECSCODES = "decsCodes"
 DECSCODES_ANNOTATOR = "decsCodes_Annotator"
-
-
-
-
-
-
-def modify_article_dictionary(dict_result:dict):
-    id = dict_result['id']
-    
-    MONGO.db.selected_importants.update_one({"_id":id},
-    {'$set':
-    {"decsCodes":dict_result["decsCodes"],
-    "decsCodes_Annotator":dict_result["decsCodes_Annotator"]}
-
-    })
-
 
 
 @APP.route('/articles', methods=['GET','POST'])
@@ -65,9 +46,22 @@ def get(Resource):
     return jsonify({'results':articles_list_output})
 
 
-@APP.route('/modify', methods=['PATCH'])
+@APP.route('/modify', methods=['PUT'])
 def update_article(result):
-    modify_article_dictionary()
+    
+    if not request.json:
+        abort(400)
+    json_obj = request.json()
+    
+    # id = json_obj['id']
+    
+    # MONGO.db.selected_importants.update_one({"_id":id},
+    # {'$set':
+    # {"decsCodes":json_obj["decsCodes"],
+    # "decsCodes_Annotator":json_obj["decsCodes_Annotator"]}
+    # })
+
+    return jsonify({'done':json_obj})
 
 
 if __name__ == '__main__':
