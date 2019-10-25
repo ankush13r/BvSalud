@@ -7,11 +7,11 @@ import json
 import argparse
 import os
 
-def read_csv(csv_path):
+def read_csv(csv_path,delimiter):
     documents_list = []
     
     with open(csv_path) as csv_file:
-        csv_reader = csv.reader(csv_file,delimiter='|')
+        csv_reader = csv.reader(csv_file,delimiter=delimiter)
         for  row in csv_reader:
             try:
                 int(row[0])
@@ -70,18 +70,22 @@ def compare_headers(documents_list_dict_by_code,output_path):
     output_file.write("]}")
     output_file.close()
 
-def main(path_output,path_input):
-    documents_list = read_csv(path_input)
+def main(path_output,path_input,delimiter):
+    documents_list = read_csv(path_input,delimiter)
     documents_list_dict_by_code = get_list_dict_by_code(documents_list)
     compare_headers(documents_list_dict_by_code,path_output)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog ='match_mh.py',usage='%(prog)s[-o file.csv]')
-    parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='Input file path.') 
+    parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='Input file path.')
+    parser.add_argument('-F','--field',metavar='',type=str,required=True, help ='field separeter.')
+
     args = parser.parse_args()
     input = args.input
+    delimiter = args.filed
+
     current_dir = os.getcwd()
     path_input = os.path.join(current_dir,input)
     path_output = (str(path_input) + ".json")
-    main(path_output,path_input)
+    main(path_output,path_input,delimiter)
