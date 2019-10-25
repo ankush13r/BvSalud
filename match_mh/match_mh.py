@@ -79,11 +79,11 @@ def main(path_output,path_input,delimiter):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog ='match_mh.py',usage='%(prog)s[-o file.csv]')
     parser.add_argument('-i','--input',metavar='',type=str,required=True, help ='Input file path.')
-    parser.add_argument('-F','--field',metavar='',type=str,required=True, help ='field separeter.')
+    parser.add_argument('-F','--field',metavar='',type=str,required=True, help ='To define field separete character.')
 
     args = parser.parse_args()
     input = args.input
-    delimiter = args.filed
+    delimiter = args.field
 
     current_dir = os.getcwd()
     path_input = os.path.join(current_dir,input)
