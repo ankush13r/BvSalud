@@ -9,9 +9,9 @@ import os
 
 def read_csv(csv_path,delimiter):
     documents_list = []
-    
+
     with open(csv_path) as csv_file:
-        csv_reader = csv.reader(csv_file,delimiter=delimiter)
+        csv_reader = csv.reader(csv_file,delimiter='\t')
         for  row in csv_reader:
             try:
                 int(row[0])
