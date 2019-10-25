@@ -9,7 +9,7 @@ import os
 
 def read_csv(csv_path,delimiter):
     documents_list = []
-
+    print(delimiter)
     with open(csv_path) as csv_file:
         csv_reader = csv.reader(csv_file,delimiter='\t')
         for  row in csv_reader:
