@@ -59,13 +59,14 @@ def compare_headers(documents_list_dict_by_code,output_path):
                                     "matched_mh":matched_length,"total_mh":distinc_length,"prediction:":(str(matched_length)+ "/" + str(distinc_length)),"percentage":round((matched_length/distinc_length)*100,1)}
                         matched_dict_list.append(matched_mh_dict)
                 j = j +1
+
         if len(matched_dict_list) > 0 :
             if count_coma > 0:
                 output_file.write(",")
             count_coma = count_coma + 1
             dictionary_equal_Abstract = {"documents":matched_dict_list}
             json_dict = json.dumps(dictionary_equal_Abstract, indent=4,ensure_ascii=False)
-            output_file.write(json_dict)            
+            output_file.write(json_dict)      
     output_file.write("]}")
     output_file.close()
 
