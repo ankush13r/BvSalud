@@ -11,11 +11,10 @@ import re
 #client = MongoClient('mongodb://mesinesp:mesinesp@localhost:27017')
 
 client = MongoClient('localhost:27017')
-db = client("localhost",
+db = client("opscnio01.bsc.es",
             username='mongo_admin',
             password='PlanTL-2019',
-            authSource=DATA_BASE,
-            authMechanism='SCRAM-SHA-256')
+            authSource=DATA_BASE,)
 
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 = db[COLLECTIONS_NONE_INDEXED_T1]
