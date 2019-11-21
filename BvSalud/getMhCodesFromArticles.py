@@ -106,7 +106,6 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
 
 
 def main(output):
-    decsCodes_list_dict = create_Dict_codes("data/codesMH.txt")
     try:
         decsCodes_list_dict = create_Dict_codes("data/codesMH.txt")
     except Exception as err:
