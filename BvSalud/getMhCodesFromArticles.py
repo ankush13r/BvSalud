@@ -103,7 +103,7 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
                         "abstractText": document_dict['ab_es'],
                         "Mesh":mhCodeObj
                         }
-            data_json = json.dumps(data_dict, indent=4, ensure_ascii=False,encoding="utf-8")
+            data_json = json.dumps(data_dict, indent=4, ensure_ascii=False,).encode(encoding="utf-8")
             outputFile.write(data_json)
         i = i + 1
 
