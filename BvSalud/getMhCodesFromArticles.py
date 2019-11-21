@@ -7,15 +7,11 @@ import json
 import os
 import re
 
+uri = 'mongodb://mongo_admin:PlanTL-2019@opscnio01.bsc.es/?authSource=admin'
+client = MongoClient(uri)
 
-#client = MongoClient('mongodb://mesinesp:mesinesp@localhost:27017')
-
-client = MongoClient('localhost:27017')
-db = client("opscnio01.bsc.es",
-            username='mongo_admin',
-            password='PlanTL-2019',
-            authSource=DATA_BASE,)
-
+# client = MongoClient('localhost:27017')
+db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 = db[COLLECTIONS_NONE_INDEXED_T1]
 
@@ -24,13 +20,14 @@ REGEX_WORD_AFTER_SLASH = r"\/\w[^( &)&,]*"
 
 
 def create_Dict_codes(codes_file_root):
+    regeToSplitCode = re.compile("\t|\|")
     keyword_dict = {}
     # Saves all codes to a dictionary, key as code and value as words in format list.
     with open(codes_file_root) as f:
         for line in f:
 
-            (key, val) = line.split('@', 1)  # Seprates codes and words
-            values_list = val.split('|')  # Synonims separater
+            values_list =re.split(regeToSplitCode   ,line)  # Seprates all words
+            key = values_list[3]  # getting key
             # Deleting line break from last number of list.
             values_list[-1] = values_list[-1].strip('\n')
             keyword_dict[key] = values_list
@@ -67,7 +64,7 @@ def get_mesh_decs_list(decsCodes_list_dict, mhList):
     for header in mhList:
         # A for for find Dec code for header.
         for key, values in decsCodes_list_dict.items():
-            if header in values:
+            if header in values: 
                 mhObj = {"Code": str(key),
                          "Word": header}
                 listMhObjs.append(mhObj)
@@ -76,7 +73,7 @@ def get_mesh_decs_list(decsCodes_list_dict, mhList):
     return listMhObjs
 
 
-def extractDataIntofile(cursor_articles, decsCodes_list_dict, output):
+def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
     # Output file where all record will be saved.
     outputFile = open(output, 'w')
     # Starting with creating a json format file, all article will be inside the article.
@@ -93,14 +90,15 @@ def extractDataIntofile(cursor_articles, decsCodes_list_dict, output):
             mesh_major = list(set(document_dict['mh']+document_dict['sh']))
         except Exception as err:
             if document_dict['mh'] is not None and document_dict['sh'] is None:
-                mesh_major = document_dict['mh']
+                  mesh_major = document_dict['mh']
         meshNoneQuali = getMeshNoneQuali(mesh_major)
-        MhCodeObj = get_mesh_decs_list(decsCodes_list_dict, meshNoneQuali)
+
+        MhCodeObj = get_mesh_decs_list(decsCodes_list_dict,meshNoneQuali)
 
         data_dict = {"title": document_dict['ti_es'],
                      "pmid": id,
                      "abstractText": document_dict['ab_es'],
-                     "Mesh": MhCodeObj
+                     "Mesh":MhCodeObj
                      }
         data_json = json.dumps(data_dict, indent=4, ensure_ascii=False)
         outputFile.write(data_json)
@@ -112,13 +110,12 @@ def extractDataIntofile(cursor_articles, decsCodes_list_dict, output):
 
 def main(output):
     try:
-        decsCodes_list_dict = create_Dict_codes("data/codesMH.txt")
+        decsCodes_list_dict = create_Dict_codes("data/DeCS.2019.both.v5.tsv")
     except Exception as err:
         print("\tError: while reading file >> ", err)
         return False
-    mongoCursor = getMongoCursor()
+    mongoCursor = getMongoCursor();
     extractDataIntofile(mongoCursor, decsCodes_list_dict, output)
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
