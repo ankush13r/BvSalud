@@ -51,13 +51,17 @@ def compare_headers(documents_list_dict_by_code,output_path):
                     meSH_joined_list = meSH1_list + meSH2_list
 
                     full_length = len(meSH_joined_list)
-                    distinc_length = len(set(meSH_joined_list))
-                    matched_length = full_length - distinc_length
+
+                    uniqs_length = len(set(meSH_joined_list))
+                    matched_length = full_length - uniqs_length
                     
-                    if matched_length != 0 and (distinc_length != matched_length):
-                        matched_mh_dict = {"id_1":documents_1[1],"id_2":documents_2[1],"mh_1":meSH1_list,"mh_2":meSH2_list,
-                                    "matched_mh":matched_length,"total_mh":distinc_length,"prediction:":(str(matched_length)+ "/" + str(distinc_length)),"percentage":round((matched_length/distinc_length)*100,1)}
-                        matched_dict_list.append(matched_mh_dict)
+                    #if matched_length != 0 and (uniqs_length != matched_length):
+                    print(">>> matched")
+                    matched_mh_dict = {"id_1":documents_1[1],"id_2":documents_2[1],"mh_1":meSH1_list,"mh_2":meSH2_list,
+                                "matched_mh":matched_length,"total_mh":uniqs_length,"prediction:":(str(matched_length)+ "/" + str(uniqs_length)),"percentage":round((matched_length/uniqs_length)*100,1)}
+                    matched_dict_list.append(matched_mh_dict)
+
+
                 j = j +1
 
         if len(matched_dict_list) > 0 :
