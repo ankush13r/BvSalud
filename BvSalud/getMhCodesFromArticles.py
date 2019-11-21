@@ -8,7 +8,9 @@ import os
 import re
 
 
-client = MongoClient('localhost/mongo_admin:PlanTL2019:27017')
+client = MongoClient('mongodb://mongo_admin:PlanTL2019@localhost:27017/'+DATA_BASE)
+
+# client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 = db[COLLECTIONS_NONE_INDEXED_T1]
