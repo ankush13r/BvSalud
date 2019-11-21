@@ -78,7 +78,6 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
     outputFile = open(output, 'w')
     # Starting with creating a json format file, all article will be inside the article.
     outputFile.write('{"articles":[')
-
     i = 0
     for document_dict in cursor_articles:
         print(i)
@@ -91,17 +90,19 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
         except Exception as err:
             if document_dict['mh'] is not None and document_dict['sh'] is None:
                   mesh_major = document_dict['mh']
+            else:
+                mesh_major = []
         meshNoneQuali = getMeshNoneQuali(mesh_major)
 
-        MhCodeObj = get_mesh_decs_list(decsCodes_list_dict,meshNoneQuali)
-
-        data_dict = {"title": document_dict['ti_es'],
-                     "pmid": id,
-                     "abstractText": document_dict['ab_es'],
-                     "Mesh":MhCodeObj
-                     }
-        data_json = json.dumps(data_dict, indent=4, ensure_ascii=False)
-        outputFile.write(data_json)
+        mhCodeObj = get_mesh_decs_list(decsCodes_list_dict,meshNoneQuali)
+        if mhCodeObj:
+            data_dict = {"title": document_dict['ti_es'],
+                        "pmid": id,
+                        "abstractText": document_dict['ab_es'],
+                        "Mesh":mhCodeObj
+                        }
+            data_json = json.dumps(data_dict, indent=4, ensure_ascii=False)
+            outputFile.write(data_json)
         i = i + 1
 
     outputFile.write(']}')
