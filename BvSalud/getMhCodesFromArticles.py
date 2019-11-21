@@ -8,7 +8,7 @@ import os
 import re
 
 
-client = MongoClient('mongodb://mongo_admin:PlanTL2019@localhost:27017/'+DATA_BASE)
+client = MongoClient('mongodb://mongo_admin:PlanTL2019@localhost:27017')
 
 # client = MongoClient('localhost:27017')
 db = client[DATA_BASE]
