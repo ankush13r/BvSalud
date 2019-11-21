@@ -27,7 +27,9 @@ def create_Dict_codes(codes_file_root):
         for line in f:
 
             values_list =re.split(regeToSplitCode   ,line)  # Seprates all words
-            key = values_list[3]  # getting key
+            key = values_list[3]  # getting key for mesh code
+        #    key = values_list[1]  # getting key for decs code
+
             # Deleting line break from last number of list.
             values_list[-1] = values_list[-1].strip('\n')
             keyword_dict[key] = values_list
@@ -101,7 +103,7 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
                         "abstractText": document_dict['ab_es'],
                         "Mesh":mhCodeObj
                         }
-            data_json = json.dumps(data_dict, indent=4, ensure_ascii=False)
+            data_json = json.dumps(data_dict, indent=4, ensure_ascii=False,encoding="utf-8")
             outputFile.write(data_json)
         i = i + 1
 
