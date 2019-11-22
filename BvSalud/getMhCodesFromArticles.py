@@ -7,10 +7,10 @@ import json
 import os
 import re
 
-uri = 'mongodb://mongo_admin:PlanTL-2019@opscnio01.bsc.es/?authSource=admin'
-client = MongoClient(uri)
+# uri = 'mongodb://mongo_admin:PlanTL-2019@opscnio01.bsc.es/?authSource=admin'
+uri = 'localhost:27017'
 
-# client = MongoClient('localhost:27017')
+client = MongoClient(uri)
 db = client[DATA_BASE]
 collection_all = db[COLLECTION_ALL]
 collection_None_Indexed_t1 = db[COLLECTIONS_NONE_INDEXED_T1]
