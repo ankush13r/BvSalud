@@ -71,11 +71,13 @@ def get_mesh_decs_list(decsCodes_list_dict, mhList):
                 mhObj = {"Code": str(key),
                          "Word": header}
                 listMhObjs.append(mhObj)
-                break
-            if header == "Decisiones":
+                if header != "Decisiones":
+                    break
+            if  "Decisiones" in values and header == "values":
                 print()
                 print(values)
                 input()
+                break
     return listMhObjs
 
 
