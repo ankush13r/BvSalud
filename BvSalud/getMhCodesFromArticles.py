@@ -26,7 +26,7 @@ def create_Dict_codes(codes_file_root):
     with open(codes_file_root) as f:
         for line in f:
 
-            values_list =re.split(regeToSplitCode   ,line)  # Seprates all words
+            values_list =re.split(regeToSplitCode ,line)  # Seprates all words
             key = values_list[3]  # getting key for mesh code
         #    key = values_list[1]  # getting key for decs code
 
@@ -65,13 +65,17 @@ def get_mesh_decs_list(decsCodes_list_dict, mhList):
     listMhObjs = []
     for header in mhList:
         # A for for find Dec code for header.
+        print(header)
         for key, values in decsCodes_list_dict.items():
-            if header in values: 
+            if header in values:
                 mhObj = {"Code": str(key),
                          "Word": header}
                 listMhObjs.append(mhObj)
                 break
-
+            if header == "Decisiones":
+                print()
+                print(values)
+                input()
     return listMhObjs
 
 
