@@ -68,8 +68,8 @@ def get_mesh_decs_list(decsCodes_list_dict, mhList):
         # A for for find Dec code for header.
         for key, values in decsCodes_list_dict.items():
             if header in values: 
-                mhObj = {"Code": str(key),
-                         "Word": header}
+                mhObj = {"code": str(key),
+                         "term": header}
                 listMhObjs.append(mhObj)
                 break
 
@@ -84,8 +84,6 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
     i = 0
     for document_dict in cursor_articles:
         print(i)
-        if i > 0:
-            outputFile.write(',')
 
         id = document_dict['_id']
         try:
@@ -99,10 +97,12 @@ def extractDataIntofile(cursor_articles,decsCodes_list_dict, output):
 
         mhCodeObj = get_mesh_decs_list(decsCodes_list_dict,meshNoneQuali)
         if mhCodeObj:
+            if i > 0:
+                outputFile.write(',')
             data_dict = {"title": document_dict['ti_es'],
                         "pmid": id,
                         "abstractText": document_dict['ab_es'],
-                        "Mesh":mhCodeObj
+                        "mesh":mhCodeObj
                         }
             data_json = json.dumps(data_dict, indent=4, ensure_ascii=False)
             outputFile.write(str(data_json))

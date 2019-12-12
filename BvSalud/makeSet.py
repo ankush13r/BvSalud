@@ -7,28 +7,32 @@ import json
 import os
 import re
 
-from bvs.constant import DATA_BASE,COLLECTION_ALL,COLLECTIONS_NONE_INDEXED_T1
+from bvs.constant import DATA_BASE, COLLECTION_ALL, COLLECTIONS_NONE_INDEXED_T1
 
 
 #####################Constants#########################
 
-cTraining = "training" #Condition to select if training. 
-cGold = "gold" #Condition for gold Set
+cTraining = "training"  # Condition to select if training.
+cGold = "gold"  # Condition for gold Set
 client = MongoClient('localhost:27017')
-db = client[DATA_BASE] #DATA_BASE is a constant, please check bvs/constant.py for all constants.
-collection_all = db[COLLECTION_ALL] # Also a constant COLLECTION_ALL
-collection_None_Indexed_t1 =db[COLLECTIONS_NONE_INDEXED_T1] # Also a constant COLLECTION_NONE_INDEXED_T1
+# DATA_BASE is a constant, please check bvs/constant.py for all constants.
+db = client[DATA_BASE]
+collection_all = db[COLLECTION_ALL]  # Also a constant COLLECTION_ALL
+# Also a constant COLLECTION_NONE_INDEXED_T1
+collection_None_Indexed_t1 = db[COLLECTIONS_NONE_INDEXED_T1]
 
 try:
-    abstract_language_error_file = open("training_errors/abstract_language_error.txt","w")
+    abstract_language_error_file = open(
+        "training_errors/abstract_language_error.txt", "w")
 except Exception as err:
-    print("Error while opening file for meSh language errors: ",err)
+    print("Error while opening file for meSh language errors: ", err)
 
 try:
-    mesh_case_info_file = open("training_errors/mesh_case_info.txt","w")
-    mesh_case_info_file.write(">Headers not found in decs code\n>ID\tMeSH header\n")
+    mesh_case_info_file = open("training_errors/mesh_case_info.txt", "w")
+    mesh_case_info_file.write(
+        ">Headers not found in decs code\n>ID\tMeSH header\n")
 except Exception as err:
-    print("Error while opening file for headers case insensitive info: ",err)
+    print("Error while opening file for headers case insensitive info: ", err)
 
 
 title_lang_file = open("training_errors/titles_language.tvs", "w")
@@ -40,80 +44,102 @@ title_lang_file.write("id\tlanguage\ttitle\tfrom_ti_list")
 
 def get_title(document_dict):
     if document_dict["ti_es"]:
-        title_lang_file.write(str(document_dict["_id"]) + "\tes\t" + str(document_dict["ti_es"]) + "\t0\n")
+        title_lang_file.write(
+            str(document_dict["_id"]) + "\tes\t" + str(document_dict["ti_es"]) + "\t0\n")
         return document_dict["ti_es"]
-        
+
     else:
         for ti in document_dict["ti"]:
-            if detect(ti)== "es":
-                title_lang_file.write(str(document_dict["_id"]) + "\tes\t" + str(ti) + "\t1\n")
+            if detect(ti) == "es":
+                title_lang_file.write(
+                    str(document_dict["_id"]) + "\tes\t" + str(ti) + "\t1\n")
                 return ti
 
     title_lang_file.write(str(document_dict["_id"]) + "\tnull\tnull\n")
     return None
 
+
 def get_mongo_cursor(condition):
-    """The method receives two parameters condition adn year and it returns a mongo cursor of data depending on parameters 
-    
+    """The method receives two parameters condition adn year and it returns a mongo cursor of data depending on parameters
+
     :param condition: A string with condition as (gold or training)
     :type condition: String
     :param year: Year. Data will be greater or equal.
     :type year: Int
     .. Notes::
         **training**:
-    """ 
-    #The method returns a cursor of data from mongoDB collection.
-    #Condition parameter is if it for training ot gold Set.
-    # Year parameter is for gold set, if you want data since any specific year, until today. 
+    """
+    # The method returns a cursor of data from mongoDB collection.
+    # Condition parameter is if it for training ot gold Set.
+    # Year parameter is for gold set, if you want data since any specific year, until today.
     print("Collecting data.")
-    if condition == cGold: #If the condition is "gold".
-        #date = datetime.strptime(str(year), '%Y')
-        
-        # Conditions for gold: 
+    if condition == cGold:  # If the condition is "gold".
+        # date = datetime.strptime(str(year), '%Y')
+
+        # Conditions for gold:
                                 # entry date must be greater than year received as parameters.
                                 # ab_es (abstract spanish ) mustn't have null value.
                                 # mh (medical subject header) mustn't have null value.
-                                # selected: All article must be selected before for test Set 
-        
+                                # selected: All article must be selected before for test Set
+
         cursor_mongo = collection_all.find(
-                    {"$and":[
-                    {"ab_es":{"$ne": None}},#abstract can't be null.
-                    {"mh":{"$ne":None}}, #mesh header can't be null.
-                    {"trainingGold":{"$ne":{True}}} #It means the article mustn't in trainingData as trainingGold. trainingGold has mesh Headers
-                    
+                    {"$and": [
+                    {"ab_es": {"$ne": None}},  # abstract can't be null.
+                    {"mh": {"$ne": None}},  # mesh header can't be null.
+                    # It means the article mustn't in trainingData as trainingGold. trainingGold has mesh Headers
+                    {"trainingGold": {"$ne": {True}}}
+
                     ]})
-  
-    elif condition == cTraining: #If the condition is "training".
-        duplicate_ab_es_ids_list_file = open('data/ids_list_duplicat_abstract.txt','r') 
+
+    elif condition == cTraining:  # If the condition is "training".
+        duplicate_ab_es_ids_list_file = open(
+            'data/ids_list_duplicat_abstract.txt', 'r')
         duplicate_ab_es_ids_list = duplicate_ab_es_ids_list_file.read().splitlines()
         # Condition for training:
                                     # ab_es can't be null.
                                     # if test_training is true or (mh not null and test_training not true. Uncomment line in query to do it.
-                                    
-        cursor_mongo = collection_all.find({ "$and":[
-            {"ab_es":{"$ne": None}},
-            {"_id":{"$nin":duplicate_ab_es_ids_list}}
-            #{"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
+
+        cursor_mongo = collection_all.find({"$and": [
+            {"ab_es": {"$ne": None}},
+            {"_id": {"$nin": duplicate_ab_es_ids_list}}
+            # {"$or":[{"$and":[{"mh":{"$ne":None}},{"test_training":{"$ne":True}}]},{"test_training":True}]}
             ]}
              )
-    else:# If the condition is wrong or different, it will print an error massage and return false
+    else:  # If the condition is wrong or different, it will print an error massage and return false
         print(f"\tError: condition must be {cTraining} or {cGold}.")
         return False
     total_len = cursor_mongo.count(True)
-    print("Total records:",total_len,"\n")
-    return cursor_mongo,total_len # Returns cursos and it's size.
-
+    print("Total records:", total_len, "\n")
+    return cursor_mongo, total_len  # Returns cursos and it's size.
 
 
 def create_Dict_codes(codes_file_root):
+    # keyword_dict = {}
+    # with open(codes_file_root) as f: #Saves all codes to a dictionary, key as code and value as words in format list.
+    #     for line in f:
+    #         (key, val) = line.split('@') #Seprates codes and words
+    #         values_list = val.split('|') #Synonims separater
+    #         values_list[-1] = values_list[-1].strip('\n') #Deleting line break from last number of list.
+    #         keyword_dict[key] = values_list
+    #     return keyword_dict
+        
+    regeToSplitCode = re.compile("\t|\|")
     keyword_dict = {}
-    with open(codes_file_root) as f: #Saves all codes to a dictionary, key as code and value as words in format list.
+    # Saves all codes to a dictionary, key as code and value as words in format list.
+    with open(codes_file_root) as f:
         for line in f:
-            (key, val) = line.split('@') #Seprates codes and words
-            values_list = val.split('|') #Synonims separater
-            values_list[-1] = values_list[-1].strip('\n') #Deleting line break from last number of list.
-            keyword_dict[key] = values_list
-        return keyword_dict
+
+            values_list =re.split(regeToSplitCode   ,line)  # Seprates all words
+            key = values_list[0]  # getting key for decs code
+        #    key = values_list[1]  # getting key for decs code
+
+            # Deleting line break from last number of list.
+            values_list[-1] = values_list[-1].strip('\n')
+            if key != '-': 
+                keyword_dict[key] = values_list
+
+    return keyword_dict
+        
 
 
 def is_Spanish_lang(document_dict): # Method for detection language of abstract tet from a article. It receives whole article and will find ab_es
@@ -178,14 +204,14 @@ def get_mesh_decs_list(document_dict,decsCodes_list_dict,with_header): #Method t
     :rtype: List []
     """
     
-    #It the mesh header is null than it will return a empty list.
+    # It the mesh header is null than it will return a empty list.
     if not document_dict['mh']:
         return list()
 
     try: #Trying to join mh or sh list, but if it can't it will just get mh , because some time sh is null.
         mesh_major = list(set(document_dict['mh']+document_dict['sh']))
     except: #Just get mh
-        #if document_dict['mh'] is not None and document_dict['sh'] is None: # sh is null
+        # if document_dict['mh'] is not None and document_dict['sh'] is None: # sh is null
         mesh_major = document_dict['mh']
             
     mesh_major_decs_list = [] # A local variabel to create the list of mesh headers.
@@ -323,7 +349,7 @@ def main(output,condition,with_slash):
         return False
 
     try:
-        decsCodes_list_dict = create_Dict_codes("data/codes.txt")
+        decsCodes_list_dict = create_Dict_codes("data/DeCS.2019.both.v5.tsv")
     except Exception as err:
         print("\tError: while reading file >> ",err,)
         return False
@@ -359,13 +385,13 @@ def main(output,condition,with_slash):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog ='goalSet.py',usage='%(prog)s [-y ####] [-o file.json]')
-    #parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
+    # parser.add_argument('-y','--year',metavar='', type=int,help ='All data will be greater then that year.\n')
     parser.add_argument('-o','--output',metavar='',type=str,required=True, help ='To define a name for file.')  
     parser.add_argument('-c','--condition',choices=[cGold,cTraining],metavar='',type=str,required=True, help =f"<{cTraining}> or <{cGold}>")   
     parser.add_argument('--slash',action='store_true', help ='To make set with word after slash nad dec code')  
 
     args = parser.parse_args()
-    #year = args.year
+    # year = args.year
     with_slash = args.slash
     condition = args.condition
     output = args.output
